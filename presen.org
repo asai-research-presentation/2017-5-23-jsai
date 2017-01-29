@@ -910,3 +910,203 @@ Mapping the latent space to the actual image (decoding part)
 
 [[png:static/vae-manifold]]
 
+
+* 副産物: bit-ops
+
+MSDD アルゴリズムを実装する上で *bit-vector* を効率よく扱う必要が出来た
+
++ Common Lisp における bit-vector : C における short 配列に相当
+  + Sequenceとして扱える: *fill,map,replace...*
+  + ビット演算が標準に含まれている: *bit-and, bit-xor...* ループを書く必要がない
+  + コンパイラが64ビット単位の整数処理に自動変換してくれる(のでCと同様に速い)
+
+** Common Lisp の bit-wise 演算
+
+#+BEGIN_SRC lisp
+(bit-and x y &optional z)
+#+END_SRC
+
+bit vector =x= と =y= の論理和を取る
+
+z が与えられていれば、 結果を z に破壊的に代入しそれを返す
+
+z が シンボル ='t= のときは、 結果は =x= に破壊的に代入される
+
+z が省略された時は *新たなベクトル* を生成して返す
+
+** 注意して使わないと…
+
+大量のconsing: 中間結果がヒープに確保される
+
+#+BEGIN_SRC lisp
+(bit-and (bit-xor x y) z)
+
+-> 以下と同様
+
+(let ((tmp  (make-array (length x) :element-type 'bit)) ; ヒープ
+      (tmp2 (make-array (length x) :element-type 'bit))); ヒープ
+
+  (bit-xor x y tmp)
+  (bit-and tmp z tmp2)
+  tmp2)
+#+END_SRC
+
+** 対処法
+
+dynamic-extent 宣言で中間ベクトルをスタック配置
+
+#+BEGIN_SRC lisp
+(bit-and (bit-xor x y) z)
+
+-> 以下と同様
+
+(let ((tmp  (make-array (length x) :element-type 'bit))
+      (tmp2 (make-array (length x) :element-type 'bit)))
+  (declare (dynamic-extent tmp tmp2))
+  (bit-xor x y tmp)
+  (bit-and tmp z tmp2)
+  tmp2)
+#+END_SRC
+
+** ほかにもいろいろ最適化出来る
+
+中間ベクトルの再利用
+
+#+BEGIN_SRC lisp
+(bit-and (bit-xor x y) z)
+
+-> 以下と同様
+
+(let ((tmp  (make-array (length x) :element-type 'bit)))
+  (declare (dynamic-extent tmp))
+  (bit-xor x y tmp)
+  (bit-and tmp z tmp)  ; tmp を再利用 → スタックを節約
+  tmp)
+#+END_SRC
+
+#+BEGIN_CENTER
++ *こんな小手先の最適化は研究の本質じゃない! 自動化したい!*
+#+END_CENTER
+
+** 拙作 bit-ops: *ビット演算コンパイラ*
+
+#+BEGIN_SRC lisp
+(as-bitwise-operations (&key result)
+  &body)
+#+END_SRC
+
+=&body= にビット演算を書くと *自動で速いプログラムに書きなおしてくれる* マクロ
+
+内部的にはSSAっぽく計算を保持
+
+中間ベクトルの再利用 (スタック消費を抑える) → コンパイラのレジスタ配置に相当
+
+共通部分式除去 → 例: =(and a b)= が二度現れたら一度だけ計算して結果を再利用
+
+** 例1:
+
+#+BEGIN_SRC lisp
+(as-bitwise-operations ()
+  (and a b c))
+
+-> 展開 (コンパイル)
+
+(LET* ((#:LEN835 (LENGTH C))
+       ;; 自動で生成された変数。
+       ;; 結果として返されるベクトルなので、ヒープに。
+       (#:G833 (MAKE-BIT-VECTOR #:LEN835)))
+   (BIT-AND B C #:G833)
+   (BIT-AND A #:G833 #:G833) ; 中間結果は再利用
+   #:G833)
+#+END_SRC
+
+** 例2:
+
+#+BEGIN_SRC lisp
+(as-bitwise-operations (:result c) ; 結果を c に書き込むよう指定
+  (and a b c))
+
+->
+
+(LET* ((#:LEN835 (LENGTH C))
+       ;; 自動で生成された変数。
+       ;; 結果はcに書き戻される
+       (#:G833 C))
+   (BIT-AND B C #:G833)
+   (BIT-AND A #:G833 #:G833) ; 中間結果は再利用
+   #:G833)
+#+END_SRC
+
+** 例3: a が 1 なら b を、 0 なら c を取る操作 (if-then-else)
+
+#+BEGIN_SRC lisp
+(as-bitwise-operations (:result c)
+  (ior (and a b)
+       (and (not a) c)))
+
+->
+
+(LET* ((#:LENGTH (LENGTH C))
+       (#:G746 C))
+  (LET* ((#:G747 (MAKE-BIT-VECTOR #:LENGTH)))
+    (DECLARE (DYNAMIC-EXTENT #:G747)) ; 中間結果G747はスタック配置
+    (BIT-AND A B #:G746)
+    (BIT-NOT A #:G747)
+    (BIT-AND #:G747 C #:G747)      ; 中間ベクトルG747再利用
+    (BIT-IOR #:G746 #:G747 #:G746) ; 結果ベクトルG746再利用
+    #:G746))
+#+END_SRC
+
+** ビット演算用のDSLを拡張できる
+
+#+BEGIN_SRC lisp
+(define-bitwise-operation if (condition then else)
+  `(ior (and ,condition ,then)
+        (and (not ,condition) ,else)))
+
+これで
+
+(as-bitwise-operations (:result c)
+  (ior (and a b)
+       (and (not a) c)))
+
+のかわりに
+
+(as-bitwise-operations (:result c)
+  (if a b c))
+
+と書ける
+#+END_SRC
+
+** 半加算器
+
+[[spng:halfadder]]
+
+#+BEGIN_SRC lisp
+(define-bitwise-operation half-adder-sum (a b)
+  "sum output of half adder "
+  `(xor ,a ,b))
+(define-bitwise-operation half-adder-carry (a b)
+  "carry output of half adder "
+  `(and ,a ,b))
+#+END_SRC
+
+** 半加算器を使って全加算器を書く
+
+[[spng:fulladder]]
+
+#+BEGIN_SRC lisp
+(define-bitwise-operation full-adder-sum (a b x)
+  "sum output of full adder "
+  `(half-adder-sum (half-adder-sum ,a ,b)
+                   ,x))
+
+(define-bitwise-operation full-adder-carry (a b x)
+  "carry output of full adder "
+  `(ior (half-adder-carry ,a ,b)
+        (half-adder-carry (half-adder-sum ,a ,b)
+                          ,x)))
+#+END_SRC
+
+どんどん拡張できる!
+
