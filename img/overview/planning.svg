@@ -10,15 +10,30 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="198.51059mm"
-   height="163.4136mm"
-   viewBox="0 0 703.38398 579.02458"
+   width="213.62964mm"
+   height="163.81679mm"
+   viewBox="0 0 756.95541 580.45318"
    id="svg6210"
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="planning.svg">
   <defs
      id="defs6212">
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker25654"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path25656" />
+    </marker>
     <marker
        inkscape:isstock="true"
        style="overflow:visible"
@@ -409,9 +424,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="203.07802"
-     inkscape:cy="254.35619"
+     inkscape:zoom="1.4"
+     inkscape:cx="412.69871"
+     inkscape:cy="169.18249"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -440,7 +455,52 @@
      inkscape:label="レイヤー 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-1.6286905,-84.187425)">
+     transform="translate(51.942736,-84.187425)">
+    <text
+       xml:space="preserve"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.5px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       x="451.77844"
+       y="424.2915"
+       id="text8551"
+       sodipodi:linespacing="98.000002%"><tspan
+         sodipodi:role="line"
+         x="451.77844"
+         y="424.2915"
+         id="tspan25047">アクション1</tspan><tspan
+         sodipodi:role="line"
+         x="451.77844"
+         y="441.4415"
+         id="tspan25537" /><tspan
+         sodipodi:role="line"
+         x="451.77844"
+         y="458.59149"
+         id="tspan25529" /><tspan
+         sodipodi:role="line"
+         x="451.77844"
+         y="475.74152"
+         id="tspan25531" /><tspan
+         sodipodi:role="line"
+         x="451.77844"
+         y="492.89151"
+         id="tspan25049" /><tspan
+         sodipodi:role="line"
+         x="451.77844"
+         y="510.0415"
+         id="tspan8576" /><tspan
+         sodipodi:role="line"
+         x="451.77844"
+         y="527.19153"
+         id="tspan8578">アクション2</tspan><tspan
+         sodipodi:role="line"
+         x="451.77844"
+         y="544.34149"
+         id="tspan8557" /></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.70000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.7, 2.7;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 503.1588,537.30201 0,48.57143"
+       id="path8543-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
     <image
        y="207.3622"
        x="-170"
@@ -997,26 +1057,26 @@
     <text
        xml:space="preserve"
        style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.5px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       x="123.74369"
-       y="610.2395"
+       x="70.172264"
+       y="611.66809"
        id="text8406"
        sodipodi:linespacing="98.000002%"><tspan
          sodipodi:role="line"
          id="tspan8408"
-         x="123.74369"
-         y="610.2395">人が手で書いてモデリングした</tspan><tspan
+         x="70.172264"
+         y="611.66809">人が手で書いてモデリングした</tspan><tspan
          sodipodi:role="line"
-         x="123.74369"
-         y="627.38953"
+         x="70.172264"
+         y="628.81812"
          id="tspan8414">通常のプランニング問題と違い</tspan><tspan
          sodipodi:role="line"
-         x="123.74369"
-         y="644.53949"
+         x="70.172264"
+         y="645.96808"
          id="tspan8410">どの命題がどんな意味なのかは</tspan><tspan
          sodipodi:role="line"
-         x="123.74369"
-         y="661.68951"
-         id="tspan8418">人間にもよくわからない</tspan></text>
+         x="70.172264"
+         y="663.1181"
+         id="tspan8418">人間にはよくわからない</tspan></text>
     <image
        y="762.36218"
        x="950"
@@ -1036,51 +1096,14 @@
     <text
        xml:space="preserve"
        style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.5px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       x="491.0928"
-       y="394.59174"
+       x="502.52136"
+       y="395.30603"
        id="text8545"
        sodipodi:linespacing="98.000002%"><tspan
          sodipodi:role="line"
-         x="491.0928"
-         y="394.59174"
+         x="502.52136"
+         y="395.30603"
          id="tspan8549">プラン</tspan></text>
-    <text
-       xml:space="preserve"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.5px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       x="451.77844"
-       y="424.2915"
-       id="text8551"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="451.77844"
-         y="424.2915"
-         id="tspan25047">アクション1</tspan><tspan
-         sodipodi:role="line"
-         x="451.77844"
-         y="441.4415"
-         id="tspan25049" /><tspan
-         sodipodi:role="line"
-         x="451.77844"
-         y="458.59149"
-         id="tspan8576" /><tspan
-         sodipodi:role="line"
-         x="451.77844"
-         y="475.74152"
-         id="tspan8555">アクション2</tspan><tspan
-         sodipodi:role="line"
-         x="451.77844"
-         y="492.89151"
-         id="tspan8578">　　　...</tspan><tspan
-         sodipodi:role="line"
-         x="451.77844"
-         y="510.0415"
-         id="tspan8557" /></text>
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.70000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.7, 2.7;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 514.44452,501.0163 0,48.57143"
-       id="path8543-4"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
     <path
        style="fill:#ff0000;fill-rule:evenodd;stroke:#000000;stroke-width:1.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend-0)"
        d="m 251.64294,353.34337 0,29.5999"
@@ -1893,19 +1916,27 @@
     </g>
     <text
        xml:space="preserve"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.5px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       x="457.09406"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.25px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       x="449.09406"
        y="441.72501"
        id="text25017"
        sodipodi:linespacing="98.000002%"><tspan
          sodipodi:role="line"
          id="tspan25019"
-         x="457.09406"
-         y="441.72501">効果:(and (bit1)</tspan><tspan
+         x="449.09406"
+         y="441.72501">効果:</tspan><tspan
          sodipodi:role="line"
-         x="457.09406"
-         y="453.97501"
-         id="tspan25021">　　　(not (bit3)))</tspan></text>
+         x="449.09406"
+         y="457.64999"
+         id="tspan25527">　(and</tspan><tspan
+         sodipodi:role="line"
+         x="449.09406"
+         y="473.57501"
+         id="tspan25535">　　(bit1)</tspan><tspan
+         sodipodi:role="line"
+         x="449.09406"
+         y="489.5"
+         id="tspan25021">　　(not (bit3)))</tspan></text>
     <g
        transform="matrix(-0.28905125,0,0,-0.28905125,674.30395,468.40838)"
        id="g7612-3-9-9-6-7">
@@ -2421,5 +2452,34 @@
        width="900"
        clip-path="url(#clipPath25411)"
        transform="matrix(0.61244021,0,0,0.61244021,449.17834,373.48167)" />
+    <text
+       xml:space="preserve"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.5px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       x="336.62869"
+       y="608.35486"
+       id="text25459"
+       sodipodi:linespacing="98.000002%"><tspan
+         sodipodi:role="line"
+         id="tspan25461"
+         x="336.62869"
+         y="608.35486">が、ドメイン非依存ソルバは</tspan><tspan
+         sodipodi:role="line"
+         x="336.62869"
+         y="625.50488"
+         id="tspan25487">命題の意味は全く気にせず</tspan><tspan
+         sodipodi:role="line"
+         x="336.62869"
+         y="642.65485"
+         id="tspan25523">論理関係+のみで処理する</tspan><tspan
+         sodipodi:role="line"
+         x="336.62869"
+         y="659.80487"
+         id="tspan25525">ので問題ない</tspan></text>
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25654)"
+       d="m 420.95702,481.78344 48.4313,0"
+       id="path8016-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
   </g>
 </svg>
