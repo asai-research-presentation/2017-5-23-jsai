@@ -4,8 +4,10 @@
 #+LINK: img file:img/%s
 #+LINK: png file:img/%s.png
 #+LINK: jpg file:img/%s.jpg
+#+LINK: svg file:img/%s.svg
 #+LINK: spng file:img/static/%s.png
 #+LINK: sjpg file:img/static/%s.jpg
+#+LINK: ssvg file:img/static/%s.svg
 
 #+BEGIN_outline-text-1
 #+BEGIN_CENTER
@@ -27,9 +29,34 @@ Made by guicho2.71828 (Masataro Asai)
 
 * Deep Neural Networks
 
-人工ニューロン(1944), 第1期 AIバブル (60-70s), 第2期 (80s), そして今
+とてもはやっている
 
-[[sjpg:deeplearning]]
+　
+
+　
+
+[[png:deeplearning1]]
+
+** Deep Neural Networks
+
+とてもはやっている
+
+ベクトル (データ) と 行列W (重み) の掛け算 
+
+　
+
+[[png:deeplearning2]]
+
+** Deep Neural Networks
+
+とてもはやっている
+
+ベクトル (データ) と 行列W (重み) の掛け算 
+
+→ 出力の誤差=微分を使ってWを更新 → 学習完了
+
+[[png:deeplearning3]]
+
 
 ** 認知タスクで人間に匹敵する精度
 
@@ -47,13 +74,13 @@ Made by guicho2.71828 (Masataro Asai)
 
 + 求めるべき関数 $y^*=f^*(x)$
 + NNが表す関数　 $y=f(x)$
-+ → 関数の誤差 $||y-y^*||$ を最小化する最適化問題
++ 学習 ≡ 誤差 $||y-y^*||$ を最小化する最適化問題
 
-| タスク       | 入力x      | 出力y                      |
-|--------------+------------+----------------------------|
-| 画像分類     | 画像       | ラベル(車、ネコ、猿・・・) |
-| 翻訳         | 文章       | 文章                       |
-| 未来予測     | フレーム列 | 次のフレーム               |
+| タスク   | 入力x      | 出力y                      |
+|----------+------------+----------------------------|
+| 画像分類 | 画像       | ラベル(車、ネコ、猿・・・) |
+| 翻訳     | 文章(日)   | 文章(英)                   |
+| 未来予測 | フレーム列 | 次のフレーム               |
 
 ** NNは複雑な問題を魔法のように解くことが出来る
 
@@ -86,7 +113,7 @@ Made by guicho2.71828 (Masataro Asai)
 + 脳科学でシンギュラっちゃうぜ！
 + *出来ない派の意見:*
 + ヒトデやプラナリアも神経系を持つが賢いか??
-+ *Do you /really/ believe that humanity is smart?*
++ *Do you /really/ believe that humanity is /so/ smart?*
 #+END_SPAN8
 #+BEGIN_SPAN4
 [[sjpg:trump]]
@@ -97,7 +124,7 @@ Made by guicho2.71828 (Masataro Asai)
 #+END_ALIGNRIGHT
 #+END_SPAN4
 #+BEGIN_SPAN12
-  + *The sad reality recently told us: People are not necessarily smart.↑*
+  + *The sad reality: People are not necessarily smart.↑*
 #+END_SPAN12
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
@@ -121,28 +148,31 @@ Made by guicho2.71828 (Masataro Asai)
 
 [[spng:gradient-descent]]
 
-*最適解でないところに到達する可能性があるが、*
+*一般には: 最適解でないところに到達する可能性がある*
 
-*局所解はほぼ確実に大域最適解である という仮定で無視している*
+*NNでは: 局所解はほぼ確実に大域最適解である == 無視*
 
 #+BEGIN_NOTE
 SGDでも基本的な想定は一緒
 #+END_NOTE
 
 ** 進化計算などで解かれるRastrigin関数 (例)
-
+   
 [[sjpg:rastrigin]]
 
-誤った局所解に落ちた場合にどうやって脱出するか?
+こういう関数は SGD では解けない
 
-→ 物体認識の関数はこういう形をしていない、と仮定している
+→ *NNでは学習できない種類の構造も存在する*
 
-** 銀の弾はない: NNで複雑な問題を魔法のように解くことはできない・・・と思われる
+** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる
 
 + 出来ない派のもう少し真面目な反論2:
   + *認知タスクと比べ、論理思考タスクは人間にも難しい*
     + *人間の物体認識: 1秒以下*
     + *大学入試数学の証明問題: 25分*
+    + 明らかに *難しさの質に差がある*
+  + 難しさの質というのはどうやって測る?
+    + 理論的解析: *計算量理論* (NP困難とか)
   + *論理思考タスクは計算量理論的に困難な問題が多数*
     + *NP困難以上: 最悪指数時間*
     + *← 学習に指数時間かかる = 解けないのと同じ*
@@ -442,36 +472,33 @@ SGDでも基本的な想定は一緒
 
 * プランニング問題 (決定的,完全情報) -- Blocksworld
 
-[[png:plan]]
+#+HTML: <embed src="img/plan.svg" type="image/svg+xml"  />
 
 ** アクション = 条件付き状態遷移
 
 #+BEGIN_CENTER
 #+BEGIN_XLARGE
-(move ?X ?Y)
+アクション (move ?X ?Y)
 #+END_XLARGE
 #+END_CENTER
 
-
 #+BEGIN_CENTER
-変数 *?X*, *?Y* などに値 *BLOCK-A*, *BLOCK-B* などを適用して使う
+*?X*, *?Y* : 変数。 値 *BLOCK-A*, *BLOCK-B* などを適用して使う
 
-*前提条件* *追加効果* *削除効果* で構成される
+*前提条件* と *効果* で構成される
 #+END_CENTER
 #+BEGIN_QUOTE
-*前提条件*
+*前提条件* が満たされた時…
 
-(clear *?X*) : 積み木 *?X* の上に何もなく (1)
+命題 (clear *?X*) : 積み木 *?X* の上に何も置かれていない
 
-(clear *?Y*) : 積み木 *?Y* の上にも何もない (2) ときに、
+命題 (clear *?Y*) : 積み木 *?Y* の上に何も置かれていない
 
-*追加効果*
+*効果* を適用
 
-⇒ (on *?X* *?Y*) : *?X* が *?Y* の上に移動する。(3)
+⇒ 命題 (on *?X* *?Y*) を追加 : *?X* が *?Y* の上に移動
 
-*削除効果*
-
-⇒ (not (clear *?Y*)) : *?Y* は clear ではなくなる。(4)
+⇒ 命題 (clear *?Y*) を削除 : *?Y* は clear ではなくなる
 #+END_QUOTE
 
 ** *PDDL* : Planning Domain Description Language
@@ -483,7 +510,7 @@ SGDでも基本的な想定は一緒
 #+BEGIN_SPAN2
 
 #+END_SPAN2
-#+BEGIN_SPAN6
+#+BEGIN_SPAN8
 #+BEGIN_SRC lisp
 (:action move
  :parameters (?X ?Y)
@@ -496,7 +523,7 @@ SGDでも基本的な想定は一緒
         (not         ; (4)
          (clear ?Y))))
 #+END_SRC
-#+END_SPAN6
+#+END_SPAN8
 #+BEGIN_SPAN2
 
 #+END_SPAN2
@@ -545,20 +572,16 @@ SGDでも基本的な想定は一緒
  *機械学習・Neural Networks* 
  
  for *認識・反射*
- + 入力 は *Subsymbolic*
+ + 入力 は *Subsymbolic* (連続値)
    
-   画像、音声、非構造化テキスト
- + *1タイムステップ*:
+   画像、音声、非構造化テキスト: 
+ + *直感/脊髄反射的知能*:
    
    　 *_直後_ の行動の決定*
    #+BEGIN_SMALLER
-   Reflex Agent = 脊髄反射
-
    *パブロフの犬* : 餌→よだれ
 
    *自動運転* : 赤信号,人 → 止まる.
-
-   *ファナック産業ロボ* : 画像 → モータ出力
 
    *翻訳* : 文章 → 文章
    #+END_SMALLER
@@ -573,13 +596,13 @@ SGDでも基本的な想定は一緒
  + 入出力は *Symbolic*
    
    論理 オブジェクト ルール
- + *>1000タイムステップ:*
+ + *論理・推論による知能:*
 
    　 *_未来に渡る_ 戦略の決定*
    
    　 (戦略 = 行動の *列や木*)
    #+BEGIN_SMALLER
-   *レスキューロボ* : 現実 = 難解パズル
+   *レスキューロボ* : ゴール = 被災者生存
 
    *囲碁,将棋* : ゴール = 勝利
 
@@ -594,9 +617,17 @@ SGDでも基本的な想定は一緒
  #+END_ROW-FLUID
  #+END_CONTAINER-FLUID
 
-#+BEGIN_ALIGNRIGHT
-AlphaGo = Subsymbolic (DLNNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
-#+END_ALIGNRIGHT
+
+** 既存の有名システム
+
++ AlphaGo = Subsymbolic (DLNNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
+  + ただし *囲碁に特化*, かつ *膨大な棋譜が必要*
+  + 自律的なエージェントは *未知の状況に推論により対処しなくてはならない* → まだ完璧ではない
++ DQN = DLNN (*Subsymbolic*) + Reinforcement Learning (*Subsymbolic*)
+  + 様々な Atari Game につかえる汎用的なフレームワーク (Invader, Packman…) だが
+  + ほとんどのゲームは *脊髄反射的な操作で長く生き残ることが出来る*
+  + *Atari をプレイする上で 複雑な論理思考能力は必要ない*
+  + だからこそRLで成功した
 
 #+BEGIN_NOTE
 DLNN: Deep Learning Neural Network
@@ -621,12 +652,15 @@ UCT-MCTS: Monte Carlo Tree Search + Universal Confidence Bound applied on Trees
 #+BEGIN_SPAN6
 + 第二次AIの冬の原因:
   + *論理だけで全てが解決できると考えた*
-  + 現実世界 (物体、アクション) のラベル付を👍入力する必要があった
-+ 第三次AIの冬のありそうな原因
-  + *学習さえできれば全てが解決できると考えた?*
+  + 現実世界 (物体、アクション) のラベル付を手入力する必要があった
+  + ソルバも遅すぎた
++ 現在: より速いソルバがあり、ラベル付もDLでできそうだ
 #+END_SPAN6
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
+
++ 第三次AIの冬のありそうな原因: *学習で全てが解決できると考えた?*
+  + 脳科学(笑)とかの迷信に踊らされている日本の傾向
 
 ** 高度に知的な機械を作るには → DeepLearning + 論理と推論
 
@@ -646,9 +680,9 @@ vs
 　
 #+END_SPAN2
 #+BEGIN_SPAN5
-目標を達成するために論理的な
+目標を達成するために
 
-*戦略を練る機械*
+*論理で戦略を練る機械*
 
 #+END_SPAN5
 #+END_ROW-FLUID
@@ -671,196 +705,196 @@ State of the Art Classical Planning を組み合わせる
 ひとまず休憩
 #+END_ALIGNRIGHT
 
-* 唐突ですが取っ掛かりとして
+* Overview
+
+スライディングパズルを解くAIを作る
+
+論理推論に基づくAI: *棋譜から学習した勘で解くAlphaGoと異なる*
+
+[[sjpg:puzzle]]
+
+** スライディングパズル
+
+ 空きパネルとそれ以外を移動させることで絵を完成させるパズル
+
+ [[sjpg:puzzle]]
+
+ #+BEGIN_ALIGNRIGHT
+ 勘だけでは解けない難しいパズル
+
+ 4x4の15-パズル、5x5の24-パズルはさらに難しい
+ #+END_ALIGNRIGHT
+
+** Overview
+
+[[png:overview/1]]
+
+** Overview
+
+[[png:overview/2]]
+
+** Overview
+
+#+HTML: <embed src="img/overview/3.svg" type="image/svg+xml"  />
+
+* State Autoencoder
+
+[[png:overview/state-ae]]
+
+* Entire System
+
+[[png:overview/planning]]
+
+
+
+* セミファイナル
 
 死んでると思ってたセミが実は生きてて
 
 びっくりしたことはありませんか?
 
+#+BEGIN_ALIGNRIGHT
+Credit: http://hukaimandara.jugem.jp/?eid=92
+#+END_ALIGNRIGHT
+
 [[sjpg:semifinal]]
 
-Credit: http://hukaimandara.jugem.jp/?eid=92
+** セミファイナル
 
-* Backgrounds
+
+#+BEGIN_ALIGNRIGHT
+Credit: http://hukaimandara.jugem.jp/?eid=92
+#+END_ALIGNRIGHT
 
 [[jpg:static/cicada]]
 
-Credit: http://hukaimandara.jugem.jp/?eid=92
+#+BEGIN_ALIGNRIGHT
++ 教訓: 複雑な3次元データは *足を開いている/死んでいる*
+
+  という *1bit* のデータに要約できる → 命題そのもの
+#+END_ALIGNRIGHT
+
+# * Latent Space $L$ of an original state space $S$
+# 
+# #+BEGIN_QUOTE
+# Apparently very complex $S$ can be described by low-dimentional $L$
+# #+END_QUOTE
+# 
+# [[jpg:static/cicada]]
 
 
-* Latent Space $L$ of an original state space $S$
+* /Manifold Hypothesis/ マニホールド仮説 and /Latent Space/
 
-#+BEGIN_QUOTE
-Apparently very complex $S$ can be described by low-dimentional $L$
-#+END_QUOTE
++ $x$: 高次元vector (例: 28x28 の画像データ = 784次元)
++ マニホールド仮説:
+  + 世の中の高次元データは低次元にマッピングできる *はず*
+  + 一見複雑なデータも実は少ないパラメータで説明できる 
++ $z$: 低次元 *Latent Space* vector (下の図では 2次元)
++ *この扱いやすい低次元ベクトルが欲しい*
+  + セミファイナルの見分け方に相当
 
-[[jpg:static/cicada]]
+#+BEGIN_ALIGNRIGHT
++ ← Deep Learning で $z$ を見つける
+#+END_ALIGNRIGHT
 
-* Manifold Hypothesis
+# $x$: high dimensional vector in $S$, $z$ in manifold $L$
+# 
+# Data is concentrated around a low dimensional manifold
+# 
+# Hope finding a representation Z of that manifold.
 
-$x$: high dimensional vector in $S$, $z$ in manifold $L$
-
-Data is concentrated around a low dimensional manifold
-
-Hope finding a representation Z of that manifold.
-
+#+BEGIN_ALIGNRIGHT
 http://www.deeplearningbook.org/ and VAE tutorial
+#+END_ALIGNRIGHT
 
 [[png:static/manifold]]
 
-* Manifold Hypothesis
+** Manifold Hypothesis
 
-$x$: high dimensional vector in $S$, $z$: manifold $L$
+ $x$: high dimensional vector in $S$, $z$: manifold $L$
 
-Data is concentrated around a low dimensional manifold
+ Data is concentrated around a low dimensional manifold
 
-Hope finding a representation Z of that manifold.
+ Hope finding a representation Z of that manifold.
 
-http://www.deeplearningbook.org/ and VAE tutorial
+ http://www.deeplearningbook.org/ and VAE tutorial
 
-[[png:static/manifold2]]
+ [[png:static/manifold2]]
 
-* How to obtain $L$?
+** Latent Space の威力
 
-+ PCA: Principal Component Analysis
+ #+BEGIN_SMALLER
+ Reinforcement Learning(RL) in Latent Space (e.g. Luck IROS14, AAAI16)
+ #+END_SMALLER
 
-+ */✘/* Assumes a linear function
+ 強化学習(RL)を高次元に直接適用するのは難しい → PCA で得たLatent Space でRL
 
-\[y = f(x) = Wx + b\]
+ (PCA: 一段 かつ 活性化関数無しのNNと考えられる 古いタイプの Latent Space 学習手法)
 
-* Neural Network
+ 　
 
-+ A framework for learning a *function* that maps input $x$ to output $y$
+ mapping 62-DOF space → 2D
 
-+ NN w/ $>2$ layers can learn arbitrary function (given enough neurons)
+ [[png:static/latent-RL]]
 
-\[x = \sigma (Wx + b) \]
+** Autoencoder
 
-[[png:static/nn]]
+ #+BEGIN_CENTER
+ *教師なし学習*
 
-* Autoencoder
+ 入力空間 *S* を Latent Space *L* に *圧縮*
 
-#+BEGIN_CENTER
-Unsupervised learning method which learns to 
+ かつ *S* に *展開* して *元の画像に損失無く戻す。*
+ #+END_CENTER
 
-*compress S* into *L* and *decompress back to S*
-#+END_CENTER
+ #+BEGIN_CONTAINER-FLUID
+ #+BEGIN_ROW-FLUID
+ #+BEGIN_SPAN3
 
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN3
+ #+END_SPAN3
+ #+BEGIN_SPAN6
+ [[png:static/autoenc]]
+ #+END_SPAN6
+ #+BEGIN_SPAN3
 
-#+END_SPAN3
-#+BEGIN_SPAN6
-[[png:static/autoenc]]
-#+END_SPAN6
-#+BEGIN_SPAN3
+ #+END_SPAN3
+ #+END_ROW-FLUID
+ #+END_CONTAINER-FLUID
 
-#+END_SPAN3
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
+ #+BEGIN_ALIGNRIGHT
+ → *データ* $x$ を *Latent vector* $z$ に変換/逆変換するNNを学習
+ #+END_ALIGNRIGHT
+
+** Deep Autoencoder
+
+ いろいろな追加技術を使うことでDeepにできる → *より圧縮できる*
+
+ Stacked AE, pretraining, CNN, dropout, Batch-Normalization, GPU...
+
+ [[png:static/deep-ae]]
+
+
+
+* Gumbel-Softmax (Jang, Gu, ICRA2017に *投稿中*, 2/3に採択結果判明)
+
+*入力をカテゴリカル分布にマップする* Activation Function 
+
+学習中に温度を下げていくことで *始めは自由に学習*
+
+*そののち、精度を保ったまま中間層の分布をカテゴリカルに近づける*
+
+#+BEGIN_HTML
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="649px" height="206px" version="1.1" content="&lt;mxfile userAgent=&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36&quot; version=&quot;6.0.1.2&quot; editor=&quot;www.draw.io&quot; type=&quot;google&quot;&gt;&lt;diagram name=&quot;Page-1&quot;&gt;3ZhLc5swEMc/Dcd0kAQCX+O67SGd6TTTaXqU0fJoZcsjy69++oogDBjs0MZ2TONDpL9ey29Xi5BDxrPtR8UW6WfJQTjY5VuHvHcwxshF5l+u7AqF+rgQEpXxQkKV8Jj9Biu6Vl1lHJaNjlpKobNFU4zkfA6RbmhMKblpdoulaK66YAm0hMeIibb6PeM6LdTQdyv9E2RJWq6MXNsyY2VnKyxTxuWmJpGJQ8ZKSl2UZtsxiBxeyaUY9+FI694wBXPdZ0AQh1EYx4xP46kXRHBnZ1gzsbIPaw3Vu/LpN2mm4XHBory+MR52yH2qZ8LUkCnGmRBjKaR67k0AcR8Coy+1kr+g1jKiAWHUtCi5mnPgdrw1AJSG7dGnQntWJshAzkCrneliB5CAFENsfCHPL+qbylt7n6Q1T+HAisxGSLKfu4JoCpZjT6a4xRT71MFUmFXvebY2xSQvfoWHb6VsFqm1tHygUjmbroyR9y944ww08QFN7LktmmEHzPASLEmLpY/wcFiiW2LptVAAN3nOVqXSqUzknIlJpdb2qtuEA9tMP9XKP/Iu7/y8NjeGPtkRz5Wq7SdovbMJnq20NFK17oOUiwb63LzT4M3TyJWK4HT0aKYS0Kd2a9uBCgTT2bq5/mvc4eEIU4xG4PsesCDqCO1z+ufKpBHugZq8FeorRf6VmfdBfiQ9XR45HXbi9kf4zRJ3i2Uw7AOFd0ssw//9JXgseupponu3Ht8MwYEDL+KZ0cDehyeBBqd3BB31B2pn+SIzY0D/KYqYsKMO3LK36N88hc7+1cgZhHHU9dVIoxCm8SW+GukINQm67bSEaEde2otnDX901nAfRGaiPTYSutYJ5uiRdthRfldeot1IlPfI8i9Abcb8AeLYz3+diJ//Xgm1hIg6IHpdEL1LQCxvEwcK0Q4I3IP8+8ZQX/9SuwGoJGxud+STFtSQtpli3/trpqZa3VwX54rq/p9M/gA=&lt;/diagram&gt;&lt;/mxfile&gt;"><defs/><g transform="translate(0.5,0.5)"><rect x="288" y="0.75" width="75" height="202.5" rx="11.25" ry="11.25" fill="#e1d5e7" stroke="#9673a6" pointer-events="none"/><path d="M 243 72 L 273 102 L 243 132 L 213 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(231.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">256<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 168 72 L 198 102 L 168 132 L 138 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(156.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">512<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 198 102 L 208.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 212.16 102 L 206.91 104.63 L 208.22 102 L 206.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 120.75 102 L 135.75 102 L 123 102 L 133.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 137.16 102 L 131.91 104.63 L 133.22 102 L 131.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 273 102 L 288 102 L 273 102 L 283.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 287.16 102 L 281.91 104.63 L 283.22 102 L 281.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 482.25 72 L 512.25 102 L 482.25 132 L 452.25 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(470.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">512<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 407.25 72 L 437.25 102 L 407.25 132 L 377.25 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(395.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">256<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 437.25 102 L 447.47 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 451.41 102 L 446.16 104.63 L 447.47 102 L 446.16 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 360 102 L 375 102 L 362.25 102 L 372.47 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 376.41 102 L 371.16 104.63 L 372.47 102 L 371.16 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><rect x="526.5" y="42" width="120" height="120" rx="18" ry="18" fill="#dae8fc" stroke="#6c8ebf" pointer-events="none"/><path d="M 512.25 102 L 521.72 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 525.66 102 L 520.41 104.63 L 521.72 102 L 520.41 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><rect x="0.75" y="42" width="120" height="120" rx="18" ry="18" fill="#dae8fc" stroke="#6c8ebf" pointer-events="none"/>
+<image xlink:href="https://1.bp.blogspot.com/-OBY7yjnWj9k/WCK6i_l0R9I/AAAAAAAAFLY/jCJwLNuPMecbvAB719g6VhAypmoDH6gswCLcB/s1600/x0.gif" x="8.25" y="49.5" width="105" height="105" fill="#f5f5f5" stroke="#666666" pointer-events="none"/>
+<image xlink:href="https://1.bp.blogspot.com/-WySijJ91Oa8/WCK6jFdXluI/AAAAAAAAFLc/CpaGjhd5lPwUdT6FdGNPQKRlyFhYvcwVQCLcB/s1600/x1.gif" x="534" y="49.5" width="105" height="105" fill="#f5f5f5" stroke="#666666" pointer-events="none"/>
+<image xlink:href="https://1.bp.blogspot.com/-tGqhaoX1a4Y/WCK6izWaixI/AAAAAAAAFLU/QRr6CzXET18_-c8hlx89QOkSQ3HoRH2DwCLcB/s1600/y.gif" x="293.25" y="6.75" width="64.5" height="190.5" fill="#f5f5f5" stroke="#666666" pointer-events="none"/></g></svg>
+#+END_HTML
 
 #+BEGIN_ALIGNRIGHT
-→ equivalent to *PCA applied to nonlinear function*
+*カテゴリー2 → 0か1 の離散的分布になる!*
 #+END_ALIGNRIGHT
 
-* Deep Autoencoder
-
-Deep AE made available by various techniques
-
-Stacked AE, pretraining, CNN, dropout, Batch-Normalization, GPU...
-
-[[png:static/deep-ae]]
-
-
-* Reinforcement Learning
-
-*Policy function* $\pi(s)\mapsto a : S \rightarrow A$ -- returns action $a$ for state $s$
-
-Agent always follows the policy function
-
-*Optimal Policy* $\pi^* (s)$ : a policy that gives the highest reward
-
-Goal: *Find/learn* the best approximation of $\pi^*$
-
-Methods: Value-iteration, Policy-iteration, TD-learning ∋ Q-learning
-
-* Reinforcement Learning(RL) in Latent Space (e.g. Luck IROS14, AAAI16)
-
-RL in $S$ is too difficult → Apply RL to $L$ for speedup
-
-\[x\in S, z \in L: \ x = f(z) \]
-
-　
-
-mapping 62-DOF space → 2D
-
-[[png:static/latent-RL]]
-
-# * Underlying belief:
-# 
-# #+BEGIN_QUOTE
-# The real world is apparently complex, but in *almost all cases* they can be described by *only a few parameters*.
-# #+END_QUOTE
-
-* Deep Reinforcement Learning: DQN?
-
-No, DQN is not using latent space representation
-
-It represents Q-function by neural network
-
-* Classical Planning 
-
-_/✔/_ *Scalable, Highly-optimized solver* for complex combinatorial problems
-
-_/✔/_ Guided by *domain-independent* heuristics
-
-*/✘/* *Requires an explicit encoding* of the real world, written by human
-
-* Comparison
-
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN6
-#+BEGIN_CENTER
-*Latent Reinforcement Learning*
-#+END_CENTER
-
-_/✔/_ Works on the *implicit encoding* of the real world
-
-*/✘/* Reasoning is limited to the *1-step future* of the current state
-
-*/✘/* guided by *instance-specific learned knowledge* (specific object, situation, goal)
-#+END_SPAN6
-#+BEGIN_SPAN6
-#+BEGIN_CENTER
-*Classical Planning*
-#+END_CENTER
-
-_/✔/_ *Scalable, Highly-optimized solver* for complex combinatorial problems
-
-_/✔/_ Guided by *domain-independent* heuristics
-
-*/✘/* *Requires an explicit encoding* of the real world, written by human
-#+END_SPAN6
-#+END_ROW-FLUID
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
-
-* Goal of this project
-
-|                      |                        |                        |
-|----------------------+------------------------+------------------------|
-| Man-made             |                        |                        |
-| state representation | Reinforcement Learning | Classical Planning     |
-|----------------------+------------------------+------------------------|
-| Latent state         | Latent RL              | *Latent Planning*      |
-| representation       |                        |                        |
-|----------------------+------------------------+------------------------|
-| Deep Latent state    |                        | *Deep Latent Planning* |
-| (found by Deep AE)   |                        |                        |
-
-* How?
+* How?                                                             :noexport:
 
 Simply put: discretize $z$ into SAS variables
 
@@ -870,7 +904,7 @@ Mapping the input image to latent space (encoding part)
 
 [[png:static/vae-latent]]
 
-* How?
+* How?                                                             :noexport:
 
 Mapping the latent space to the actual image (decoding part)
 
