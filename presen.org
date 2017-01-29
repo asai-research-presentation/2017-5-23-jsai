@@ -27,6 +27,130 @@ Made by guicho2.71828 (Masataro Asai)
 #+END_NOTE
 #+END_outline-text-1
 
+* 今日の発表の Motivation
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN5
+|      |                  |
+|------+------------------|
+| ~'70 | 第一次AIブーム   |
+| ~'80 | *第一次AIの冬*   |
+| ~'90 | 第二次AIブーム   |
+| ~'08 | *第二次AIの冬*   |
+| '08~ | 第三次AIブーム   |
+| ???? | *第三次AIの冬??* |
+#+END_SPAN5
+#+BEGIN_SPAN7
++ 第二次AIの冬の原因:
+  + *論理だけで全てが*
+
+    *解決できると考えた*
+  + 現実世界 (物体、アクション) のラベルを手入力する必要があった
+  + ソルバも遅すぎた (ハードウェアも遅かったが、探索手法も指数的に非効率)
++ 現在: *より速いソルバがある*
++ 現在: *ラベル付も Deep Learning でできそうだ*
+#+END_SPAN7
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
++ 第三次AIの冬のありそうな原因: *Deep Learningで全てが解決できると考えた?*
+  + 脳科学(笑) シンギュラリティ(笑)
+
+** 高度に知的な機械を作るには → DeepLearning + 論理と推論
+
+#+BEGIN_CENTER
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN5
+ディープラーニングのみ
+
+↓
+
+犬猫程度の知能を持った
+
+*反射的な機械*
+#+END_SPAN5
+#+BEGIN_SPAN2
+　
+
+vs
+
+　
+#+END_SPAN2
+#+BEGIN_SPAN5
+DL + *論理、推論、思考*
+
+↓
+
+目標を達成するために
+
+*論理で戦略を練る機械*
+
+#+END_SPAN5
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+#+END_CENTER
+
+[[png:planning-deeplearning]]
+* ゴール
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+State of the Art
+
+Deep Learning 
+
+＋
+
+State of the Art
+
+Classical Planning
+#+END_CENTER
+#+END_XLARGE
+
+* スライディング タイル パズル (8-Puzzle)
+
+空きパネルとそれ以外を移動させることで絵を完成させるパズル
+
+[[sjpg:puzzle]]
+
+#+BEGIN_ALIGNRIGHT
+*古典的なAI問題として知られている*
+
+可能な曲面の数は 362880 個
+
+4x4の15-パズル、5x5の24-パズルはさらに難しい
+#+END_ALIGNRIGHT
+
+* Overview
+
+8-Puzzle を解く論理に基づくAIを作る
+
+ *ヒント・棋譜なし* : *棋譜から学習した勘で解くAlphaGoと異なる*
+
+[[sjpg:puzzle]]
+
+** Overview
+
+[[png:overview/1]]
+
+** Overview
+
+[[png:overview/2]]
+
+** Overview
+
+#+HTML: <embed src="img/overview/3.svg" type="image/svg+xml"  />
+
+* 
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+Introduction: There's No Silver Bullet
+#+END_CENTER
+#+END_XLARGE
+
 * Deep Neural Networks
 
 とてもはやっている
@@ -196,7 +320,6 @@ SGDでも基本的な想定は一緒
 ** 
 
 [[sjpg:fukashigi]]
-
 * AI Topics -- プランニングへのイントロダクション(再び)
 
 #+BEGIN_QUOTE
@@ -469,7 +592,6 @@ SGDでも基本的な想定は一緒
  #+END_RESUME
 
  [[png:planning2]]
-
 * プランニング問題 (決定的,完全情報) -- Blocksworld
 
 #+HTML: <embed src="img/plan.svg" type="image/svg+xml"  />
@@ -634,118 +756,90 @@ DLNN: Deep Learning Neural Network
 
 UCT-MCTS: Monte Carlo Tree Search + Universal Confidence Bound applied on Trees
 #+END_NOTE
+* システム概要
 
-* 今日の発表の Motivation
+** State Autoencoder
 
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN6
-|                |         |
-|----------------+---------|
-| 第一次AIブーム | ~'70    |
-| *第一次AIの冬* | '70~'80 |
-| 第二次AIブーム | '80~    |
-| *第二次AIの冬* | '90~    |
-| 第三次AIブーム | '2008~  |
-| *第三次AIの冬??* | ????    |
-#+END_SPAN6
-#+BEGIN_SPAN6
-+ 第二次AIの冬の原因:
-  + *論理だけで全てが解決できると考えた*
-  + 現実世界 (物体、アクション) のラベル付を手入力する必要があった
-  + ソルバも遅すぎた
-+ 現在: より速いソルバがあり、ラベル付もDLでできそうだ
-#+END_SPAN6
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
+ [[png:overview/state-ae]]
+** Gumbel-Softmax (Jang, Gu, ICLR2017?)
 
-+ 第三次AIの冬のありそうな原因: *学習で全てが解決できると考えた?*
-  + 脳科学(笑)とかの迷信に踊らされている日本の傾向
-
-** 高度に知的な機械を作るには → DeepLearning + 論理と推論
+ *入力をカテゴリカル分布にマップする* Activation Function 
 
 #+BEGIN_CENTER
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN5
-犬猫程度の知能を持った
-
-*反射的な機械*
-#+END_SPAN5
-#+BEGIN_SPAN2
-　
-
-vs
-
-　
-#+END_SPAN2
-#+BEGIN_SPAN5
-目標を達成するために
-
-*論理で戦略を練る機械*
-
-#+END_SPAN5
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
+ #+BEGIN_HTML
+ <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="649px" height="206px" version="1.1" content="&lt;mxfile userAgent=&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36&quot; version=&quot;6.0.1.2&quot; editor=&quot;www.draw.io&quot; type=&quot;google&quot;&gt;&lt;diagram name=&quot;Page-1&quot;&gt;3ZhLc5swEMc/Dcd0kAQCX+O67SGd6TTTaXqU0fJoZcsjy69++oogDBjs0MZ2TONDpL9ey29Xi5BDxrPtR8UW6WfJQTjY5VuHvHcwxshF5l+u7AqF+rgQEpXxQkKV8Jj9Biu6Vl1lHJaNjlpKobNFU4zkfA6RbmhMKblpdoulaK66YAm0hMeIibb6PeM6LdTQdyv9E2RJWq6MXNsyY2VnKyxTxuWmJpGJQ8ZKSl2UZtsxiBxeyaUY9+FI694wBXPdZ0AQh1EYx4xP46kXRHBnZ1gzsbIPaw3Vu/LpN2mm4XHBory+MR52yH2qZ8LUkCnGmRBjKaR67k0AcR8Coy+1kr+g1jKiAWHUtCi5mnPgdrw1AJSG7dGnQntWJshAzkCrneliB5CAFENsfCHPL+qbylt7n6Q1T+HAisxGSLKfu4JoCpZjT6a4xRT71MFUmFXvebY2xSQvfoWHb6VsFqm1tHygUjmbroyR9y944ww08QFN7LktmmEHzPASLEmLpY/wcFiiW2LptVAAN3nOVqXSqUzknIlJpdb2qtuEA9tMP9XKP/Iu7/y8NjeGPtkRz5Wq7SdovbMJnq20NFK17oOUiwb63LzT4M3TyJWK4HT0aKYS0Kd2a9uBCgTT2bq5/mvc4eEIU4xG4PsesCDqCO1z+ufKpBHugZq8FeorRf6VmfdBfiQ9XR45HXbi9kf4zRJ3i2Uw7AOFd0ssw//9JXgseupponu3Ht8MwYEDL+KZ0cDehyeBBqd3BB31B2pn+SIzY0D/KYqYsKMO3LK36N88hc7+1cgZhHHU9dVIoxCm8SW+GukINQm67bSEaEde2otnDX901nAfRGaiPTYSutYJ5uiRdthRfldeot1IlPfI8i9Abcb8AeLYz3+diJ//Xgm1hIg6IHpdEL1LQCxvEwcK0Q4I3IP8+8ZQX/9SuwGoJGxud+STFtSQtpli3/trpqZa3VwX54rq/p9M/gA=&lt;/diagram&gt;&lt;/mxfile&gt;"><defs/><g transform="translate(0.5,0.5)"><rect x="288" y="0.75" width="75" height="202.5" rx="11.25" ry="11.25" fill="#e1d5e7" stroke="#9673a6" pointer-events="none"/><path d="M 243 72 L 273 102 L 243 132 L 213 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(231.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">256<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 168 72 L 198 102 L 168 132 L 138 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(156.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">512<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 198 102 L 208.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 212.16 102 L 206.91 104.63 L 208.22 102 L 206.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 120.75 102 L 135.75 102 L 123 102 L 133.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 137.16 102 L 131.91 104.63 L 133.22 102 L 131.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 273 102 L 288 102 L 273 102 L 283.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 287.16 102 L 281.91 104.63 L 283.22 102 L 281.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 482.25 72 L 512.25 102 L 482.25 132 L 452.25 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(470.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">512<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 407.25 72 L 437.25 102 L 407.25 132 L 377.25 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(395.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">256<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 437.25 102 L 447.47 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 451.41 102 L 446.16 104.63 L 447.47 102 L 446.16 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 360 102 L 375 102 L 362.25 102 L 372.47 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 376.41 102 L 371.16 104.63 L 372.47 102 L 371.16 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><rect x="526.5" y="42" width="120" height="120" rx="18" ry="18" fill="#dae8fc" stroke="#6c8ebf" pointer-events="none"/><path d="M 512.25 102 L 521.72 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 525.66 102 L 520.41 104.63 L 521.72 102 L 520.41 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><rect x="0.75" y="42" width="120" height="120" rx="18" ry="18" fill="#dae8fc" stroke="#6c8ebf" pointer-events="none"/>
+ <image xlink:href="https://1.bp.blogspot.com/-OBY7yjnWj9k/WCK6i_l0R9I/AAAAAAAAFLY/jCJwLNuPMecbvAB719g6VhAypmoDH6gswCLcB/s1600/x0.gif" x="8.25" y="49.5" width="105" height="105" fill="#f5f5f5" stroke="#666666" pointer-events="none"/>
+ <image xlink:href="https://1.bp.blogspot.com/-WySijJ91Oa8/WCK6jFdXluI/AAAAAAAAFLc/CpaGjhd5lPwUdT6FdGNPQKRlyFhYvcwVQCLcB/s1600/x1.gif" x="534" y="49.5" width="105" height="105" fill="#f5f5f5" stroke="#666666" pointer-events="none"/>
+ <image xlink:href="https://1.bp.blogspot.com/-tGqhaoX1a4Y/WCK6izWaixI/AAAAAAAAFLU/QRr6CzXET18_-c8hlx89QOkSQ3HoRH2DwCLcB/s1600/y.gif" x="293.25" y="6.75" width="64.5" height="190.5" fill="#f5f5f5" stroke="#666666" pointer-events="none"/></g></svg>
+ #+END_HTML
 #+END_CENTER
 
-[[png:planning-deeplearning]]
+ #+BEGIN_NOTE
+ ICLR17に *投稿中*, 2/3に採択結果判明
+ #+END_NOTE
 
-* ゴール
+** Gumbel-Softmax
 
-#+BEGIN_XLARGE
-#+BEGIN_CENTER
-State of the Art Deep Learning と
+学習中に温度を下げていくことで *始めは自由に学習*
 
-State of the Art Classical Planning を組み合わせる
-#+END_CENTER
-#+END_XLARGE
+*そののち、精度を保ったまま中間層の分布をカテゴリカルに近づける*
+
+[[spng:gumbel]]
 
 #+BEGIN_ALIGNRIGHT
-ひとまず休憩
+*カテゴリー2 → 0か1 の離散的分布になる → 命題にマップ可能*
 #+END_ALIGNRIGHT
 
-* Overview
+** Entire System
 
-スライディングパズルを解くAIを作る
+ [[png:overview/planning]]
 
-論理推論に基づくAI: *棋譜から学習した勘で解くAlphaGoと異なる*
+* 評価
 
-[[sjpg:puzzle]]
+GTX1070, PhenomII X6 1060T, 16GB
 
-** スライディングパズル
++ Fast Downward :: LMcut heuristics, A*
 
- 空きパネルとそれ以外を移動させることで絵を完成させるパズル
++ State AutoEncoder :: Tensorflow, Keras
 
- [[sjpg:puzzle]]
+  784(84x84)
 
- #+BEGIN_ALIGNRIGHT
- 勘だけでは解けない難しいパズル
+  →FC(1000,ReLu)→Batchnorm→Dropout(0.4)
 
- 4x4の15-パズル、5x5の24-パズルはさらに難しい
- #+END_ALIGNRIGHT
+  →FC(1000,ReLu)→Batchnorm→Dropout(0.4)
 
-** Overview
+  →FC(25,GumbelSoftmax)
 
-[[png:overview/1]]
+  →FC(1000,ReLu)→Batchnorm→Dropout(0.4)
 
-** Overview
+  →FC(1000,ReLu)→Batchnorm→Dropout(0.4)
 
-[[png:overview/2]]
+  →784(84x84) (loss: Binary crossentropy)
 
-** Overview
+* 所要時間(目安)
 
-#+HTML: <embed src="img/overview/3.svg" type="image/svg+xml"  />
+新しいシステムなので対戦相手が居ない...
 
-* State Autoencoder
++ State Autoencoder 学習時間: 1時間程度
++ MSDD Operator Acquisition (Lisp SBCL): 1時間程度
++ PDDL変換 (Lisp SBCL): 一瞬
++ Fast Downward: 2時間, メモリ1G程度で終了
 
-[[png:overview/state-ae]]
+** State AutoEncoder
 
-* Entire System
+[[spng:experiment/autoencoding_train]]
 
-[[png:overview/planning]]
+** State AutoEncoder
 
+[[spng:experiment/autoencoding_test]]
 
+** State AutoEncoder
+
+[[spng:experiment/init_goal]]
+
+** State AutoEncoder
+
+[[spng:experiment/plan]]
 
 * セミファイナル
 
@@ -781,7 +875,6 @@ Credit: http://hukaimandara.jugem.jp/?eid=92
 # #+END_QUOTE
 # 
 # [[jpg:static/cicada]]
-
 
 * /Manifold Hypothesis/ マニホールド仮説 and /Latent Space/
 
@@ -873,35 +966,6 @@ http://www.deeplearningbook.org/ and VAE tutorial
 
  [[png:static/deep-ae]]
 
-
-
-* Gumbel-Softmax (Jang, Gu, ICRA2017?)
-
-*入力をカテゴリカル分布にマップする* Activation Function 
-
-#+BEGIN_HTML
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="649px" height="206px" version="1.1" content="&lt;mxfile userAgent=&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36&quot; version=&quot;6.0.1.2&quot; editor=&quot;www.draw.io&quot; type=&quot;google&quot;&gt;&lt;diagram name=&quot;Page-1&quot;&gt;3ZhLc5swEMc/Dcd0kAQCX+O67SGd6TTTaXqU0fJoZcsjy69++oogDBjs0MZ2TONDpL9ey29Xi5BDxrPtR8UW6WfJQTjY5VuHvHcwxshF5l+u7AqF+rgQEpXxQkKV8Jj9Biu6Vl1lHJaNjlpKobNFU4zkfA6RbmhMKblpdoulaK66YAm0hMeIibb6PeM6LdTQdyv9E2RJWq6MXNsyY2VnKyxTxuWmJpGJQ8ZKSl2UZtsxiBxeyaUY9+FI694wBXPdZ0AQh1EYx4xP46kXRHBnZ1gzsbIPaw3Vu/LpN2mm4XHBory+MR52yH2qZ8LUkCnGmRBjKaR67k0AcR8Coy+1kr+g1jKiAWHUtCi5mnPgdrw1AJSG7dGnQntWJshAzkCrneliB5CAFENsfCHPL+qbylt7n6Q1T+HAisxGSLKfu4JoCpZjT6a4xRT71MFUmFXvebY2xSQvfoWHb6VsFqm1tHygUjmbroyR9y944ww08QFN7LktmmEHzPASLEmLpY/wcFiiW2LptVAAN3nOVqXSqUzknIlJpdb2qtuEA9tMP9XKP/Iu7/y8NjeGPtkRz5Wq7SdovbMJnq20NFK17oOUiwb63LzT4M3TyJWK4HT0aKYS0Kd2a9uBCgTT2bq5/mvc4eEIU4xG4PsesCDqCO1z+ufKpBHugZq8FeorRf6VmfdBfiQ9XR45HXbi9kf4zRJ3i2Uw7AOFd0ssw//9JXgseupponu3Ht8MwYEDL+KZ0cDehyeBBqd3BB31B2pn+SIzY0D/KYqYsKMO3LK36N88hc7+1cgZhHHU9dVIoxCm8SW+GukINQm67bSEaEde2otnDX901nAfRGaiPTYSutYJ5uiRdthRfldeot1IlPfI8i9Abcb8AeLYz3+diJ//Xgm1hIg6IHpdEL1LQCxvEwcK0Q4I3IP8+8ZQX/9SuwGoJGxud+STFtSQtpli3/trpqZa3VwX54rq/p9M/gA=&lt;/diagram&gt;&lt;/mxfile&gt;"><defs/><g transform="translate(0.5,0.5)"><rect x="288" y="0.75" width="75" height="202.5" rx="11.25" ry="11.25" fill="#e1d5e7" stroke="#9673a6" pointer-events="none"/><path d="M 243 72 L 273 102 L 243 132 L 213 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(231.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">256<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 168 72 L 198 102 L 168 132 L 138 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(156.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">512<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 198 102 L 208.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 212.16 102 L 206.91 104.63 L 208.22 102 L 206.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 120.75 102 L 135.75 102 L 123 102 L 133.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 137.16 102 L 131.91 104.63 L 133.22 102 L 131.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 273 102 L 288 102 L 273 102 L 283.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 287.16 102 L 281.91 104.63 L 283.22 102 L 281.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 482.25 72 L 512.25 102 L 482.25 132 L 452.25 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(470.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">512<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 407.25 72 L 437.25 102 L 407.25 132 L 377.25 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(395.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">256<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 437.25 102 L 447.47 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 451.41 102 L 446.16 104.63 L 447.47 102 L 446.16 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 360 102 L 375 102 L 362.25 102 L 372.47 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 376.41 102 L 371.16 104.63 L 372.47 102 L 371.16 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><rect x="526.5" y="42" width="120" height="120" rx="18" ry="18" fill="#dae8fc" stroke="#6c8ebf" pointer-events="none"/><path d="M 512.25 102 L 521.72 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 525.66 102 L 520.41 104.63 L 521.72 102 L 520.41 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><rect x="0.75" y="42" width="120" height="120" rx="18" ry="18" fill="#dae8fc" stroke="#6c8ebf" pointer-events="none"/>
-<image xlink:href="https://1.bp.blogspot.com/-OBY7yjnWj9k/WCK6i_l0R9I/AAAAAAAAFLY/jCJwLNuPMecbvAB719g6VhAypmoDH6gswCLcB/s1600/x0.gif" x="8.25" y="49.5" width="105" height="105" fill="#f5f5f5" stroke="#666666" pointer-events="none"/>
-<image xlink:href="https://1.bp.blogspot.com/-WySijJ91Oa8/WCK6jFdXluI/AAAAAAAAFLc/CpaGjhd5lPwUdT6FdGNPQKRlyFhYvcwVQCLcB/s1600/x1.gif" x="534" y="49.5" width="105" height="105" fill="#f5f5f5" stroke="#666666" pointer-events="none"/>
-<image xlink:href="https://1.bp.blogspot.com/-tGqhaoX1a4Y/WCK6izWaixI/AAAAAAAAFLU/QRr6CzXET18_-c8hlx89QOkSQ3HoRH2DwCLcB/s1600/y.gif" x="293.25" y="6.75" width="64.5" height="190.5" fill="#f5f5f5" stroke="#666666" pointer-events="none"/></g></svg>
-#+END_HTML
-
-#+BEGIN_NOTE
-ICRA17に *投稿中*, 2/3に採択結果判明
-#+END_NOTE
-
-** Gumbel-Softmax
-
-学習中に温度を下げていくことで *始めは自由に学習*
-
-*そののち、精度を保ったまま中間層の分布をカテゴリカルに近づける*
-
-[[spng:gumbel]]
-
-#+BEGIN_ALIGNRIGHT
-*カテゴリー2 → 0か1 の離散的分布になる → 命題にマップ可能*
-#+END_ALIGNRIGHT
-
 * How?                                                             :noexport:
 
 Simply put: discretize $z$ into SAS variables
@@ -918,7 +982,6 @@ Mapping the latent space to the actual image (decoding part)
 
 [[png:static/vae-manifold]]
 
-
 * 副産物: bit-ops
 
 MSDD アルゴリズムを実装する上で *bit-vector* を効率よく扱う必要が出来た
@@ -926,7 +989,7 @@ MSDD アルゴリズムを実装する上で *bit-vector* を効率よく扱う�
 + Common Lisp における bit-vector : C における short 配列に相当
   + Sequenceとして扱える: *fill,map,replace...*
   + ビット演算が標準に含まれている: *bit-and, bit-xor...* ループを書く必要がない
-  + コンパイラが64ビット単位の整数処理に自動変換してくれる(のでCと同様に速い)
+  + コンパイラが64ビットの整数処理に自動変換してくれる(のでCと同様に速い)
 
 ** Common Lisp の bit-wise 演算
 
@@ -936,9 +999,9 @@ MSDD アルゴリズムを実装する上で *bit-vector* を効率よく扱う�
 
 bit vector =x= と =y= の論理和を取る
 
-z が与えられていれば、 結果を z に破壊的に代入しそれを返す
+z が与えられていれば、 結果を *z に破壊的に代入* しそれを返す
 
-z が シンボル ='t= のときは、 結果は =x= に破壊的に代入される
+# z が シンボル =t= のときは、 結果は =x= に破壊的に代入される
 
 z が省略された時は *新たなベクトル* を生成して返す
 
