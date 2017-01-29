@@ -1,4 +1,4 @@
-#+title: Classical Planning in a Deep Latent Space
+#+title: Classical Planning in Deep Latent Space
 #+author: Masataro Asai
 #+include: "head.org"
 #+LINK: img file:img/%s
@@ -9,12 +9,13 @@
 
 #+BEGIN_outline-text-1
 #+BEGIN_CENTER
-#+BEGIN_XLARGE
-Classical Planning in a
+東京大学大学院 博士2年
 
-Deep Latent Space
-#+END_XLARGE
+総合文化研究科　(渋谷駒場キャンパス)
 
+学振DC2
+
+浅井 政太郎
 #+END_CENTER
 
 #+BEGIN_NOTE
@@ -26,20 +27,661 @@ Made by guicho2.71828 (Masataro Asai)
 
 * Deep Neural Networks
 
-[[sjpg:static/
+人工ニューロン(1944), 第1期 AIバブル (60-70s), 第2期 (80s), そして今
+
+[[sjpg:deeplearning]]
+
+** 認知タスクで人間に匹敵する精度
+
+[[png:dl-image-task]]
+
+** 認知タスクで人間に匹敵する精度
+
+[[png:dl-nlp-task]]
+
+** ニューラルネットの役割
+
+#+BEGIN_CENTER
+「直感的な」問題を解く *関数* を学習すること
+#+END_CENTER
+
++ 求めるべき関数 $y^*=f^*(x)$
++ NNが表す関数　 $y=f(x)$
++ → 関数の誤差 $||y-y^*||$ を最小化する最適化問題
+
+| タスク       | 入力x      | 出力y                      |
+|--------------+------------+----------------------------|
+| 画像分類     | 画像       | ラベル(車、ネコ、猿・・・) |
+| 翻訳         | 文章       | 文章                       |
+| 未来予測     | フレーム列 | 次のフレーム               |
+
+** NNは複雑な問題を魔法のように解くことが出来る
+
+#+BEGIN_LARGER
+なぜなら
+
+#+BEGIN_indent
+  + 人間は賢くてニューロンで動く し、
+  + ニューロンある = 賢さの証明 だし、
+  + 賢ければ何でも出来て当然 だし、
+  + 将来はシンギュラリティに溢れてて当然。
+  + ...
+  + ハァ?
+#+END_indent
+#+END_LARGER
+
+** 
+
+[[png:dl-silver-bullet]]
+
+** NNは複雑な問題を魔法のように解くことができる?
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN8
++ *出来る派の意見:*
++ 人間は賢くてニューロンで動く
++ ニューロン = 賢い
++ 賢い機械はスゴイからニューロンだ
++ 脳科学でシンギュラっちゃうぜ！
++ *出来ない派の意見:*
++ ヒトデやプラナリアも神経系を持つが賢いか??
++ *Do you /really/ believe that humanity is smart?*
+#+END_SPAN8
+#+BEGIN_SPAN4
+[[sjpg:trump]]
+
+[[spng:mizuho]]
+#+BEGIN_ALIGNRIGHT
+※ 画像はイメージ
+#+END_ALIGNRIGHT
+#+END_SPAN4
+#+BEGIN_SPAN12
+  + *The sad reality recently told us: People are not necessarily smart.↑*
+#+END_SPAN12
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
 
 
-* Classical Planning
+** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる
+
++ 出来る派のもう少しマシな意見:
+  + NN は Turing完全, アナログNNは Super Turing (Siegelmann, 95, Science)
+  + 二段以上のNNは 十分な数のノードがあれば どんな関数でも表現することができる
+
++ *出来ない派のもう少し真面目な反論*:
+  + *表現できる != 学習できる*
+  + *構造の単純な関数しか学習できない*
+    + *Gradient Descent の亜種で解けるような関数*
+    + *局所解は大域最適解である??*
+
+** Gradient Descent (再急降下法)
+
+傾きの大きい方向に向かって進む
+
+[[spng:gradient-descent]]
+
+*最適解でないところに到達する可能性があるが、*
+
+*局所解はほぼ確実に大域最適解である という仮定で無視している*
+
+#+BEGIN_NOTE
+SGDでも基本的な想定は一緒
+#+END_NOTE
+
+** 進化計算などで解かれるRastrigin関数 (例)
+
+[[sjpg:rastrigin]]
+
+誤った局所解に落ちた場合にどうやって脱出するか?
+
+→ 物体認識の関数はこういう形をしていない、と仮定している
+
+** 銀の弾はない: NNで複雑な問題を魔法のように解くことはできない・・・と思われる
+
++ 出来ない派のもう少し真面目な反論2:
+  + *認知タスクと比べ、論理思考タスクは人間にも難しい*
+    + *人間の物体認識: 1秒以下*
+    + *大学入試数学の証明問題: 25分*
+  + *論理思考タスクは計算量理論的に困難な問題が多数*
+    + *NP困難以上: 最悪指数時間*
+    + *← 学習に指数時間かかる = 解けないのと同じ*
+
+** 学習が終わるのは
+
+[[sjpg:利根川]]
+
+** 
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+ニューラルネットは
+
+銀の弾ではない
+
+従って、ブームではあるが・・・
+#+END_CENTER
+#+END_XLARGE
+
+** 
+
+[[sjpg:fukashigi]]
+
+* AI Topics -- プランニングへのイントロダクション(再び)
+
+#+BEGIN_QUOTE
+「これがDLの次にあるもうひとつの人工知能だ」
+#+END_QUOTE
+
+** 誰?
+
+ #+BEGIN_CONTAINER-FLUID
+ #+BEGIN_ROW-FLUID
+ #+BEGIN_SPAN6
+ [[png:astro/1]]
+ #+END_SPAN6
+ #+BEGIN_SPAN6
+ [[png:rescue/1]]
+ #+END_SPAN6
+ #+END_ROW-FLUID
+ #+END_CONTAINER-FLUID
+
+  #+BEGIN_RESUME
+  And let me introduce these robots.
+  The guy in the left is Astro boy.
+  #+END_RESUME
+
+*** 誰?
+
+ #+BEGIN_CONTAINER-FLUID
+ #+BEGIN_ROW-FLUID
+ #+BEGIN_SPAN6
+ [[png:astro/2]]
+ #+END_SPAN6
+ #+BEGIN_SPAN6
+ [[png:rescue/1]]
+ #+END_SPAN6
+ #+END_ROW-FLUID
+ #+END_CONTAINER-FLUID
+
+ #+BEGIN_RESUME
+ As you know, he is a famous manga superhero invented by Tezuka Osamu in 50s,
+ #+END_RESUME
+
+*** 誰?
+
+  #+BEGIN_CONTAINER-FLUID
+  #+BEGIN_ROW-FLUID
+  #+BEGIN_SPAN6
+  [[png:astro/final]]
+  #+END_SPAN6
+  #+BEGIN_SPAN6
+  [[png:rescue/1]]
+  #+END_SPAN6
+  #+END_ROW-FLUID
+  #+END_CONTAINER-FLUID
+
+ #+BEGIN_RESUME
+ and he can think, hear, speak, act. he also has emotions.
+ #+END_RESUME
+
+*** 誰?
+
+  #+BEGIN_CONTAINER-FLUID
+  #+BEGIN_ROW-FLUID
+  #+BEGIN_SPAN6
+  [[png:astro/final]]
+  #+END_SPAN6
+  #+BEGIN_SPAN6
+  [[png:rescue/2]]
+  #+END_SPAN6
+  #+END_ROW-FLUID
+  #+END_CONTAINER-FLUID
+
+ #+BEGIN_RESUME
+  In contrast, the guy in the right is a real robot that is actually in use @ fukuoka prefecture for the rescue purpose..
+  His name is T-52 Enryu, developped by a Japanese company Temzak.
+  He is huge and powerful -- about 4 meters in height and can carry things which is as heavy as 500kg.
+  Well, so, in a sense, he is also a superhero in the real disastrous situation.
+ #+END_RESUME
+
+*** 誰?
+
+  #+BEGIN_CONTAINER-FLUID
+  #+BEGIN_ROW-FLUID
+  #+BEGIN_SPAN6
+  [[png:astro/final]]
+  #+END_SPAN6
+  #+BEGIN_SPAN6
+  [[png:rescue/3]]
+  #+END_SPAN6
+  #+END_ROW-FLUID
+  #+END_CONTAINER-FLUID
+
+ #+BEGIN_RESUME
+ But does he have feelings or can he think? Can he even move around by his own?
+ #+END_RESUME
+
+*** 誰?
+
+  #+BEGIN_CONTAINER-FLUID
+  #+BEGIN_ROW-FLUID
+  #+BEGIN_SPAN6
+  [[png:astro/final]]
+  #+END_SPAN6
+  #+BEGIN_SPAN6
+  [[png:rescue/final]]
+  #+END_SPAN6
+  #+END_ROW-FLUID
+  #+END_CONTAINER-FLUID
+
+ #+BEGIN_RESUME
+ No. It requires full human intervention --- it is indeed operated by a
+ driver who gets in or by a remote control. It is more like a
+ super-sophisticated shovel car.
+ #+END_RESUME
+
+** 実際の大規模災害では非実用的 --- 操縦士が足りない!
+
+ #+BEGIN_CONTAINER-FLUID
+ #+BEGIN_ROW-FLUID
+ #+BEGIN_SPAN2
+ [[png:rescue]]
+ [[png:rescue]]
+ [[png:rescue]]
+ [[png:silent]]
+ #+END_SPAN2
+ #+BEGIN_SPAN10
+ [[jpg:static/tsunami]]
+ #+END_SPAN10
+ #+END_ROW-FLUID
+ #+END_CONTAINER-FLUID
+
+ #+BEGIN_LARGER
+ #+BEGIN_ALIGNRIGHT
+ + そのままでは役に立たない!
+ #+END_ALIGNRIGHT
+ #+END_LARGER
+
+ #+BEGIN_RESUME
+ Now the problem is : It's ok in small accidents but is impractical in the real, massive 
+ natural disaster which frequently occurs in Japan.
+ The key resource is human ---
+ These special purpose vehicles require human intervention,
+ thus they are useless without trained operators.
+ #+END_RESUME
+
+*** 操縦士を増やせない -- Human Resource and Training
+
+ #+BEGIN_CONTAINER-FLUID
+ #+BEGIN_ROW-FLUID
+ #+BEGIN_SPAN4
+  [[png:rescue/1]]
+ #+END_SPAN4
+ #+BEGIN_SPAN8
+
+   + ✘ /時間/ がかかる :: 訓練に ＞100時間, *必要な時だけ増やす* のは不可能
+   + ✘ /￥￥￥￥/ がかかる :: 訓練官、訓練場所、訓練用具
+   + ✘ 技術は /維持が重要/ :: 定期的な再訓練、長期的コスト、さらなるマニー
+   + ✘ 平時は /無駄/ な技術 :: 普段は意味がない -- 無駄なマニー!
+ #+END_SPAN8
+ #+END_ROW-FLUID
+ #+END_CONTAINER-FLUID
+
+ #+BEGIN_RESUME
+ In a natural disaster, we need as many experienced operators as possible.
+ However, it is virtually impossible due to several reasons. 
+
+ First, training takes time.
+ It is impossible to quickly increase the number of operators as needed, at the time of disaster.
+
+ Second, the money matters.
+ Training a person costs a lot of money, including: the cost of maintaining
+ a training center, the cost of additional vehicles for training, the cost
+ of training the trainers, wages for trainers, etc.
+
+ Third, Skills need to be updated and maintained.
+ You know, how about preparing the large number of operators in advance?
+ No, the society cannot torelate the cost of keep training them.
+ Operators may lose the skills and skills may become outdated.
+
+ Finally, in a normal situation, those skills are useless.
+ It forces the society to waste a great amount of extra money.
+ #+END_RESUME
+
+** だからこそ: 自動プランナ Automated Planner
+
+ [[png:planning/1]]
+
+ #+BEGIN_RESUME
+ 研究テーマのプランニングは、ロボットに、人間の助けを借りず、いかに自律して行動させるかを扱います。
+ これをモデル化したプランニング問題は、具体的な行動の列を求める 組合せ最適化問題です。
+
+ プランニング問題のタスクは、
+ センサーから初期状態とゴールを受け取って、被災者を助ける正しい手順を出力することです。
+
+ たとえば、この図では男性が瓦礫に埋まって助けを求めています。
+ プランニング機能のあるロボットは、コレに対して「男性を助けよ」という大まかな指示を受けます。
+ #+END_RESUME
+
+** だからこそ: 自動プランナ Automated Planner
+
+ [[png:planning/2]]
+
+ #+BEGIN_RESUME
+ 指示の内容には、図のように初期状態とゴール、許可された行動のリストが入っています。
+ ロボットは、自動プランニングにより、人間の代わりに適切な行動を組み立てて、ゴールを自動で達成します。
+ #+END_RESUME
+
+** だからこそ: 自動プランナ Automated Planner
+
+ [[png:planning/final]]
+
+ #+BEGIN_RESUME
+ プランニングは汎用な枠組みなので、災害救助以外にも様々な問題に適用することができます。
+ 現実の応用例では「宇宙探査機運行問題」や「企業ネットワーク脆弱性問題」も表現できます。
+
+ このように、プランニングは、難しい問題を汎用性を失わずに解くことを目指します。
+ #+END_RESUME
+
+ # 自動運転事故:
+ # ポリシーが決まっていないならそういうものは作るべきではない
+ # 危険だ
+
+ # しかし自動運転は自分の扱うプランニングとは違うので実は困らない
+
+ # ゴール設定は人間がやればいい
+ # ターゲットを決めた上で
+ # 全力で考えるのがプランニングの技術
+ # 効用関数を決めるのは人間
+ # いかにそれを実現するか
+ # あくまで命令に従うロボットであることを強調
+
+ # ドメインは消す
+ # アプリケーション
+ # 
+ # coreまでは実例
+ # 災害援助は将来
+ # 完全に分離
+ # 
+ # 掃除ドメインをメインに
+
+ # ** プランニングとは?
+ # 
+ # [[png:planning-4room]]
+
+ # #+BEGIN_RESUME
+ # 同じ掃除ドメインの4部屋インスタンスも表現できますし、
+ # 現実の応用例では「宇宙探査ドメイン」も表現できます。
+ # 
+ # このように、プランニングは、難しい問題を汎用性を失わずに解くことを目指します。
+ # 
+ # 仮に将来、写真のような救助ロボットにプランニングソルバを組み込めば、
+ # 被災者を発見した時に適切な行動を自ら選択できるようになるかもしれません。
+ # #+END_RESUME
+
+** AIの使いドコロ  :noexport:
+
+ + 人では不可能な作業の代替 :: 危険な環境, 宇宙空間・深海, 24時間対応, マイクロ秒応答
+ + コストのかかる専門技師の代替・自動化 :: 機械工作, 人工衛星運営(専門家会議の時給が高い!)
+ + ミスの許されない完璧な理論保証の求められる問題の求解 :: 半導体のバグ検証システム(生産を始めると止められない)
+
+** AIと自動プランニング の位置づけ -- /理論/ と /実応用/ の中間  :noexport:
+
+ 緑は /理論/ 、オレンジは /実応用/ 、 AI はその橋渡し (どれともかぶらない部分もある)
+
+ #+BEGIN_RESUME
+ Automated Planning is a branch of Aritificial Intelligence. 
+
+ It shares a lot of technology with Operations Research and Theoretical
+ Computer Science, and is considered a bridge between pure theory and
+ pure applications.
+ #+END_RESUME
+
+ [[png:planning2]]
+
+* プランニング問題 (決定的,完全情報) -- Blocksworld
+
+[[png:plan]]
+
+** アクション = 条件付き状態遷移
+
+#+BEGIN_CENTER
+#+BEGIN_XLARGE
+(move ?X ?Y)
+#+END_XLARGE
+#+END_CENTER
+
+
+#+BEGIN_CENTER
+変数 *?X*, *?Y* などに値 *BLOCK-A*, *BLOCK-B* などを適用して使う
+
+*前提条件* *追加効果* *削除効果* で構成される
+#+END_CENTER
+#+BEGIN_QUOTE
+*前提条件*
+
+(clear *?X*) : 積み木 *?X* の上に何もなく (1)
+
+(clear *?Y*) : 積み木 *?Y* の上にも何もない (2) ときに、
+
+*追加効果*
+
+⇒ (on *?X* *?Y*) : *?X* が *?Y* の上に移動する。(3)
+
+*削除効果*
+
+⇒ (not (clear *?Y*)) : *?Y* は clear ではなくなる。(4)
+#+END_QUOTE
+
+** *PDDL* : Planning Domain Description Language
+
+現在も International Planning Competition の入力形式として使われている。
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN2
+
+#+END_SPAN2
+#+BEGIN_SPAN6
+#+BEGIN_SRC lisp
+(:action move
+ :parameters (?X ?Y)
+ :preconditions
+   (and (clear ?X)   ; (1)
+        (clear ?Y))  ; (2)
+
+ :effect
+   (and (on ?X ?Y)   ; (3)
+        (not         ; (4)
+         (clear ?Y))))
+#+END_SRC
+#+END_SPAN6
+#+BEGIN_SPAN2
+
+#+END_SPAN2
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
+#+BEGIN_NOTE
+宇宙探査機 NASA DS1 上の Remote Agent 自動航行システム でも
+ "DDL" という名で 似たような記述言語があったようだ
+#+END_NOTE
+
+** プランニング = グラフ探索
+
+*ノード* : 状態 = 命題の集合 ⇒ =(on A B)=, =(clear A)= など
+
+*辺*     : アクション ⇒ =(move A B)= 等
+
+[[png:graph]]
+
+# #+BEGIN_CONTAINER-FLUID
+# #+BEGIN_ROW-FLUID
+# #+BEGIN_SPAN6
+# # + ヒューリスティック探索 A*
+# # + State-of-the-Art *1
+# #+END_SPAN6
+# #+BEGIN_SPAN6
+# # #+attr_html: :width 50%
+# #+END_SPAN6
+# #+END_ROW-FLUID
+# #+END_CONTAINER-FLUID
+
+#+BEGIN_NOTE
+*1 [Helmert, 2006] [Richter, 2010]
+#+END_NOTE
+  
 
 
 
-* Motivation
+** Q. はやりのDeep Learningとの違いは?
 
+ A. レイヤが違う
 
+ #+BEGIN_CONTAINER-FLUID
+ #+BEGIN_ROW-FLUID
+ #+BEGIN_SPAN6
+ *機械学習・Neural Networks* 
+ 
+ for *認識・反射*
+ + 入力 は *Subsymbolic*
+   
+   画像、音声、非構造化テキスト
+ + *1タイムステップ*:
+   
+   　 *_直後_ の行動の決定*
+   #+BEGIN_SMALLER
+   Reflex Agent = 脊髄反射
+
+   *パブロフの犬* : 餌→よだれ
+
+   *自動運転* : 赤信号,人 → 止まる.
+
+   *ファナック産業ロボ* : 画像 → モータ出力
+
+   *翻訳* : 文章 → 文章
+   #+END_SMALLER
+   ☺ 効率よく 1-to-1 mapping
+   
+   ☹ 単純作業
+ #+END_SPAN6
+ #+BEGIN_SPAN6
+ *推論・探索*
+
+ for *プランニング・ゲーム・定理証明*
+ + 入出力は *Symbolic*
+   
+   論理 オブジェクト ルール
+ + *>1000タイムステップ:*
+
+   　 *_未来に渡る_ 戦略の決定*
+   
+   　 (戦略 = 行動の *列や木*)
+   #+BEGIN_SMALLER
+   *レスキューロボ* : 現実 = 難解パズル
+
+   *囲碁,将棋* : ゴール = 勝利
+
+   *証明器* : ゴール = QED
+
+   *コンパイラ* : 命令列の生成
+   #+END_SMALLER
+   #+BEGIN_LARGER
+   ☺ 多数の論理の組み合わせ
+   #+END_LARGER
+ #+END_SPAN6
+ #+END_ROW-FLUID
+ #+END_CONTAINER-FLUID
+
+#+BEGIN_ALIGNRIGHT
+AlphaGo = Subsymbolic (DLNNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
+#+END_ALIGNRIGHT
+
+#+BEGIN_NOTE
+DLNN: Deep Learning Neural Network
+
+UCT-MCTS: Monte Carlo Tree Search + Universal Confidence Bound applied on Trees
+#+END_NOTE
+
+* 今日の発表の Motivation
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN6
+|                |         |
+|----------------+---------|
+| 第一次AIブーム | ~'70    |
+| *第一次AIの冬* | '70~'80 |
+| 第二次AIブーム | '80~    |
+| *第二次AIの冬* | '90~    |
+| 第三次AIブーム | '2008~  |
+| *第三次AIの冬??* | ????    |
+#+END_SPAN6
+#+BEGIN_SPAN6
++ 第二次AIの冬の原因:
+  + *論理だけで全てが解決できると考えた*
+  + 現実世界 (物体、アクション) のラベル付を👍入力する必要があった
++ 第三次AIの冬のありそうな原因
+  + *学習さえできれば全てが解決できると考えた?*
+#+END_SPAN6
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
+** 高度に知的な機械を作るには → DeepLearning + 論理と推論
+
+#+BEGIN_CENTER
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN5
+犬猫程度の知能を持った
+
+*反射的な機械*
+#+END_SPAN5
+#+BEGIN_SPAN2
+　
+
+vs
+
+　
+#+END_SPAN2
+#+BEGIN_SPAN5
+目標を達成するために論理的な
+
+*戦略を練る機械*
+
+#+END_SPAN5
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+#+END_CENTER
+
+[[png:planning-deeplearning]]
+
+* ゴール
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+State of the Art Deep Learning と
+
+State of the Art Classical Planning を組み合わせる
+#+END_CENTER
+#+END_XLARGE
+
+#+BEGIN_ALIGNRIGHT
+ひとまず休憩
+#+END_ALIGNRIGHT
+
+* 唐突ですが取っ掛かりとして
+
+死んでると思ってたセミが実は生きてて
+
+びっくりしたことはありませんか?
+
+[[sjpg:semifinal]]
+
+Credit: http://hukaimandara.jugem.jp/?eid=92
 
 * Backgrounds
-
-
 
 [[jpg:static/cicada]]
 

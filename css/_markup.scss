@@ -1,5 +1,12 @@
 /* ***************** Markup ****************** */
 
+h1.title {
+    font-size: 250%;
+    font-weight: bold;
+    line-height:110%;
+    text-shadow: 1px 1px 1px lightgray;
+}
+
 p {
   margin: 0.2em 0 0 0;
 }
@@ -104,4 +111,8 @@ blockquote {
 
 .vertical {
     writing-mode: vertical-rl;
+}
+
+.indent {
+    margin-left: 10%;
 }
