@@ -143,11 +143,11 @@ Classical Planning
 
 #+HTML: <embed src="img/overview/3.svg" type="image/svg+xml"  />
 
-* 
+* Introduction
 
 #+BEGIN_XLARGE
 #+BEGIN_CENTER
-Introduction: There's No Silver Bullet
+There's No Silver Bullet
 #+END_CENTER
 #+END_XLARGE
 
@@ -197,14 +197,18 @@ Introduction: There's No Silver Bullet
 #+END_CENTER
 
 + 求めるべき関数 $y^*=f^*(x)$
-+ NNが表す関数　 $y=f(x)$
-+ 学習 ≡ 誤差 $||y-y^*||$ を最小化する最適化問題
+  
+  | タスク   | 入力x      | 出力y                      |
+  |----------+------------+----------------------------|
+  | 画像分類 | 画像       | ラベル(車、ネコ、猿・・・) |
+  | 翻訳     | 文章(日)   | 文章(英)                   |
+  | 未来予測 | フレーム列 | 次のフレーム               |
 
-| タスク   | 入力x      | 出力y                      |
-|----------+------------+----------------------------|
-| 画像分類 | 画像       | ラベル(車、ネコ、猿・・・) |
-| 翻訳     | 文章(日)   | 文章(英)                   |
-| 未来予測 | フレーム列 | 次のフレーム               |
++ NNが表す関数　 $y=f(x)$
+
+#+BEGIN_CENTER
++ 学習 ≡ 誤差 $||y-y^*||$ を最小化する最適化問題
+#+END_CENTER
 
 ** NNは複雑な問題を魔法のように解くことが出来る
 
@@ -238,21 +242,19 @@ Introduction: There's No Silver Bullet
 + *出来ない派の意見:*
 + ヒトデやプラナリアも神経系を持つが賢いか??
 + *Do you /really/ believe that humanity is /so/ smart?*
+  + *The sad reality: Not necessarily.↑↓*
 #+END_SPAN8
 #+BEGIN_SPAN4
 [[sjpg:trump]]
 
-[[spng:mizuho]]
 #+BEGIN_ALIGNRIGHT
 ※ 画像はイメージ
 #+END_ALIGNRIGHT
 #+END_SPAN4
-#+BEGIN_SPAN12
-  + *The sad reality: People are not necessarily smart.↑*
-#+END_SPAN12
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
+[[spng:mizuho]]
 
 ** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる
 
@@ -816,14 +818,14 @@ GTX1070, PhenomII X6 1060T, 16GB
 
   →784(84x84) (loss: Binary crossentropy)
 
-* 所要時間(目安)
+** 所要時間(目安)
 
-新しいシステムなので対戦相手が居ない...
+ 新しいシステムなので対戦相手が居ない...
 
-+ State Autoencoder 学習時間: 1時間程度
-+ MSDD Operator Acquisition (Lisp SBCL): 1時間程度
-+ PDDL変換 (Lisp SBCL): 一瞬
-+ Fast Downward: 2時間, メモリ1G程度で終了
+ + State Autoencoder 学習時間: 1時間程度
+ + MSDD Operator Acquisition (Lisp SBCL): 1時間程度
+ + PDDL変換 (Lisp SBCL): 一瞬
+ + Fast Downward: 2時間, メモリ1G程度で終了
 
 ** State AutoEncoder
 
@@ -837,11 +839,66 @@ GTX1070, PhenomII X6 1060T, 16GB
 
 [[spng:experiment/init_goal]]
 
+** PDDL Domain Definition
+
+#+BEGIN_SRC
+  -rw-rw-r-- 1 guicho guicho  31M 2017-01-20 00:10 domain-all.pddl
+#+END_SRC
+
+#+BEGIN_SRC lisp
+(define (domain latent)
+ (:requirements :strips :negative-preconditions)
+ (:predicates (z0) (z1) (z2) (z3) (z4) (z5) (z6) (z7) (z8) (z9) (z10)
+  (z11) (z12) (z13) (z14) (z15) (z16) (z17) (z18) (z19) (z20) (z21)
+  (z22) (z23) (z24))
+ (:action a10000010010110111100011111000010001011111110011111
+  :parameters () :precondition
+  (and (z0) (not (z1)) (not (z2)) (not (z3)) (not (z4)) (not (z5))
+       (z6) (not (z7)) (not (z8)) (z9) (not (z10)) (z11) (z12)
+       (not (z13)) (z14) (z15) (z16) (z17) (not (z18)) (not (z19))
+       (not (z20)) (z21) (z22) (z23) (z24))
+  :effect (and (z5) (not (z6)) (z13) (z20)))
+ (:action a10000010010110111100011110000001001011011110001110
+  ...
+#+END_SRC
+
 ** State AutoEncoder
 
 [[spng:experiment/plan]]
 
-* セミファイナル
+** Fast Downward Log Trace (Search Statistics)
+
+#+BEGIN_SRC
+reading input... [t=5.479e-05 (sec)]
+...
+Building successor generator...done! [t=31.7737 (sec)]
+done initalizing global data [t=31.7738 (sec)]
+Conducting best first search with reopening closed nodes, (real) bound = 2147483647
+Initializing landmark cut heuristic...
+New best heuristic value for lmcut: 4
+[g=0, 1 evaluated, 0 expanded, t=36.1568 (sec), 1054016 KB]
+f = 4 [1 evaluated, 0 expanded, t=36.1569 (sec), 1054016 KB]
+...
+f = 12 [339 evaluated, 183 expanded, t=843.001 (sec), 1054016 KB]
+f = 13 [553 evaluated, 314 expanded, t=1357.62 (sec), 1054016 KB]
+f = 14 [942 evaluated, 529 expanded, t=2288.7 (sec), 1054016 KB]
+Solution found!
+Actual search time: 2688.73 (sec) [t=2724.89 (sec)]
+a11010000010010000101001111101100010001000010100111 (1)
+a11011000100010000101001111101100011001000011100101 (1)
+...
+a10011100111110010010011011001111010111011001001111 (1)
+a10011110101110110010011111001011001111011001001111 (1)
+Plan length: 14 step(s).
+Expanded 631 state(s).
+Evaluated 1140 state(s).
+Generated 1924 state(s).
+Dead ends: 24 state(s).
+Search time: 2693.06 (sec)
+Total time: 2724.89 (sec)
+#+END_SRC
+
+* セミファイナル                                                   :noexport:
 
 死んでると思ってたセミが実は生きてて
 
@@ -876,7 +933,7 @@ Credit: http://hukaimandara.jugem.jp/?eid=92
 # 
 # [[jpg:static/cicada]]
 
-* /Manifold Hypothesis/ マニホールド仮説 and /Latent Space/
+* /Manifold Hypothesis/ マニホールド仮説 and /Latent Space/        :noexport:
 
 + $x$: 高次元vector (例: 28x28 の画像データ = 784次元)
 + マニホールド仮説:
