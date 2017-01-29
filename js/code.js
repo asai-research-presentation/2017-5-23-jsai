@@ -135,7 +135,7 @@ function clip(low,x,high,when_low,when_high){
 function adjustVerticalCenter(){
     var top = 0.4 * ($(window).height() - $(document.body).height());
     var high = 0.2 * $(window).height();
-    var duration = 270 ;        // default: 400
+    var duration = 0 ;        // default: 400
     var delay_ratio = 0.4 ;
     if (top > high){
         $(document.body)
