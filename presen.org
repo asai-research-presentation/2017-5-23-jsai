@@ -233,34 +233,39 @@ There's No Silver Bullet
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
-#+BEGIN_SPAN8
+#+BEGIN_SPAN6
 + *出来る派の意見:*
 + 人間は賢くてニューロンで動く
 + ニューロン = 賢い
 + 賢い機械はスゴイからニューロンだ
 + 脳科学でシンギュラっちゃうぜ！
-+ *出来ない派の意見:*
-+ ヒトデやプラナリアも神経系を持つが賢いか??
-+ *Do you /really/ believe that humanity is /so/ smart?*
-  + *The sad reality: Not necessarily.↑↓*
-#+END_SPAN8
-#+BEGIN_SPAN4
-[[sjpg:trump]]
 
+  ※ 画像はイメージ
+  
+  [[spng:ai_pet_family]]
+#+END_SPAN6
+#+BEGIN_SPAN6
++ *出来ない派の意見:*
++ プラナリアも神経系を持つが賢い??
++ *Is humanity /so/ smart?*
++ *Not necessarily↓*
+
+  ※ 画像はイメージ
+  
+  [[spng:mizuho]]
+  
+  [[sjpg:trump]]
 #+BEGIN_ALIGNRIGHT
-※ 画像はイメージ
 #+END_ALIGNRIGHT
-#+END_SPAN4
+#+END_SPAN6
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
-
-[[spng:mizuho]]
 
 ** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる
 
 + 出来る派のもう少しマシな意見:
   + NN は Turing完全, アナログNNは Super Turing (Siegelmann, 95, Science)
-  + 二段以上のNNは 十分な数のノードがあれば どんな関数でも表現することができる
+  + 二段以上のNNは 十分な数のノードがあれば どんな関数でも表現可能
 
 + *出来ない派のもう少し真面目な反論*:
   + *表現できる != 学習できる*
@@ -274,21 +279,25 @@ There's No Silver Bullet
 
 [[spng:gradient-descent]]
 
+#+BEGIN_CENTER
 *一般には: 最適解でないところに到達する可能性がある*
 
 *NNでは: 局所解はほぼ確実に大域最適解である == 無視*
+#+END_CENTER
 
 #+BEGIN_NOTE
 SGDでも基本的な想定は一緒
 #+END_NOTE
 
 ** 進化計算などで解かれるRastrigin関数 (例)
-   
-[[sjpg:rastrigin]]
 
+#+BEGIN_CENTER
 こういう関数は SGD では解けない
 
 → *NNでは学習できない種類の構造も存在する*
+#+END_CENTER
+   
+[[sjpg:rastrigin]]
 
 ** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる
 
@@ -802,7 +811,7 @@ GTX1070, PhenomII X6 1060T, 16GB
 
 + Fast Downward :: LMcut heuristics, A*
 
-+ State AutoEncoder :: Tensorflow, Keras
++ State AutoEncoder :: Tensorflow, Keras, Adam optimizer (learning rate:0.001)
 
   784(84x84)
 
@@ -829,13 +838,25 @@ GTX1070, PhenomII X6 1060T, 16GB
 
 ** State AutoEncoder
 
+1: Train入力 2: 生Latent 3: 生Autoencoding 4: 切り捨てLatent 5: 切り捨てLatentのAutoencoding
+
 [[spng:experiment/autoencoding_train]]
 
 ** State AutoEncoder
 
+1: Test入力 2: 生Latent 3: 生Autoencoding 4: 切り捨てLatent 5: 切り捨てLatentのAutoencoding
+
+Test 入力: 訓練画像に含まれていない画像
+
 [[spng:experiment/autoencoding_test]]
 
+#+BEGIN_ALIGNRIGHT
+きちんと学習できている
+#+END_ALIGNRIGHT
+
 ** State AutoEncoder
+
+入力2: 初期画像とゴール画像
 
 [[spng:experiment/init_goal]]
 
@@ -862,10 +883,6 @@ GTX1070, PhenomII X6 1060T, 16GB
   ...
 #+END_SRC
 
-** State AutoEncoder
-
-[[spng:experiment/plan]]
-
 ** Fast Downward Log Trace (Search Statistics)
 
 #+BEGIN_SRC
@@ -875,8 +892,6 @@ Building successor generator...done! [t=31.7737 (sec)]
 done initalizing global data [t=31.7738 (sec)]
 Conducting best first search with reopening closed nodes, (real) bound = 2147483647
 Initializing landmark cut heuristic...
-New best heuristic value for lmcut: 4
-[g=0, 1 evaluated, 0 expanded, t=36.1568 (sec), 1054016 KB]
 f = 4 [1 evaluated, 0 expanded, t=36.1569 (sec), 1054016 KB]
 ...
 f = 12 [339 evaluated, 183 expanded, t=843.001 (sec), 1054016 KB]
@@ -885,7 +900,6 @@ f = 14 [942 evaluated, 529 expanded, t=2288.7 (sec), 1054016 KB]
 Solution found!
 Actual search time: 2688.73 (sec) [t=2724.89 (sec)]
 a11010000010010000101001111101100010001000010100111 (1)
-a11011000100010000101001111101100011001000011100101 (1)
 ...
 a10011100111110010010011011001111010111011001001111 (1)
 a10011110101110110010011111001011001111011001001111 (1)
@@ -897,6 +911,15 @@ Dead ends: 24 state(s).
 Search time: 2693.06 (sec)
 Total time: 2724.89 (sec)
 #+END_SRC
+
+** Plan Results
+
+[[spng:experiment/plan]]
+
+* Conclusion
+
++ Proposed a new system that solves a combinatorial problem proposed as raw images
++ Should be a milestone toward symbol grounding problem
 
 * セミファイナル                                                   :noexport:
 
