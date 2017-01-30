@@ -1191,21 +1191,21 @@ dynamic-extent 宣言で中間ベクトルをスタック配置
 ** 例3: a が 1 なら b を、 0 なら c を取る操作 (if-then-else)
 
 #+BEGIN_SRC lisp
-(as-bitwise-operations (:result c)
+(as-bitwise-operations ()
   (ior (and a b)
        (and (not a) c)))
 
 ->
 
-(LET* ((#:LENGTH (LENGTH C))
-       (#:G746 C))
-  (LET* ((#:G747 (MAKE-BIT-VECTOR #:LENGTH)))
-    (DECLARE (DYNAMIC-EXTENT #:G747)) ; 中間結果G747はスタック配置
-    (BIT-AND A B #:G746)
-    (BIT-NOT A #:G747)
-    (BIT-AND #:G747 C #:G747)      ; 中間ベクトルG747再利用
-    (BIT-IOR #:G746 #:G747 #:G746) ; 結果ベクトルG746再利用
-    #:G746))
+(LET* ((#:LEN700 (LENGTH C))
+       (#:G701 (MAKE-BIT-VECTOR #:LEN700)))
+  (LET* ((#:G702 (MAKE-BIT-VECTOR #:LEN700)))
+    (DECLARE (DYNAMIC-EXTENT #:G702))  ; 中間結果G747はスタック配置
+    (BIT-AND A B #:G701)           ; 結果ベクトルG701再利用
+    (BIT-NOT A #:G702)
+    (BIT-AND #:G702 C #:G702)      ; 中間ベクトルG702再利用
+    (BIT-IOR #:G701 #:G702 #:G701) ; 結果ベクトルG701再利用
+    #:G701))
 #+END_SRC
 
 ** ビット演算用のDSLを拡張できる
@@ -1259,5 +1259,124 @@ dynamic-extent 宣言で中間ベクトルをスタック配置
                           ,x)))
 #+END_SRC
 
+** 全加算器を使って2段加算器を書く
+
+[[spng:adder6]]
+
+
+#+BEGIN_SRC lisp
+(as-bitwise-operations ()
+  (full-adder-sum (subseq a 1)
+                  (subseq b 1)
+                  (half-adder-carry a b)))
+
+->
+
+(LET* ((#:*LENGTH-VARIABLE*723 (LENGTH B))
+       (#:G727 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*723)))
+  (LET* ((#:G725 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*723))
+         (#:G724 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*723)))
+    (DECLARE (DYNAMIC-EXTENT #:G725 #:G724))
+    (BIT-REPLACE A 1 #:G724)
+    (BIT-REPLACE B 1 #:G725)
+    (BIT-XOR #:G724 #:G725 #:G724)
+    (BIT-AND A B #:G727)
+    (BIT-XOR #:G724 #:G727 #:G727)
+    #:G727))
+#+END_SRC
+
+** n段加算器を書く
+
+[[spng:adder6]]
+
 どんどん拡張できる!
+
+#+BEGIN_SRC lisp
+(as-bitwise-operations ()
+  (full-adder-sum (subseq a 1)
+                  (subseq b 1)
+                  (half-adder-carry a b)))
+
+(define-bitwise-operation multi-adder-sum (a b n)
+  (if (= n 0)
+      `(half-adder-sum ,a ,b)
+      `(full-adder-sum (subseq ,a ,n)
+                       (subseq ,b ,n)
+                       (multi-adder-carry ,a ,b ,(1- n)))))
+
+(define-bitwise-operation multi-adder-carry (a b n)
+  ...)
+#+END_SRC
+
+** n段加算器を書く
+
+
+[[spng:adder6]]
+
+どんどん拡張できる!
+
+#+BEGIN_SRC lisp
+
+(as-bitwise-operations ()
+  (multi-adder-sum a b 5))
+
+(LET* ((#:*LENGTH-VARIABLE*844 (LENGTH B))
+       (#:G881 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844)))
+  (LET* ((#:G846 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G845 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G848 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G849 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G854 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G855 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G860 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G861 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G866 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G867 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G872 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G871 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G868 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G865 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G862 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G859 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G856 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G853 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         (#:G850 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844)))
+    (DECLARE
+     (DYNAMIC-EXTENT #:G846 #:G845 #:G848 #:G849 #:G854 #:G855 #:G860 #:G861
+      #:G866 #:G867 #:G872 #:G871 #:G868 #:G865 #:G862 #:G859 #:G856 #:G853
+      #:G850))
+    (BIT-REPLACE A 5 #:G845)
+    (BIT-REPLACE B 5 #:G846)
+    (BIT-XOR #:G845 #:G846 #:G845)
+    (BIT-REPLACE A 4 #:G848)
+    (BIT-REPLACE B 4 #:G849)
+    (BIT-AND #:G848 #:G849 #:G850)
+    (BIT-XOR #:G848 #:G849 #:G853)
+    (BIT-REPLACE A 3 #:G854)
+    (BIT-REPLACE B 3 #:G855)
+    (BIT-AND #:G854 #:G855 #:G856)
+    (BIT-XOR #:G854 #:G855 #:G859)
+    (BIT-REPLACE A 2 #:G860)
+    (BIT-REPLACE B 2 #:G861)
+    (BIT-AND #:G860 #:G861 #:G862)
+    (BIT-XOR #:G860 #:G861 #:G865)
+    (BIT-REPLACE A 1 #:G866)
+    (BIT-REPLACE B 1 #:G867)
+    (BIT-AND #:G866 #:G867 #:G868)
+    (BIT-XOR #:G866 #:G867 #:G871)
+    (BIT-AND A B #:G872)
+    (BIT-AND #:G871 #:G872 #:G871)
+    (BIT-IOR #:G868 #:G871 #:G868)
+    (BIT-AND #:G865 #:G868 #:G865)
+    (BIT-IOR #:G862 #:G865 #:G862)
+    (BIT-AND #:G859 #:G862 #:G859)
+    (BIT-IOR #:G856 #:G859 #:G856)
+    (BIT-AND #:G853 #:G856 #:G853)
+    (BIT-IOR #:G850 #:G853 #:G850)
+    (BIT-XOR #:G845 #:G850 #:G881)
+    #:G881))
+
+#+END_SRC
+
+
 
