@@ -147,7 +147,7 @@ Classical Planning
 
 #+BEGIN_XLARGE
 #+BEGIN_CENTER
-There's No Silver Bullet
+There's No Silver Bullet!!
 #+END_CENTER
 #+END_XLARGE
 
@@ -261,7 +261,7 @@ There's No Silver Bullet
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
-** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる2
+** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる2 :noexport:
 
 + 出来る派のもう少しマシな意見:
   + NN は Turing完全, アナログNNは Super Turing (Siegelmann, 95, Science)
@@ -308,9 +308,9 @@ SGDでも基本的な想定は一緒
     + 明らかに *難しさの質に差がある*
   + 難しさの質というのはどうやって測る?
     + 理論的解析: *計算量理論* (NP困難とか)
-  + *論理思考タスクは計算量理論的に困難な問題が多数*
-    + *NP困難以上: 最悪指数時間*
-    + *← 学習に指数時間かかる = 解けないのと同じ*
+  # + *論理思考タスクは計算量理論的に困難な問題が多数*
+  #   + *NP困難以上: 最悪指数時間*
+  #   + *← 学習に指数時間かかる = 解けないのと同じ*
 
 *** 学習が終わるのは
 
