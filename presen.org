@@ -27,7 +27,7 @@ Made by guicho2.71828 (Masataro Asai)
 #+END_NOTE
 #+END_outline-text-1
 
-* 今日の発表の Motivation
+* 今日の発表の Motivation                                          :noexport:
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
@@ -57,7 +57,7 @@ Made by guicho2.71828 (Masataro Asai)
 + 第三次AIの冬のありそうな原因: *Deep Learningで全てが解決できると考えた?*
   + 脳科学(笑) シンギュラリティ(笑)
 
-** 高度に知的な機械を作るには → DeepLearning + 論理と推論
+* 高度に知的な機械を作るには → DeepLearning + 論理と推論
 
 #+BEGIN_CENTER
 #+BEGIN_CONTAINER-FLUID
@@ -67,7 +67,7 @@ Made by guicho2.71828 (Masataro Asai)
 
 ↓
 
-犬猫程度の知能を持った
+虫程度の知能を持った
 
 *反射的な機械*
 #+END_SPAN5
@@ -261,7 +261,7 @@ There's No Silver Bullet
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
-** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる
+** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる2
 
 + 出来る派のもう少しマシな意見:
   + NN は Turing完全, アナログNNは Super Turing (Siegelmann, 95, Science)
@@ -273,7 +273,7 @@ There's No Silver Bullet
     + *Gradient Descent の亜種で解けるような関数*
     + *局所解は大域最適解である??*
 
-** Gradient Descent (再急降下法)
+*** Gradient Descent (再急降下法)
 
 傾きの大きい方向に向かって進む
 
@@ -289,7 +289,7 @@ There's No Silver Bullet
 SGDでも基本的な想定は一緒
 #+END_NOTE
 
-** 進化計算などで解かれるRastrigin関数 (例)
+*** 進化計算などで解かれるRastrigin関数 (例)
 
 #+BEGIN_CENTER
 こういう関数は SGD では解けない
@@ -299,7 +299,7 @@ SGDでも基本的な想定は一緒
    
 [[sjpg:rastrigin]]
 
-** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる
+** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる3
 
 + 出来ない派のもう少し真面目な反論2:
   + *認知タスクと比べ、論理思考タスクは人間にも難しい*
@@ -312,7 +312,7 @@ SGDでも基本的な想定は一緒
     + *NP困難以上: 最悪指数時間*
     + *← 学習に指数時間かかる = 解けないのと同じ*
 
-** 学習が終わるのは
+*** 学習が終わるのは
 
 [[sjpg:利根川]]
 
@@ -717,6 +717,8 @@ SGDでも基本的な想定は一緒
    *自動運転* : 赤信号,人 → 止まる.
 
    *翻訳* : 文章 → 文章
+
+   *囲碁局面の評価関数* : 局面 → 勝率
    #+END_SMALLER
    ☺ 効率よく 1-to-1 mapping
    
@@ -737,11 +739,11 @@ SGDでも基本的な想定は一緒
    #+BEGIN_SMALLER
    *レスキューロボ* : ゴール = 被災者生存
 
-   *囲碁,将棋* : ゴール = 勝利
-
    *証明器* : ゴール = QED
 
    *コンパイラ* : 命令列の生成
+   
+   *囲碁,将棋* : ゴール = 勝利
    #+END_SMALLER
    #+BEGIN_LARGER
    ☺ 多数の論理の組み合わせ
@@ -750,6 +752,7 @@ SGDでも基本的な想定は一緒
  #+END_ROW-FLUID
  #+END_CONTAINER-FLUID
 
+AlphaGo = Subsymbolic (DLNNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
 
 ** 既存の有名システム
 
@@ -769,9 +772,52 @@ UCT-MCTS: Monte Carlo Tree Search + Universal Confidence Bound applied on Trees
 #+END_NOTE
 * システム概要
 
+ [[png:overview/planning]]
+
 ** State Autoencoder
 
  [[png:overview/state-ae]]
+
+** Autoencoder
+
+#+BEGIN_CENTER
+*教師なし学習*
+
+入力空間 *S* を Latent Space *L* に *圧縮*
+
+かつ *S* に *展開* して *元の画像に損失無く戻す。*
+#+END_CENTER
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN3
+
+#+END_SPAN3
+#+BEGIN_SPAN6
+[[png:static/autoenc]]
+#+END_SPAN6
+#+BEGIN_SPAN3
+
+#+END_SPAN3
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
+#+BEGIN_ALIGNRIGHT
+→ *データ* $x$ を *Latent vector* $z$ に変換/逆変換するNNを学習
+#+END_ALIGNRIGHT
+
+** Deep Autoencoder
+
+ いろいろな追加技術を使うことでDeepにできる → *より圧縮できる*
+
+ Stacked AE, pretraining, CNN, dropout, Batch-Normalization, GPU...
+
+ [[png:static/deep-ae]]
+
+** State Autoencoder
+
+ [[png:overview/state-ae]]
+
 ** Gumbel-Softmax (Jang, Gu, ICLR2017?)
 
  *入力をカテゴリカル分布にマップする* Activation Function 
@@ -1012,31 +1058,31 @@ http://www.deeplearningbook.org/ and VAE tutorial
 
 ** Autoencoder
 
- #+BEGIN_CENTER
- *教師なし学習*
+#+BEGIN_CENTER
+*教師なし学習*
 
- 入力空間 *S* を Latent Space *L* に *圧縮*
+入力空間 *S* を Latent Space *L* に *圧縮*
 
- かつ *S* に *展開* して *元の画像に損失無く戻す。*
- #+END_CENTER
+かつ *S* に *展開* して *元の画像に損失無く戻す。*
+#+END_CENTER
 
- #+BEGIN_CONTAINER-FLUID
- #+BEGIN_ROW-FLUID
- #+BEGIN_SPAN3
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN3
 
- #+END_SPAN3
- #+BEGIN_SPAN6
- [[png:static/autoenc]]
- #+END_SPAN6
- #+BEGIN_SPAN3
+#+END_SPAN3
+#+BEGIN_SPAN6
+[[png:static/autoenc]]
+#+END_SPAN6
+#+BEGIN_SPAN3
 
- #+END_SPAN3
- #+END_ROW-FLUID
- #+END_CONTAINER-FLUID
+#+END_SPAN3
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
 
- #+BEGIN_ALIGNRIGHT
- → *データ* $x$ を *Latent vector* $z$ に変換/逆変換するNNを学習
- #+END_ALIGNRIGHT
+#+BEGIN_ALIGNRIGHT
+→ *データ* $x$ を *Latent vector* $z$ に変換/逆変換するNNを学習
+#+END_ALIGNRIGHT
 
 ** Deep Autoencoder
 
@@ -1316,52 +1362,20 @@ dynamic-extent 宣言で中間ベクトルをスタック配置
 どんどん拡張できる!
 
 #+BEGIN_SRC lisp
-
 (as-bitwise-operations ()
   (multi-adder-sum a b 5))
 
 (LET* ((#:*LENGTH-VARIABLE*844 (LENGTH B))
        (#:G881 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844)))
-  (LET* ((#:G846 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G845 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G848 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G849 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G854 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G855 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G860 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G861 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G866 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G867 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G872 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G871 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G868 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G865 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G862 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G859 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G856 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G853 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         (#:G850 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844)))
+  (LET* ((#:G845 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
+         ...
+         (#:G872 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844)))
     (DECLARE
-     (DYNAMIC-EXTENT #:G846 #:G845 #:G848 #:G849 #:G854 #:G855 #:G860 #:G861
-      #:G866 #:G867 #:G872 #:G871 #:G868 #:G865 #:G862 #:G859 #:G856 #:G853
-      #:G850))
+     (DYNAMIC-EXTENT #:G845 ... #:G872))
     (BIT-REPLACE A 5 #:G845)
     (BIT-REPLACE B 5 #:G846)
     (BIT-XOR #:G845 #:G846 #:G845)
-    (BIT-REPLACE A 4 #:G848)
-    (BIT-REPLACE B 4 #:G849)
-    (BIT-AND #:G848 #:G849 #:G850)
-    (BIT-XOR #:G848 #:G849 #:G853)
-    (BIT-REPLACE A 3 #:G854)
-    (BIT-REPLACE B 3 #:G855)
-    (BIT-AND #:G854 #:G855 #:G856)
-    (BIT-XOR #:G854 #:G855 #:G859)
-    (BIT-REPLACE A 2 #:G860)
-    (BIT-REPLACE B 2 #:G861)
-    (BIT-AND #:G860 #:G861 #:G862)
-    (BIT-XOR #:G860 #:G861 #:G865)
-    (BIT-REPLACE A 1 #:G866)
-    (BIT-REPLACE B 1 #:G867)
+    ...
     (BIT-AND #:G866 #:G867 #:G868)
     (BIT-XOR #:G866 #:G867 #:G871)
     (BIT-AND A B #:G872)
@@ -1375,8 +1389,45 @@ dynamic-extent 宣言で中間ベクトルをスタック配置
     (BIT-IOR #:G850 #:G853 #:G850)
     (BIT-XOR #:G845 #:G850 #:G881)
     #:G881))
-
 #+END_SRC
 
+** まとめ
+
++ DeepLearning + Planning を実装する上で MSDD を実装
++ MSDD のために 早い bit-vector 操作が必要だった
++ bit-vector の操作を SIMD的に最適化するマクロ bit-ops を開発した
 
 
+
+
+* 最後に
+
+#+BEGIN_XLARGE
+東京大学
+#+BEGIN_CENTER
+総合文化研究科 広域科学専攻
+#+END_CENTER
+#+BEGIN_ALIGNRIGHT
+の宣伝
+#+END_ALIGNRIGHT
+#+END_XLARGE
+
+** 入試が簡単!
+
+[[spng:p13]]
+
+** Lisper 歓迎!
+
+[[spng:cl-mpi]]
+
+** 
+
+#+BEGIN_XLARGE
+東京大学
+#+BEGIN_CENTER
+総合文化研究科 広域科学専攻
+#+END_CENTER
+#+BEGIN_ALIGNRIGHT
+Welcome!
+#+END_ALIGNRIGHT
+#+END_XLARGE
