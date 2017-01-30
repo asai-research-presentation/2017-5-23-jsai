@@ -853,9 +853,9 @@ UCT-MCTS: Monte Carlo Tree Search + Universal Confidence Bound applied on Trees
 
 * 評価
 
-GTX1070, PhenomII X6 1060T, 16GB
+GTX1070, PhenomII X6 1060T (3.4GHz overclock), 16GB Mem
 
-+ Fast Downward :: LMcut heuristics, A*
++ Fast Downward :: LMcut vs Blind heuristics, A*
 
 + State AutoEncoder :: Tensorflow, Keras, Adam optimizer (learning rate:0.001)
 
@@ -957,6 +957,12 @@ Dead ends: 24 state(s).
 Search time: 2693.06 (sec)
 Total time: 2724.89 (sec)
 #+END_SRC
+
+** State of the Art な枝刈り技術が /この未知のドメインでも有効/
+
+|                 | LMcut | Blind |
+| Node Evaluation | 1140  |       |
+| Memory Usage    | 1GB   |       |
 
 ** Plan Results
 
