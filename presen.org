@@ -752,7 +752,7 @@ SGDでも基本的な想定は一緒
  #+END_ROW-FLUID
  #+END_CONTAINER-FLUID
 
-AlphaGo = Subsymbolic (DLNNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
++ AlphaGo = Subsymbolic (DLNNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
 
 ** 既存の有名システム
 
