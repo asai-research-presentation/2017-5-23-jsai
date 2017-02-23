@@ -897,13 +897,15 @@ Total time: 2724.89 (sec)
   + テキスト用のAE: Li et al. "A hierarchical neural autoencoder for paragraphs and documents." (2015)
   + 音声用のAE: Deng, Li, et al. "Binary coding of speech spectrograms using a deep auto-encoder." Interspeech. 2010.
 
-  + Here's an Apple, Here's a pen → oh, ApplePen!
-  + 学習してプランナで解くことにより 数千ステップの高速な言語レベル推論が可能に
+  + *Here's an Apple, Here's a pen → oh, ApplePen!*
+  + 学習してプランナで解くことにより *数千ステップの高速な言語レベル推論が可能に*
 
 * 今日のメッセージ
 
 #+BEGIN_CENTER
 NLPエキスパートと 探索の専門家の力を合わせて このシステムを作ってみませんか？
+
+主な産業応用例: *ルールベース人口無能を超える 論理を備えた 真に知的なチャットボット*
 #+END_CENTER
 
-主な産業応用例: *ルールベース人口無能を超える 真に知的なチャットボット*
+
