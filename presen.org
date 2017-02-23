@@ -554,6 +554,14 @@ Lights-Out
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
+* 
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+システム概要
+#+END_CENTER
+#+END_XLARGE
+
 ** 入力1: Training Inputs -- Image Pairs
 
 実行可能なアクションの例を示す画像ペア
@@ -566,7 +574,7 @@ Lights-Out
 
 ** 入力2: Planning Inputs -- Initial Image & Goal Image
 
-探すべきプランの始点と終点にある2つの状態(初期状態とゴール状態) を示す画像
+探すべきプランの *始点と終点* にある2つの状態 を示す画像
 
 [[png:overview/input2]]
 
@@ -811,7 +819,7 @@ $N=25$ の例
   ...
 #+END_SRC
 
-** Fast Downward Log Trace (Search Statistics)
+** Fast Downward Log Trace (Search Statistics)                     :noexport:
 
 #+BEGIN_SRC
 reading input... [t=5.479e-05 (sec)]
@@ -898,14 +906,14 @@ Total time: 2724.89 (sec)
   + 音声用のAE: Deng, Li, et al. "Binary coding of speech spectrograms using a deep auto-encoder." Interspeech. 2010.
 
   + *Here's an Apple, Here's a pen → oh, ApplePen!*
-  + 学習してプランナで解くことにより *数千ステップの高速な言語レベル推論が可能に*
+  + SAEを学習してプランナで解く → *数千ステップの高速な言語レベル推論が可能に*
 
 * 今日のメッセージ
 
 #+BEGIN_CENTER
-NLPエキスパートと 探索の専門家の力を合わせて このシステムを作ってみませんか？
+目標:
 
-主な産業応用例: *ルールベース人口無能を超える 論理を備えた 真に知的なチャットボット*
+　 *ルールベース人口無能を超える 論理を備えた 真に知的なチャットボット*
+
+NLPエキスパートと 探索エキスパートの力を合わせて このシステムを作ってみませんか？
 #+END_CENTER
-
-
