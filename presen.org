@@ -29,11 +29,11 @@ Made by guicho2.71828 (Masataro Asai)
 
 * もくじ
 
-+ Background -- 専攻分野 -- AIプランニングへのイントロダクション
++ Background -- 専攻分野 -- AIプランニング
 + CV
 + IJCAI投稿論文 -- 深層学習 + AIプランニング
 
-* Background -- 専攻分野 -- AIプランニングへのイントロダクション
+* イントロ -- 専攻分野 -- AIプランニング
 
  #+BEGIN_CONTAINER-FLUID
  #+BEGIN_ROW-FLUID
@@ -307,9 +307,9 @@ Made by guicho2.71828 (Masataro Asai)
 ⇒ 命題 (clear *?Y*) を削除 : *?Y* は clear ではなくなる
 #+END_QUOTE
 
-** *PDDL* : Planning Domain Description Language                   :noexport:
+** *PDDL* : Planning Domain Description Language
 
-現在も International Planning Competition の入力形式として使われている。
+International Planning Competition で使われている入力形式
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
@@ -365,9 +365,6 @@ Made by guicho2.71828 (Masataro Asai)
 *1 [Helmert, 2006] [Richter, 2010]
 #+END_NOTE
   
-
-
-
 ** [一般向け] Q. はやりのDeep Learningとの違いは?
 
  A. レイヤが違う
@@ -430,13 +427,13 @@ Made by guicho2.71828 (Masataro Asai)
 ** 既存の有名システム
 
 + AlphaGo = Subsymbolic (DLNNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
-  + ただし *囲碁に特化*, かつ *膨大な棋譜が必要*
-  + 自律的なエージェントは *未知の状況に推論により対処しなくてはならない* → まだ完璧ではない
+  + ただし *囲碁に特化*
+  + *膨大な棋譜が必要* --- 少数データしかない環境(e.g.宇宙探査機)には適用不可能
 + DQN = DLNN (*Subsymbolic*) + Reinforcement Learning (*Subsymbolic*)
   + 様々な Atari Game につかえる汎用的なフレームワーク (Invader, Packman…) だが
   + ほとんどのゲームは *脊髄反射的な操作で長く生き残ることが出来る*
-  + *Atari をプレイする上で 複雑な論理思考能力は必要ない*
-  + だからこそRLで成功した
+  + *Atariゲームに複雑な論理思考能力は必要ない* から RL で成功した
+  + 実際、 *Sokoban など論理思考が求められるAtariゲームでは性能が良くない*
 
 #+BEGIN_NOTE
 DLNN: Deep Learning Neural Network
@@ -452,19 +449,31 @@ UCT-MCTS: Monte Carlo Tree Search + Universal Confidence Bound applied on Trees
 #+END_CENTER
 #+END_XLARGE
 
-* 高度に知的な機械を作るには → DeepLearning + 論理と推論
+* IJCAI投稿内容
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+Classical Planning in
+
+ Deep Latent Space:
+
+From Unlabelled Images to PDDL (and back)
+#+END_CENTER
+#+END_XLARGE
+
+** 高度に知的な機械を作るには → DeepLearning + 論理と推論
 
 #+BEGIN_CENTER
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
 #+BEGIN_SPAN5
-ディープラーニングのみ
-
-↓
-
-虫程度の知能を持った
-
-*反射的な機械*
++ ディープラーニングのみ
+  
+  ↓
+  
+  虫程度の知能を持った
+  
+  *反射的な機械*
 #+END_SPAN5
 #+BEGIN_SPAN2
 　
@@ -474,13 +483,13 @@ vs
 　
 #+END_SPAN2
 #+BEGIN_SPAN5
-DL + *論理、推論、思考*
-
-↓
-
-目標を達成するために
-
-*論理で戦略を練る機械*
++ */DL + 論理、推論、思考/*
+  
+  ↓
+  
+  */目標を達成するために/*
+  
+  */論理で戦略を練る機械/*
 
 #+END_SPAN5
 #+END_ROW-FLUID
@@ -488,7 +497,7 @@ DL + *論理、推論、思考*
 #+END_CENTER
 
 [[png:planning-deeplearning]]
-* ゴール
+** ゴール
 
 #+BEGIN_XLARGE
 #+BEGIN_CENTER
@@ -504,7 +513,7 @@ Classical Planning
 #+END_CENTER
 #+END_XLARGE
 
-* スライディング タイル パズル (8-Puzzle)
+** スライディング タイル パズル (8-Puzzle)
 
 空きパネルとそれ以外を移動させることで絵を完成させるパズル
 
@@ -518,239 +527,130 @@ Classical Planning
 4x4の15-パズル、5x5の24-パズルはさらに難しい
 #+END_ALIGNRIGHT
 
-* ヒント・棋譜なし 画像のみ で 8-Puzzleを解く
+** 論文のゴール: 棋譜なし・事前知識なし 訓練画像のみ 完全自動で 8-puzzle を解くAIシステムを作る
 
-8-Puzzle を解く論理に基づくAIを作る
+*棋譜なし* : 棋譜から学習した勘(評価関数)で解くAlphaGoと異なる
 
- *ヒント・棋譜なし* : *棋譜から学習した勘で解くAlphaGoと異なる*
+*事前知識なし* : 「パネル」「9マスある」「パネルが動く」などの事前知識(ラベル、シンボル)は与えられない
 
 [[sjpg:puzzle]]
 
-** ヒント・棋譜なし 画像のみ で 8-Puzzleを解く
+** 論文のゴール: 棋譜なし・事前知識なし 訓練画像のみ 完全自動で */任意の問題/* を解くAIシステムを作る
 
-[[png:overview/1]]
-
-** ヒント・棋譜なし 画像のみ で 8-Puzzleを解く
-
-[[png:overview/2]]
-
-** ヒント・棋譜なし 画像のみ で 8-Puzzleを解く
-
-#+HTML: <embed src="img/overview/3.svg" type="image/svg+xml"  />
-
-* Introduction
-
-#+BEGIN_XLARGE
-#+BEGIN_CENTER
-There's No Silver Bullet!!
-#+END_CENTER
-#+END_XLARGE
-
-* Deep Neural Networks
-
-とてもはやっている
-
-　
-
-　
-
-[[png:deeplearning1]]
-
-** Deep Neural Networks
-
-とてもはやっている
-
-ベクトル (データ) と 行列W (重み) の掛け算 
-
-　
-
-[[png:deeplearning2]]
-
-** Deep Neural Networks
-
-とてもはやっている
-
-ベクトル (データ) と 行列W (重み) の掛け算 
-
-→ 出力の誤差=微分を使ってWを更新 → 学習完了
-
-[[png:deeplearning3]]
-
-
-** 認知タスクで人間に匹敵する精度
-
-[[png:dl-image-task]]
-
-** 認知タスクで人間に匹敵する精度
-
-[[png:dl-nlp-task]]
-
-** ニューラルネットの役割
-
-#+BEGIN_CENTER
-「直感的な」問題を解く *関数* を学習すること
-#+END_CENTER
-
-+ 求めるべき関数 $y^*=f^*(x)$
-  
-  | タスク   | 入力x      | 出力y                      |
-  |----------+------------+----------------------------|
-  | 画像分類 | 画像       | ラベル(車、ネコ、猿・・・) |
-  | 翻訳     | 文章(日)   | 文章(英)                   |
-  | 未来予測 | フレーム列 | 次のフレーム               |
-
-+ NNが表す関数　 $y=f(x)$
-
-#+BEGIN_CENTER
-+ 学習 ≡ 誤差 $||y-y^*||$ を最小化する最適化問題
-#+END_CENTER
-
-** NNは複雑な問題を魔法のように解くことが出来る
-
-#+BEGIN_LARGER
-なぜなら
-
-#+BEGIN_indent
-  + 人間は賢くてニューロンで動く し、
-  + ニューロンある = 賢さの証明 だし、
-  + 賢ければ何でも出来て当然 だし、
-  + 将来はシンギュラリティに溢れてて当然。
-  + ...
-  + ハァ?
-#+END_indent
-#+END_LARGER
-
-** 
-
-[[png:dl-silver-bullet]]
-
-** NNは複雑な問題を魔法のように解くことができる?
+*8-puzzle だけでなく 任意の問題を解く*
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
 #+BEGIN_SPAN6
-+ *出来る派の意見:*
-+ 人間は賢くてニューロンで動く
-+ ニューロン = 賢い
-+ 賢い機械はスゴイからニューロンだ
-+ 脳科学でシンギュラっちゃうぜ！
+ハノイの塔
 
-  ※ 画像はイメージ
-  
-  [[spng:ai_pet_family]]
+[[sjpg:hanoi]]
 #+END_SPAN6
 #+BEGIN_SPAN6
-+ *出来ない派の意見:*
-+ プラナリアも神経系を持つが賢い??
-+ *Is humanity /so/ smart?*
-+ *Not necessarily↓*
+Lights-Out
 
-  ※ 画像はイメージ
-  
-  [[spng:mizuho]]
-  
-  [[sjpg:trump]]
-#+BEGIN_ALIGNRIGHT
-#+END_ALIGNRIGHT
+[[sjpg:lightsout]]
 #+END_SPAN6
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
-** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる2 :noexport:
+** 入力1: Training Inputs -- Image Pairs
 
-+ 出来る派のもう少しマシな意見:
-  + NN は Turing完全, アナログNNは Super Turing (Siegelmann, 95, Science)
-  + 二段以上のNNは 十分な数のノードがあれば どんな関数でも表現可能
+実行可能なアクションの例を示す画像ペア
 
-+ *出来ない派のもう少し真面目な反論*:
-  + *表現できる != 学習できる*
-  + *構造の単純な関数しか学習できない*
-    + *Gradient Descent の亜種で解けるような関数*
-    + *局所解は大域最適解である??*
+[[png:overview/1]]
 
-*** Gradient Descent (再急降下法)
+** 入力1: Training Inputs -- Image Pairs
 
-傾きの大きい方向に向かって進む
+[[png:overview/2]]
 
-[[spng:gradient-descent]]
+** 入力2: Planning Inputs -- Initial Image & Goal Image
 
-#+BEGIN_CENTER
-*一般には: 最適解でないところに到達する可能性がある*
+探すべきプランの始点と終点にある2つの状態(初期状態とゴール状態) を示す画像
 
-*NNでは: 局所解はほぼ確実に大域最適解である == 無視*
-#+END_CENTER
+[[png:overview/input2]]
 
-#+BEGIN_NOTE
-SGDでも基本的な想定は一緒
-#+END_NOTE
+** 論文のゴール: 棋譜なし・事前知識なし 訓練画像のみ 完全自動で */任意の問題/* を解くAIシステムを作る
 
-*** 進化計算などで解かれるRastrigin関数 (例)
+#+HTML: <embed src="img/overview/3.svg" type="image/svg+xml"  />
 
-#+BEGIN_CENTER
-こういう関数は SGD では解けない
+** 実行例 (MNIST 8-puzzle)
 
-→ *NNでは学習できない種類の構造も存在する*
-#+END_CENTER
-   
-[[sjpg:rastrigin]]
+[[png:mnist-plan]]
 
-** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる3
+** 実際の問題の例 (Mandrill 8-puzzle)
 
-+ 出来ない派のもう少し真面目な反論2:
-  + *認知タスクと比べ、論理思考タスクは人間にも難しい*
-    + *人間の物体認識: 1秒以下*
-    + *大学入試数学の証明問題: 25分*
-    + 明らかに *難しさの質に差がある*
-  + 難しさの質というのはどうやって測る?
-    + 理論的解析: *計算量理論* (NP困難とか)
-  # + *論理思考タスクは計算量理論的に困難な問題が多数*
-  #   + *NP困難以上: 最悪指数時間*
-  #   + *← 学習に指数時間かかる = 解けないのと同じ*
+MNIST 8-puzzle は 「物体」のようなものが明確に分離されている
 
-*** 学習が終わるのは
+この実験 は このシステムがそのような特性に左右されないことを示す
 
-[[sjpg:利根川]]
+[[png:mandrill-intro]]
 
-** 
+** 実行例 (Mandrill 8-puzzle)
 
-#+BEGIN_XLARGE
-#+BEGIN_CENTER
-ニューラルネットは
+[[png:mandrill-plan]]
 
-銀の弾ではない
+** 実行例 (Tower of Hanoi)
 
-従って、ブームではあるが・・・
-#+END_CENTER
-#+END_XLARGE
+全く意味の異なる入力でも解けることを示す
 
-** 
+[[png:hanoi3]]
 
-[[sjpg:fukashigi]]
+[[png:hanoi4]]
 
-* ゴール
+** 実行例 (Lights Out)
 
-#+BEGIN_XLARGE
-#+BEGIN_CENTER
-State of the Art
+8-puzzle も hanoi も 「物体」のようなものが「消えない」という性質がある。
 
-Deep Learning 
+この実験 は このシステムがそのような特性に左右されないことを示す
 
-＋
+[[png:lights-out]]
 
-State of the Art
+** 実行例 (Skewed Lights Out)
 
-Classical Planning
-#+END_CENTER
-#+END_XLARGE
+8-puzzle, hanoi, LightsOut は 「物体」のようなものが格子状に並んでいる
 
+この実験 は このシステムがそのような特性に左右されないことを示す
 
-* システム概要
+[[png:lights-out-skewed]]
 
- [[png:overview/planning]]
+** ノイズのある入力にも対応
 
-** State Autoencoder
+# Denoising AE を使っているため入力ノイズに左右されずにプランを求められる
 
- [[png:overview/state-ae]]
+[[png:noise]]
+
+# (ノイズのある入力 $r$ と、それにSAEを適用した $Decode(Encode(r))$ の比較)
+
+* どうやって作ったのか？ 予想された困難
+
+基本アイディア: DLNN + Classical Planner
+
++ 1. ラベル無し画像データからなんとかして知識を取り出したい
+
+  + *どんな知識をどうやって?* ← *自明でない*
+
++ 2. 取り出せたとする。NNで発見される知識は Subsymbolic: 実数値
+
+  + プランナが必要とするのは Symbolic な入力: 離散値・命題・真偽値
+
+  + システム全体が Unsupervised, 画像入力だけでラベル無し 
+
+  + Subsymbolic を Symbol をどう変換する? (*Symbol Grounding*) ← *自明でない*
+
++ 3. 仮に自動的に Symbol を 生成したとして
+
+  + 自動的に作られた Symbol は人に理解できる形式ではおそらくない
+
+  + *機械のSymbolをどうやって人の理解できる形式にするか？* ← *自明でない*
+
+* Latent-space Planner: */LatPlan/*
+
+以上 *学習*, *Symbol Grounding*, *Symbolの解釈* を同時に解決し
+
+生の入力のみから完全自動で *任意の問題* を解くシステム
+
+ [[png:planning]]
 
 ** Autoencoder
 
@@ -792,7 +692,7 @@ Classical Planning
 
  [[png:overview/state-ae]]
 
-** Gumbel-Softmax (Jang, Gu, ICLR2017?)
+** Gumbel-Softmax Reparametrization (Jang, Gu, ICLR2017)
 
  *入力をカテゴリカル分布にマップする* Activation Function 
 
@@ -806,30 +706,41 @@ Classical Planning
 #+END_CENTER
 
  #+BEGIN_NOTE
- ICLR17に *投稿中*, 2/3に採択結果判明
+ 2/3に採択
  #+END_NOTE
 
 ** Gumbel-Softmax
 
 学習中に温度を下げていくことで *始めは自由に学習*
 
-*そののち、精度を保ったまま中間層の分布をカテゴリカルに近づける*
+そののち、精度を保ったまま *中間層の分布を離散カテゴリカルに近似*
 
 [[spng:gumbel]]
 
+$N\times M$ 行列を出力, $N$: 変数の数 $M$: カテゴリの数
+
 #+BEGIN_ALIGNRIGHT
-*カテゴリー2 → 0か1 の離散的分布になる → 命題にマップ可能*
++ $M=2$ *→ N個の命題(true/false)にマップ可能*
 #+END_ALIGNRIGHT
+
+** State Autoencoder
+
+
+[[png:train-state-ae]]
+
++ SAEを学習させることにより以下の関数を得る:
+  + $b = Encode(r)$ : *生データ $r$ を boolean vector に変換する関数*
+  + $\tilde{r} = Decode(b)$ : *boolean vector $b$ を 生データ $\tilde{r}$ に変換する関数*
 
 ** Entire System
 
- [[png:overview/planning]]
+ [[png:planning]]
 
 * 評価
 
 GTX1070, PhenomII X6 1060T (3.4GHz overclock), 16GB Mem
 
-+ Fast Downward :: LMcut vs Blind heuristics, A*
++ Classical Planner :: Fast Downward (State-of-the-Art solver, C++)
 
 + State AutoEncoder :: Tensorflow, Keras, Adam optimizer (learning rate:0.001)
 
@@ -847,14 +758,13 @@ GTX1070, PhenomII X6 1060T (3.4GHz overclock), 16GB Mem
 
   →784(84x84) (loss: Binary crossentropy)
 
-** 所要時間(目安)
+** 所要時間(目安)                                                  :noexport:
 
- 新しいシステムなので対戦相手が居ない...
-
- + State Autoencoder 学習時間: 1時間程度
- + MSDD Operator Acquisition (Lisp SBCL): 1時間程度
+ + State Autoencoder(TensorFlow,Keras): 学習時間: 1時間程度
  + PDDL変換 (Lisp SBCL): 一瞬
- + Fast Downward: 2時間, メモリ1G程度で終了
+ + Fast Downward (C++): 2時間, メモリ1G程度で終了
+
+初めてのシステムなので実行時間は問題ではない
 
 ** State AutoEncoder
 
@@ -882,9 +792,7 @@ Test 入力: 訓練画像に含まれていない画像
 
 ** PDDL Domain Definition
 
-#+BEGIN_SRC
-  -rw-rw-r-- 1 guicho guicho  31M 2017-01-20 00:10 domain-all.pddl
-#+END_SRC
+$N=25$ の例
 
 #+BEGIN_SRC lisp
 (define (domain latent)
@@ -932,18 +840,70 @@ Search time: 2693.06 (sec)
 Total time: 2724.89 (sec)
 #+END_SRC
 
-** State of the Art な枝刈り技術が /この未知のドメインでも有効/
+** 人間が書いたドメイン用の枝刈り技術が /この未知の自動生成ドメインでも有効/
 
-|                 | LMcut | Blind |
-| Node Evaluation | 1140  |       |
-| Memory Usage    | 1GB   |       |
-
-** Plan Results
-
-[[spng:experiment/plan]]
+|------------------------+-------------------+----------------|
+| Heuristics             | Search Time (sec) | Node Expansion |
+|------------------------+-------------------+----------------|
+| MNIST 8-puzzle         |                   |                |
+| blind                  | 1.904             | 193924         |
+| pdb                    | *1.780*           | *109096*       |
+|------------------------+-------------------+----------------|
+| blind                  | 1.751             | 201156         |
+| pdb                    | *1.508*           | *111642*       |
+|------------------------+-------------------+----------------|
+| blind                  | 1.657             | 186767         |
+| pdb                    | *1.215*           | *84561*        |
+|------------------------+-------------------+----------------|
+| blind                  | 1.514             | 183336         |
+| pdb                    | *1.474*           | *82518*        |
+|------------------------+-------------------+----------------|
+| blind                  | 1.460             | 169907         |
+| pdb                    | *0.685*           | *52084*        |
+|------------------------+-------------------+----------------|
+| blind                  | 1.489             | 130863         |
+| pdb                    | *0.382*           | *26967*        |
+|------------------------+-------------------+----------------|
+| Hanoi (4 peg)          |                   |                |
+| blind                  | 0.0008            | 55             |
+| pdb                    | *0.0006*          | *17*           |
+|------------------------+-------------------+----------------|
+| LightsOut (4x4)        |                   |                |
+| blind                  | 0.0159            | 952            |
+| pdb                    | *0.0013*          | *27*           |
+|------------------------+-------------------+----------------|
+| Spiral LightsOut (3x3) |                   |                |
+| blind                  | 0.0040            | 522            |
+| pdb                    | *0.0026*          | *214*          |
+|------------------------+-------------------+----------------|
+| Mandrill 8-puzzle      |                   |                |
+| blind                  | 2.759             | 335378         |
+| pdb                    | *1.113*           | *88851*        |
+|------------------------+-------------------+----------------|
 
 * Conclusion
 
-+ Proposed a new system that solves a combinatorial problem proposed as raw images
-+ Should be a milestone toward symbol grounding problem
++ 入力:
+  + ラベル無しの生の入力データで与えられた状態遷移規則
+  + ラベル無しの初期状態・ゴールを表す画像ペア
++ 出力: ゴールを達成するためのプランを表す画像列
 
++ State AutoEncoder(SAE): Gumbel-Softmaxを用いたVAE
+
++ 主な貢献: *SAEによって生データから生成したシンボリック表現を用いてプランニング問題を解けることを実証*
+
++ *SAE の実装を変えれば(原理的には)画像以外の任意の入力データに対応可能なはず*
+
+  + テキスト用のAE: Li et al. "A hierarchical neural autoencoder for paragraphs and documents." (2015)
+  + 音声用のAE: Deng, Li, et al. "Binary coding of speech spectrograms using a deep auto-encoder." Interspeech. 2010.
+
+  + Here's an Apple, Here's a pen → oh, ApplePen!
+  + 学習してプランナで解くことにより 数千ステップの高速な言語レベル推論が可能に
+
+* 今日のメッセージ
+
+#+BEGIN_CENTER
+NLPエキスパートと 探索の専門家の力を合わせて このシステムを作ってみませんか？
+#+END_CENTER
+
+主な産業応用例: *ルールベース人口無能を超える 真に知的なチャットボット*
