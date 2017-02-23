@@ -27,315 +27,24 @@ Made by guicho2.71828 (Masataro Asai)
 #+END_NOTE
 #+END_outline-text-1
 
-* 今日の発表の Motivation                                          :noexport:
-
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN5
-|      |                  |
-|------+------------------|
-| ~'70 | 第一次AIブーム   |
-| ~'80 | *第一次AIの冬*   |
-| ~'90 | 第二次AIブーム   |
-| ~'08 | *第二次AIの冬*   |
-| '08~ | 第三次AIブーム   |
-| ???? | *第三次AIの冬??* |
-#+END_SPAN5
-#+BEGIN_SPAN7
-+ 第二次AIの冬の原因:
-  + *論理だけで全てが*
-
-    *解決できると考えた*
-  + 現実世界 (物体、アクション) のラベルを手入力する必要があった
-  + ソルバも遅すぎた (ハードウェアも遅かったが、探索手法も指数的に非効率)
-+ 現在: *より速いソルバがある*
-+ 現在: *ラベル付も Deep Learning でできそうだ*
-#+END_SPAN7
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
-
-+ 第三次AIの冬のありそうな原因: *Deep Learningで全てが解決できると考えた?*
-  + 脳科学(笑) シンギュラリティ(笑)
-
-* 高度に知的な機械を作るには → DeepLearning + 論理と推論
-
-#+BEGIN_CENTER
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN5
-ディープラーニングのみ
-
-↓
-
-虫程度の知能を持った
-
-*反射的な機械*
-#+END_SPAN5
-#+BEGIN_SPAN2
-　
-
-vs
-
-　
-#+END_SPAN2
-#+BEGIN_SPAN5
-DL + *論理、推論、思考*
-
-↓
-
-目標を達成するために
-
-*論理で戦略を練る機械*
-
-#+END_SPAN5
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
-#+END_CENTER
-
-[[png:planning-deeplearning]]
-* ゴール
-
-#+BEGIN_XLARGE
-#+BEGIN_CENTER
-State of the Art
-
-Deep Learning 
-
-＋
-
-State of the Art
-
-Classical Planning
-#+END_CENTER
-#+END_XLARGE
-
-* スライディング タイル パズル (8-Puzzle)
-
-空きパネルとそれ以外を移動させることで絵を完成させるパズル
-
-[[sjpg:puzzle]]
-
-#+BEGIN_ALIGNRIGHT
-*古典的なAI問題として知られている*
-
-可能な曲面の数は 362880 個
-
-4x4の15-パズル、5x5の24-パズルはさらに難しい
-#+END_ALIGNRIGHT
-
-* Overview
-
-8-Puzzle を解く論理に基づくAIを作る
-
- *ヒント・棋譜なし* : *棋譜から学習した勘で解くAlphaGoと異なる*
-
-[[sjpg:puzzle]]
-
-** Overview
-
-[[png:overview/1]]
-
-** Overview
-
-[[png:overview/2]]
-
-** Overview
-
-#+HTML: <embed src="img/overview/3.svg" type="image/svg+xml"  />
-
-* Introduction
-
-#+BEGIN_XLARGE
-#+BEGIN_CENTER
-There's No Silver Bullet!!
-#+END_CENTER
-#+END_XLARGE
-
-* Deep Neural Networks
-
-とてもはやっている
-
-　
-
-　
-
-[[png:deeplearning1]]
-
-** Deep Neural Networks
-
-とてもはやっている
-
-ベクトル (データ) と 行列W (重み) の掛け算 
-
-　
-
-[[png:deeplearning2]]
-
-** Deep Neural Networks
-
-とてもはやっている
-
-ベクトル (データ) と 行列W (重み) の掛け算 
-
-→ 出力の誤差=微分を使ってWを更新 → 学習完了
-
-[[png:deeplearning3]]
-
-
-** 認知タスクで人間に匹敵する精度
-
-[[png:dl-image-task]]
-
-** 認知タスクで人間に匹敵する精度
-
-[[png:dl-nlp-task]]
-
-** ニューラルネットの役割
-
-#+BEGIN_CENTER
-「直感的な」問題を解く *関数* を学習すること
-#+END_CENTER
-
-+ 求めるべき関数 $y^*=f^*(x)$
-  
-  | タスク   | 入力x      | 出力y                      |
-  |----------+------------+----------------------------|
-  | 画像分類 | 画像       | ラベル(車、ネコ、猿・・・) |
-  | 翻訳     | 文章(日)   | 文章(英)                   |
-  | 未来予測 | フレーム列 | 次のフレーム               |
-
-+ NNが表す関数　 $y=f(x)$
-
-#+BEGIN_CENTER
-+ 学習 ≡ 誤差 $||y-y^*||$ を最小化する最適化問題
-#+END_CENTER
-
-** NNは複雑な問題を魔法のように解くことが出来る
-
-#+BEGIN_LARGER
-なぜなら
-
-#+BEGIN_indent
-  + 人間は賢くてニューロンで動く し、
-  + ニューロンある = 賢さの証明 だし、
-  + 賢ければ何でも出来て当然 だし、
-  + 将来はシンギュラリティに溢れてて当然。
-  + ...
-  + ハァ?
-#+END_indent
-#+END_LARGER
-
-** 
-
-[[png:dl-silver-bullet]]
-
-** NNは複雑な問題を魔法のように解くことができる?
-
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN6
-+ *出来る派の意見:*
-+ 人間は賢くてニューロンで動く
-+ ニューロン = 賢い
-+ 賢い機械はスゴイからニューロンだ
-+ 脳科学でシンギュラっちゃうぜ！
-
-  ※ 画像はイメージ
-  
-  [[spng:ai_pet_family]]
-#+END_SPAN6
-#+BEGIN_SPAN6
-+ *出来ない派の意見:*
-+ プラナリアも神経系を持つが賢い??
-+ *Is humanity /so/ smart?*
-+ *Not necessarily↓*
-
-  ※ 画像はイメージ
-  
-  [[spng:mizuho]]
-  
-  [[sjpg:trump]]
-#+BEGIN_ALIGNRIGHT
-#+END_ALIGNRIGHT
-#+END_SPAN6
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
-
-** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる2 :noexport:
-
-+ 出来る派のもう少しマシな意見:
-  + NN は Turing完全, アナログNNは Super Turing (Siegelmann, 95, Science)
-  + 二段以上のNNは 十分な数のノードがあれば どんな関数でも表現可能
-
-+ *出来ない派のもう少し真面目な反論*:
-  + *表現できる != 学習できる*
-  + *構造の単純な関数しか学習できない*
-    + *Gradient Descent の亜種で解けるような関数*
-    + *局所解は大域最適解である??*
-
-*** Gradient Descent (再急降下法)
-
-傾きの大きい方向に向かって進む
-
-[[spng:gradient-descent]]
-
-#+BEGIN_CENTER
-*一般には: 最適解でないところに到達する可能性がある*
-
-*NNでは: 局所解はほぼ確実に大域最適解である == 無視*
-#+END_CENTER
-
-#+BEGIN_NOTE
-SGDでも基本的な想定は一緒
-#+END_NOTE
-
-*** 進化計算などで解かれるRastrigin関数 (例)
-
-#+BEGIN_CENTER
-こういう関数は SGD では解けない
-
-→ *NNでは学習できない種類の構造も存在する*
-#+END_CENTER
-   
-[[sjpg:rastrigin]]
-
-** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる3
-
-+ 出来ない派のもう少し真面目な反論2:
-  + *認知タスクと比べ、論理思考タスクは人間にも難しい*
-    + *人間の物体認識: 1秒以下*
-    + *大学入試数学の証明問題: 25分*
-    + 明らかに *難しさの質に差がある*
-  + 難しさの質というのはどうやって測る?
-    + 理論的解析: *計算量理論* (NP困難とか)
-  # + *論理思考タスクは計算量理論的に困難な問題が多数*
-  #   + *NP困難以上: 最悪指数時間*
-  #   + *← 学習に指数時間かかる = 解けないのと同じ*
-
-*** 学習が終わるのは
-
-[[sjpg:利根川]]
-
-** 
-
-#+BEGIN_XLARGE
-#+BEGIN_CENTER
-ニューラルネットは
-
-銀の弾ではない
-
-従って、ブームではあるが・・・
-#+END_CENTER
-#+END_XLARGE
-
-** 
-
-[[sjpg:fukashigi]]
-* AI Topics -- プランニングへのイントロダクション(再び)
-
-#+BEGIN_QUOTE
-「これがDLの次にあるもうひとつの人工知能だ」
-#+END_QUOTE
+* もくじ
+
++ Background -- 専攻分野 -- AIプランニングへのイントロダクション
++ CV
++ IJCAI投稿論文 -- 深層学習 + AIプランニング
+
+* Background -- 専攻分野 -- AIプランニングへのイントロダクション
+
+ #+BEGIN_CONTAINER-FLUID
+ #+BEGIN_ROW-FLUID
+ #+BEGIN_SPAN6
+ [[png:astro/1]]
+ #+END_SPAN6
+ #+BEGIN_SPAN6
+ [[png:rescue/1]]
+ #+END_SPAN6
+ #+END_ROW-FLUID
+ #+END_CONTAINER-FLUID
 
 ** 誰?
 
@@ -548,49 +257,13 @@ SGDでも基本的な想定は一緒
  このように、プランニングは、難しい問題を汎用性を失わずに解くことを目指します。
  #+END_RESUME
 
- # 自動運転事故:
- # ポリシーが決まっていないならそういうものは作るべきではない
- # 危険だ
-
- # しかし自動運転は自分の扱うプランニングとは違うので実は困らない
-
- # ゴール設定は人間がやればいい
- # ターゲットを決めた上で
- # 全力で考えるのがプランニングの技術
- # 効用関数を決めるのは人間
- # いかにそれを実現するか
- # あくまで命令に従うロボットであることを強調
-
- # ドメインは消す
- # アプリケーション
- # 
- # coreまでは実例
- # 災害援助は将来
- # 完全に分離
- # 
- # 掃除ドメインをメインに
-
- # ** プランニングとは?
- # 
- # [[png:planning-4room]]
-
- # #+BEGIN_RESUME
- # 同じ掃除ドメインの4部屋インスタンスも表現できますし、
- # 現実の応用例では「宇宙探査ドメイン」も表現できます。
- # 
- # このように、プランニングは、難しい問題を汎用性を失わずに解くことを目指します。
- # 
- # 仮に将来、写真のような救助ロボットにプランニングソルバを組み込めば、
- # 被災者を発見した時に適切な行動を自ら選択できるようになるかもしれません。
- # #+END_RESUME
-
 ** AIの使いドコロ  :noexport:
 
  + 人では不可能な作業の代替 :: 危険な環境, 宇宙空間・深海, 24時間対応, マイクロ秒応答
  + コストのかかる専門技師の代替・自動化 :: 機械工作, 人工衛星運営(専門家会議の時給が高い!)
  + ミスの許されない完璧な理論保証の求められる問題の求解 :: 半導体のバグ検証システム(生産を始めると止められない)
 
-** AIと自動プランニング の位置づけ -- /理論/ と /実応用/ の中間  :noexport:
+** AIと自動プランニング の位置づけ -- /理論/ と /実応用/ の中間
 
  緑は /理論/ 、オレンジは /実応用/ 、 AI はその橋渡し (どれともかぶらない部分もある)
 
@@ -634,7 +307,7 @@ SGDでも基本的な想定は一緒
 ⇒ 命題 (clear *?Y*) を削除 : *?Y* は clear ではなくなる
 #+END_QUOTE
 
-** *PDDL* : Planning Domain Description Language
+** *PDDL* : Planning Domain Description Language                   :noexport:
 
 現在も International Planning Competition の入力形式として使われている。
 
@@ -695,7 +368,7 @@ SGDでも基本的な想定は一緒
 
 
 
-** Q. はやりのDeep Learningとの違いは?
+** [一般向け] Q. はやりのDeep Learningとの違いは?
 
  A. レイヤが違う
 
@@ -746,7 +419,7 @@ SGDでも基本的な想定は一緒
    *囲碁,将棋* : ゴール = 勝利
    #+END_SMALLER
    #+BEGIN_LARGER
-   ☺ 多数の論理の組み合わせ
+   ☺ 時間的依存関係を含む論理の組み合わせ
    #+END_LARGER
  #+END_SPAN6
  #+END_ROW-FLUID
@@ -770,6 +443,307 @@ DLNN: Deep Learning Neural Network
 
 UCT-MCTS: Monte Carlo Tree Search + Universal Confidence Bound applied on Trees
 #+END_NOTE
+
+* CV
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+配布
+#+END_CENTER
+#+END_XLARGE
+
+* 高度に知的な機械を作るには → DeepLearning + 論理と推論
+
+#+BEGIN_CENTER
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN5
+ディープラーニングのみ
+
+↓
+
+虫程度の知能を持った
+
+*反射的な機械*
+#+END_SPAN5
+#+BEGIN_SPAN2
+　
+
+vs
+
+　
+#+END_SPAN2
+#+BEGIN_SPAN5
+DL + *論理、推論、思考*
+
+↓
+
+目標を達成するために
+
+*論理で戦略を練る機械*
+
+#+END_SPAN5
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+#+END_CENTER
+
+[[png:planning-deeplearning]]
+* ゴール
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+State of the Art
+
+Deep Learning 
+
+＋
+
+State of the Art
+
+Classical Planning
+#+END_CENTER
+#+END_XLARGE
+
+* スライディング タイル パズル (8-Puzzle)
+
+空きパネルとそれ以外を移動させることで絵を完成させるパズル
+
+[[sjpg:puzzle]]
+
+#+BEGIN_ALIGNRIGHT
+*古典的なAI問題として知られている*
+
+可能な曲面の数は 362880 個
+
+4x4の15-パズル、5x5の24-パズルはさらに難しい
+#+END_ALIGNRIGHT
+
+* ヒント・棋譜なし 画像のみ で 8-Puzzleを解く
+
+8-Puzzle を解く論理に基づくAIを作る
+
+ *ヒント・棋譜なし* : *棋譜から学習した勘で解くAlphaGoと異なる*
+
+[[sjpg:puzzle]]
+
+** ヒント・棋譜なし 画像のみ で 8-Puzzleを解く
+
+[[png:overview/1]]
+
+** ヒント・棋譜なし 画像のみ で 8-Puzzleを解く
+
+[[png:overview/2]]
+
+** ヒント・棋譜なし 画像のみ で 8-Puzzleを解く
+
+#+HTML: <embed src="img/overview/3.svg" type="image/svg+xml"  />
+
+* Introduction
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+There's No Silver Bullet!!
+#+END_CENTER
+#+END_XLARGE
+
+* Deep Neural Networks
+
+とてもはやっている
+
+　
+
+　
+
+[[png:deeplearning1]]
+
+** Deep Neural Networks
+
+とてもはやっている
+
+ベクトル (データ) と 行列W (重み) の掛け算 
+
+　
+
+[[png:deeplearning2]]
+
+** Deep Neural Networks
+
+とてもはやっている
+
+ベクトル (データ) と 行列W (重み) の掛け算 
+
+→ 出力の誤差=微分を使ってWを更新 → 学習完了
+
+[[png:deeplearning3]]
+
+
+** 認知タスクで人間に匹敵する精度
+
+[[png:dl-image-task]]
+
+** 認知タスクで人間に匹敵する精度
+
+[[png:dl-nlp-task]]
+
+** ニューラルネットの役割
+
+#+BEGIN_CENTER
+「直感的な」問題を解く *関数* を学習すること
+#+END_CENTER
+
++ 求めるべき関数 $y^*=f^*(x)$
+  
+  | タスク   | 入力x      | 出力y                      |
+  |----------+------------+----------------------------|
+  | 画像分類 | 画像       | ラベル(車、ネコ、猿・・・) |
+  | 翻訳     | 文章(日)   | 文章(英)                   |
+  | 未来予測 | フレーム列 | 次のフレーム               |
+
++ NNが表す関数　 $y=f(x)$
+
+#+BEGIN_CENTER
++ 学習 ≡ 誤差 $||y-y^*||$ を最小化する最適化問題
+#+END_CENTER
+
+** NNは複雑な問題を魔法のように解くことが出来る
+
+#+BEGIN_LARGER
+なぜなら
+
+#+BEGIN_indent
+  + 人間は賢くてニューロンで動く し、
+  + ニューロンある = 賢さの証明 だし、
+  + 賢ければ何でも出来て当然 だし、
+  + 将来はシンギュラリティに溢れてて当然。
+  + ...
+  + ハァ?
+#+END_indent
+#+END_LARGER
+
+** 
+
+[[png:dl-silver-bullet]]
+
+** NNは複雑な問題を魔法のように解くことができる?
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN6
++ *出来る派の意見:*
++ 人間は賢くてニューロンで動く
++ ニューロン = 賢い
++ 賢い機械はスゴイからニューロンだ
++ 脳科学でシンギュラっちゃうぜ！
+
+  ※ 画像はイメージ
+  
+  [[spng:ai_pet_family]]
+#+END_SPAN6
+#+BEGIN_SPAN6
++ *出来ない派の意見:*
++ プラナリアも神経系を持つが賢い??
++ *Is humanity /so/ smart?*
++ *Not necessarily↓*
+
+  ※ 画像はイメージ
+  
+  [[spng:mizuho]]
+  
+  [[sjpg:trump]]
+#+BEGIN_ALIGNRIGHT
+#+END_ALIGNRIGHT
+#+END_SPAN6
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
+** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる2 :noexport:
+
++ 出来る派のもう少しマシな意見:
+  + NN は Turing完全, アナログNNは Super Turing (Siegelmann, 95, Science)
+  + 二段以上のNNは 十分な数のノードがあれば どんな関数でも表現可能
+
++ *出来ない派のもう少し真面目な反論*:
+  + *表現できる != 学習できる*
+  + *構造の単純な関数しか学習できない*
+    + *Gradient Descent の亜種で解けるような関数*
+    + *局所解は大域最適解である??*
+
+*** Gradient Descent (再急降下法)
+
+傾きの大きい方向に向かって進む
+
+[[spng:gradient-descent]]
+
+#+BEGIN_CENTER
+*一般には: 最適解でないところに到達する可能性がある*
+
+*NNでは: 局所解はほぼ確実に大域最適解である == 無視*
+#+END_CENTER
+
+#+BEGIN_NOTE
+SGDでも基本的な想定は一緒
+#+END_NOTE
+
+*** 進化計算などで解かれるRastrigin関数 (例)
+
+#+BEGIN_CENTER
+こういう関数は SGD では解けない
+
+→ *NNでは学習できない種類の構造も存在する*
+#+END_CENTER
+   
+[[sjpg:rastrigin]]
+
+** No Silver Bullet: NNで複雑な問題を魔法のように解くことはできない・・・と思われる3
+
++ 出来ない派のもう少し真面目な反論2:
+  + *認知タスクと比べ、論理思考タスクは人間にも難しい*
+    + *人間の物体認識: 1秒以下*
+    + *大学入試数学の証明問題: 25分*
+    + 明らかに *難しさの質に差がある*
+  + 難しさの質というのはどうやって測る?
+    + 理論的解析: *計算量理論* (NP困難とか)
+  # + *論理思考タスクは計算量理論的に困難な問題が多数*
+  #   + *NP困難以上: 最悪指数時間*
+  #   + *← 学習に指数時間かかる = 解けないのと同じ*
+
+*** 学習が終わるのは
+
+[[sjpg:利根川]]
+
+** 
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+ニューラルネットは
+
+銀の弾ではない
+
+従って、ブームではあるが・・・
+#+END_CENTER
+#+END_XLARGE
+
+** 
+
+[[sjpg:fukashigi]]
+
+* ゴール
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+State of the Art
+
+Deep Learning 
+
+＋
+
+State of the Art
+
+Classical Planning
+#+END_CENTER
+#+END_XLARGE
+
+
 * システム概要
 
  [[png:overview/planning]]
@@ -973,467 +947,3 @@ Total time: 2724.89 (sec)
 + Proposed a new system that solves a combinatorial problem proposed as raw images
 + Should be a milestone toward symbol grounding problem
 
-* セミファイナル                                                   :noexport:
-
-死んでると思ってたセミが実は生きてて
-
-びっくりしたことはありませんか?
-
-#+BEGIN_ALIGNRIGHT
-Credit: http://hukaimandara.jugem.jp/?eid=92
-#+END_ALIGNRIGHT
-
-[[sjpg:semifinal]]
-
-** セミファイナル
-
-
-#+BEGIN_ALIGNRIGHT
-Credit: http://hukaimandara.jugem.jp/?eid=92
-#+END_ALIGNRIGHT
-
-[[jpg:static/cicada]]
-
-#+BEGIN_ALIGNRIGHT
-+ 教訓: 複雑な3次元データは *足を開いている/死んでいる*
-
-  という *1bit* のデータに要約できる → 命題そのもの
-#+END_ALIGNRIGHT
-
-# * Latent Space $L$ of an original state space $S$
-# 
-# #+BEGIN_QUOTE
-# Apparently very complex $S$ can be described by low-dimentional $L$
-# #+END_QUOTE
-# 
-# [[jpg:static/cicada]]
-
-* /Manifold Hypothesis/ マニホールド仮説 and /Latent Space/        :noexport:
-
-+ $x$: 高次元vector (例: 28x28 の画像データ = 784次元)
-+ マニホールド仮説:
-  + 世の中の高次元データは低次元にマッピングできる *はず*
-  + 一見複雑なデータも実は少ないパラメータで説明できる 
-+ $z$: 低次元 *Latent Space* vector (下の図では 2次元)
-+ *この扱いやすい低次元ベクトルが欲しい*
-  + セミファイナルの見分け方に相当
-
-#+BEGIN_ALIGNRIGHT
-+ ← Deep Learning で $z$ を見つける
-#+END_ALIGNRIGHT
-
-# $x$: high dimensional vector in $S$, $z$ in manifold $L$
-# 
-# Data is concentrated around a low dimensional manifold
-# 
-# Hope finding a representation Z of that manifold.
-
-#+BEGIN_ALIGNRIGHT
-http://www.deeplearningbook.org/ and VAE tutorial
-#+END_ALIGNRIGHT
-
-[[png:static/manifold]]
-
-** Manifold Hypothesis
-
- $x$: high dimensional vector in $S$, $z$: manifold $L$
-
- Data is concentrated around a low dimensional manifold
-
- Hope finding a representation Z of that manifold.
-
- http://www.deeplearningbook.org/ and VAE tutorial
-
- [[png:static/manifold2]]
-
-** Latent Space の威力
-
- #+BEGIN_SMALLER
- Reinforcement Learning(RL) in Latent Space (e.g. Luck IROS14, AAAI16)
- #+END_SMALLER
-
- 強化学習(RL)を高次元に直接適用するのは難しい → PCA で得たLatent Space でRL
-
- (PCA: 一段 かつ 活性化関数無しのNNと考えられる 古いタイプの Latent Space 学習手法)
-
- 　
-
- mapping 62-DOF space → 2D
-
- [[png:static/latent-RL]]
-
-** Autoencoder
-
-#+BEGIN_CENTER
-*教師なし学習*
-
-入力空間 *S* を Latent Space *L* に *圧縮*
-
-かつ *S* に *展開* して *元の画像に損失無く戻す。*
-#+END_CENTER
-
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN3
-
-#+END_SPAN3
-#+BEGIN_SPAN6
-[[png:static/autoenc]]
-#+END_SPAN6
-#+BEGIN_SPAN3
-
-#+END_SPAN3
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
-
-#+BEGIN_ALIGNRIGHT
-→ *データ* $x$ を *Latent vector* $z$ に変換/逆変換するNNを学習
-#+END_ALIGNRIGHT
-
-** Deep Autoencoder
-
- いろいろな追加技術を使うことでDeepにできる → *より圧縮できる*
-
- Stacked AE, pretraining, CNN, dropout, Batch-Normalization, GPU...
-
- [[png:static/deep-ae]]
-
-* How?                                                             :noexport:
-
-Simply put: discretize $z$ into SAS variables
-
-Below: results of encoding a MNIST image (784-variable) to 2 variables
-
-Mapping the input image to latent space (encoding part)
-
-[[png:static/vae-latent]]
-
-* How?                                                             :noexport:
-
-Mapping the latent space to the actual image (decoding part)
-
-[[png:static/vae-manifold]]
-
-* 副産物: bit-ops
-
-MSDD アルゴリズムを実装する上で *bit-vector* を効率よく扱う必要が出来た
-
-+ Common Lisp における bit-vector : C における short 配列に相当
-  + Sequenceとして扱える: *fill,map,replace...*
-  + ビット演算が標準に含まれている: *bit-and, bit-xor...* ループを書く必要がない
-  + コンパイラが64ビットの整数処理に自動変換してくれる(のでCと同様に速い)
-
-** Common Lisp の bit-wise 演算
-
-#+BEGIN_SRC lisp
-(bit-and x y &optional z)
-#+END_SRC
-
-bit vector =x= と =y= の論理和を取る
-
-z が与えられていれば、 結果を *z に破壊的に代入* しそれを返す
-
-# z が シンボル =t= のときは、 結果は =x= に破壊的に代入される
-
-z が省略された時は *新たなベクトル* を生成して返す
-
-** 注意して使わないと…
-
-大量のconsing: 中間結果がヒープに確保される
-
-#+BEGIN_SRC lisp
-(bit-and (bit-xor x y) z)
-
--> 以下と同様
-
-(let ((tmp  (make-array (length x) :element-type 'bit)) ; ヒープ
-      (tmp2 (make-array (length x) :element-type 'bit))); ヒープ
-
-  (bit-xor x y tmp)
-  (bit-and tmp z tmp2)
-  tmp2)
-#+END_SRC
-
-** 対処法
-
-dynamic-extent 宣言で中間ベクトルをスタック配置
-
-#+BEGIN_SRC lisp
-(bit-and (bit-xor x y) z)
-
--> 以下と同様
-
-(let ((tmp  (make-array (length x) :element-type 'bit))
-      (tmp2 (make-array (length x) :element-type 'bit)))
-  (declare (dynamic-extent tmp tmp2))
-  (bit-xor x y tmp)
-  (bit-and tmp z tmp2)
-  tmp2)
-#+END_SRC
-
-** ほかにもいろいろ最適化出来る
-
-中間ベクトルの再利用
-
-#+BEGIN_SRC lisp
-(bit-and (bit-xor x y) z)
-
--> 以下と同様
-
-(let ((tmp  (make-array (length x) :element-type 'bit)))
-  (declare (dynamic-extent tmp))
-  (bit-xor x y tmp)
-  (bit-and tmp z tmp)  ; tmp を再利用 → スタックを節約
-  tmp)
-#+END_SRC
-
-#+BEGIN_CENTER
-+ *こんな小手先の最適化は研究の本質じゃない! 自動化したい!*
-#+END_CENTER
-
-** 拙作 bit-ops: *ビット演算コンパイラ*
-
-#+BEGIN_SRC lisp
-(as-bitwise-operations (&key result)
-  &body)
-#+END_SRC
-
-=&body= にビット演算を書くと *自動で速いプログラムに書きなおしてくれる* マクロ
-
-内部的にはSSAっぽく計算を保持
-
-中間ベクトルの再利用 (スタック消費を抑える) → コンパイラのレジスタ配置に相当
-
-共通部分式除去 → 例: =(and a b)= が二度現れたら一度だけ計算して結果を再利用
-
-** 例1:
-
-#+BEGIN_SRC lisp
-(as-bitwise-operations ()
-  (and a b c))
-
--> 展開 (コンパイル)
-
-(LET* ((#:LEN835 (LENGTH C))
-       ;; 自動で生成された変数。
-       ;; 結果として返されるベクトルなので、ヒープに。
-       (#:G833 (MAKE-BIT-VECTOR #:LEN835)))
-   (BIT-AND B C #:G833)
-   (BIT-AND A #:G833 #:G833) ; 中間結果は再利用
-   #:G833)
-#+END_SRC
-
-** 例2:
-
-#+BEGIN_SRC lisp
-(as-bitwise-operations (:result c) ; 結果を c に書き込むよう指定
-  (and a b c))
-
-->
-
-(LET* ((#:LEN835 (LENGTH C))
-       ;; 自動で生成された変数。
-       ;; 結果はcに書き戻される
-       (#:G833 C))
-   (BIT-AND B C #:G833)
-   (BIT-AND A #:G833 #:G833) ; 中間結果は再利用
-   #:G833)
-#+END_SRC
-
-** 例3: a が 1 なら b を、 0 なら c を取る操作 (if-then-else)
-
-#+BEGIN_SRC lisp
-(as-bitwise-operations ()
-  (ior (and a b)
-       (and (not a) c)))
-
-->
-
-(LET* ((#:LEN700 (LENGTH C))
-       (#:G701 (MAKE-BIT-VECTOR #:LEN700)))
-  (LET* ((#:G702 (MAKE-BIT-VECTOR #:LEN700)))
-    (DECLARE (DYNAMIC-EXTENT #:G702))  ; 中間結果G747はスタック配置
-    (BIT-AND A B #:G701)           ; 結果ベクトルG701再利用
-    (BIT-NOT A #:G702)
-    (BIT-AND #:G702 C #:G702)      ; 中間ベクトルG702再利用
-    (BIT-IOR #:G701 #:G702 #:G701) ; 結果ベクトルG701再利用
-    #:G701))
-#+END_SRC
-
-** ビット演算用のDSLを拡張できる
-
-#+BEGIN_SRC lisp
-(define-bitwise-operation if (condition then else)
-  `(ior (and ,condition ,then)
-        (and (not ,condition) ,else)))
-
-これで
-
-(as-bitwise-operations (:result c)
-  (ior (and a b)
-       (and (not a) c)))
-
-のかわりに
-
-(as-bitwise-operations (:result c)
-  (if a b c))
-
-と書ける
-#+END_SRC
-
-** 半加算器
-
-[[spng:halfadder]]
-
-#+BEGIN_SRC lisp
-(define-bitwise-operation half-adder-sum (a b)
-  "sum output of half adder "
-  `(xor ,a ,b))
-(define-bitwise-operation half-adder-carry (a b)
-  "carry output of half adder "
-  `(and ,a ,b))
-#+END_SRC
-
-** 半加算器を使って全加算器を書く
-
-[[spng:fulladder]]
-
-#+BEGIN_SRC lisp
-(define-bitwise-operation full-adder-sum (a b x)
-  "sum output of full adder "
-  `(half-adder-sum (half-adder-sum ,a ,b)
-                   ,x))
-
-(define-bitwise-operation full-adder-carry (a b x)
-  "carry output of full adder "
-  `(ior (half-adder-carry ,a ,b)
-        (half-adder-carry (half-adder-sum ,a ,b)
-                          ,x)))
-#+END_SRC
-
-** 全加算器を使って2段加算器を書く
-
-[[spng:adder6]]
-
-
-#+BEGIN_SRC lisp
-(as-bitwise-operations ()
-  (full-adder-sum (subseq a 1)
-                  (subseq b 1)
-                  (half-adder-carry a b)))
-
-->
-
-(LET* ((#:*LENGTH-VARIABLE*723 (LENGTH B))
-       (#:G727 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*723)))
-  (LET* ((#:G725 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*723))
-         (#:G724 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*723)))
-    (DECLARE (DYNAMIC-EXTENT #:G725 #:G724))
-    (BIT-REPLACE A 1 #:G724)
-    (BIT-REPLACE B 1 #:G725)
-    (BIT-XOR #:G724 #:G725 #:G724)
-    (BIT-AND A B #:G727)
-    (BIT-XOR #:G724 #:G727 #:G727)
-    #:G727))
-#+END_SRC
-
-** n段加算器を書く
-
-[[spng:adder6]]
-
-どんどん拡張できる!
-
-#+BEGIN_SRC lisp
-(as-bitwise-operations ()
-  (full-adder-sum (subseq a 1)
-                  (subseq b 1)
-                  (half-adder-carry a b)))
-
-(define-bitwise-operation multi-adder-sum (a b n)
-  (if (= n 0)
-      `(half-adder-sum ,a ,b)
-      `(full-adder-sum (subseq ,a ,n)
-                       (subseq ,b ,n)
-                       (multi-adder-carry ,a ,b ,(1- n)))))
-
-(define-bitwise-operation multi-adder-carry (a b n)
-  ...)
-#+END_SRC
-
-** n段加算器を書く
-
-
-[[spng:adder6]]
-
-どんどん拡張できる!
-
-#+BEGIN_SRC lisp
-(as-bitwise-operations ()
-  (multi-adder-sum a b 5))
-
-(LET* ((#:*LENGTH-VARIABLE*844 (LENGTH B))
-       (#:G881 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844)))
-  (LET* ((#:G845 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844))
-         ...
-         (#:G872 (MAKE-BIT-VECTOR #:*LENGTH-VARIABLE*844)))
-    (DECLARE
-     (DYNAMIC-EXTENT #:G845 ... #:G872))
-    (BIT-REPLACE A 5 #:G845)
-    (BIT-REPLACE B 5 #:G846)
-    (BIT-XOR #:G845 #:G846 #:G845)
-    ...
-    (BIT-AND #:G866 #:G867 #:G868)
-    (BIT-XOR #:G866 #:G867 #:G871)
-    (BIT-AND A B #:G872)
-    (BIT-AND #:G871 #:G872 #:G871)
-    (BIT-IOR #:G868 #:G871 #:G868)
-    (BIT-AND #:G865 #:G868 #:G865)
-    (BIT-IOR #:G862 #:G865 #:G862)
-    (BIT-AND #:G859 #:G862 #:G859)
-    (BIT-IOR #:G856 #:G859 #:G856)
-    (BIT-AND #:G853 #:G856 #:G853)
-    (BIT-IOR #:G850 #:G853 #:G850)
-    (BIT-XOR #:G845 #:G850 #:G881)
-    #:G881))
-#+END_SRC
-
-** まとめ
-
-+ DeepLearning + Planning を実装する上で MSDD を実装
-+ MSDD のために 早い bit-vector 操作が必要だった
-+ bit-vector の操作を SIMD的に最適化するマクロ bit-ops を開発した
-
-
-
-
-* 最後に
-
-#+BEGIN_XLARGE
-東京大学
-#+BEGIN_CENTER
-総合文化研究科 広域科学専攻
-#+END_CENTER
-#+BEGIN_ALIGNRIGHT
-の宣伝
-#+END_ALIGNRIGHT
-#+END_XLARGE
-
-** 入試が簡単!
-
-[[spng:p13]]
-
-** Lisper 歓迎!
-
-[[spng:cl-mpi]]
-
-** 
-
-#+BEGIN_XLARGE
-東京大学
-#+BEGIN_CENTER
-総合文化研究科 広域科学専攻
-#+END_CENTER
-#+BEGIN_ALIGNRIGHT
-Welcome!
-#+END_ALIGNRIGHT
-#+END_XLARGE
