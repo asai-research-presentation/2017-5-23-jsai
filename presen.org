@@ -21,9 +21,11 @@ in Deep Latent Space
 
 総合文化研究科　(渋谷駒場キャンパス)
 
-学振DC2
+学振DC2 AAAI,IJCAIなど国際学会の常連!
 
+#+BEGIN_LARGER
 浅井 政太郎
+#+END_LARGER
 #+END_CENTER
 
 #+BEGIN_NOTE
