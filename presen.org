@@ -1075,11 +1075,17 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
 
 *SAE の実装を変えれば(原理的には)画像以外の任意の入力データに対応可能なはず*
 
-+ テキスト用のAE: Li et al. "A hierarchical neural autoencoder for paragraphs and documents." (2015)
-+ 音声用のAE: Deng, Li, et al. "Binary coding of speech spectrograms using a deep auto-encoder." Interspeech. 2010.
++ テキスト用のAE [Li et.al. 2015]
++ 音声用のAE [Deng, Li, et al. 2010]
 
 + *Here's an Apple, Here's a pen → oh, ApplePen!*
 + SAEを学習してプランナで解く → *数千ステップの高速な言語レベル推論が可能に*
+
+#+BEGIN_NOTE
+ "A hierarchical neural autoencoder for paragraphs and documents." (2015)
+
+ "Binary coding of speech spectrograms using a deep auto-encoder." (2010)
+#+END_NOTE
 
 * 苦言
 
