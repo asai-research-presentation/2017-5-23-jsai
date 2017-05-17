@@ -1,4 +1,4 @@
-#+title: Classical Planning in Deep Latent Space
+#+title: 
 #+author: Masataro Asai
 #+include: "head.org"
 #+LINK: img file:img/%s
@@ -11,7 +11,13 @@
 
 #+BEGIN_outline-text-1
 #+BEGIN_CENTER
-東京大学大学院 博士2年
+#+BEGIN_XLARGE
+Classical Planning
+
+in Deep Latent Space
+#+END_XLARGE
+
+東京大学大学院 博士3年 -- *就活中!*
 
 総合文化研究科　(渋谷駒場キャンパス)
 
@@ -29,9 +35,57 @@ Made by guicho2.71828 (Masataro Asai)
 
 * もくじ
 
-+ Background -- 専攻分野 -- AIプランニング
-+ CV
-+ IJCAI投稿論文 -- 深層学習 + AIプランニング
++ 深層学習 -- は解説の必要はありませんね?
++ 記号的汎用AIプランニング
++ 深層学習 + AIプランニング
+
+* 
+
+#+BEGIN_CENTER
+#+BEGIN_XLARGE
+199X年
+#+END_XLARGE
+#+END_CENTER
+
+* 
+
+#+BEGIN_CENTER
+#+BEGIN_XLARGE
+AIは予算削減の冬に覆われた
+#+END_XLARGE
+#+END_CENTER
+
+* 
+
+#+BEGIN_CENTER
+#+BEGIN_XLARGE
+あらゆる記号的AI研究者は
+
+絶滅したかに思えた
+#+END_XLARGE
+#+END_CENTER
+
+* 
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+しかし 記号は
+
+死に絶えてはいなかった!
+#+END_CENTER
+#+END_XLARGE
+
+* 
+
+#+BEGIN_CENTER
+#+BEGIN_XLARGE
+Classical Planning
+
+in Deep Latent Space:
+
+記号をとりもどせ!
+#+END_XLARGE
+#+END_CENTER
 
 * イントロ -- 専攻分野 -- AIプランニング
 
@@ -257,13 +311,13 @@ Made by guicho2.71828 (Masataro Asai)
  このように、プランニングは、難しい問題を汎用性を失わずに解くことを目指します。
  #+END_RESUME
 
-** AIの使いドコロ  :noexport:
+** AIプランニングの */Killer App/*
 
- + 人では不可能な作業の代替 :: 危険な環境, 宇宙空間・深海, 24時間対応, マイクロ秒応答
- + コストのかかる専門技師の代替・自動化 :: 機械工作, 人工衛星運営(専門家会議の時給が高い!)
- + ミスの許されない完璧な理論保証の求められる問題の求解 :: 半導体のバグ検証システム(生産を始めると止められない)
++ 人では不可能な作業の代替 :: 危険な環境, 宇宙空間・深海, 24時間対応
++ コストのかかる人間の代替・自動化 :: 機械工作, 人工衛星運営(専門家の時給が高い!)
++ 最適性/理論保証の求められるミッションクリティカルシステム :: 人工衛星運営(最も少ない燃料で運用)
 
-** AIと自動プランニング の位置づけ -- /理論/ と /実応用/ の中間
+** AIと自動プランニング の位置づけ -- /理論/ と /実応用/ の中間    :noexport:
 
  緑は /理論/ 、オレンジは /実応用/ 、 AI はその橋渡し (どれともかぶらない部分もある)
 
@@ -365,7 +419,7 @@ International Planning Competition で使われている入力形式
 *1 [Helmert, 2006] [Richter, 2010]
 #+END_NOTE
   
-** [一般向け] Q. はやりのDeep Learningとの違いは?
+** Q. いま */はやり/* のDeep Learningとの違いは?
 
  A. レイヤが違う
 
@@ -422,32 +476,20 @@ International Planning Competition で使われている入力形式
  #+END_ROW-FLUID
  #+END_CONTAINER-FLUID
 
-+ AlphaGo = Subsymbolic (DLNNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
++ AlphaGo = Subsymbolic (DLNNによる評価関数) + Symbolic (MCTSによる探索)
 
 ** 既存の有名システム
 
-+ AlphaGo = Subsymbolic (DLNNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
-  + ただし *囲碁に特化*
-  + *膨大な棋譜が必要* --- 少数データしかない環境(e.g.宇宙探査機)には適用不可能
++ AlphaGo = Subsymbolic (NNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
+  + ただし *ドメイン依存* -- 囲碁に特化, "マス目"や"石"といった概念をハードコード
+  + *膨大な棋譜が必要* --- 運用データしかない環境(e.g.火星)には適用不能
+  + */人って棋譜がないと行動できませんか??/*
 + DQN = DLNN (*Subsymbolic*) + Reinforcement Learning (*Subsymbolic*)
   + 様々な Atari Game につかえる汎用的なフレームワーク (Invader, Packman…) だが
-  + ほとんどのゲームは *脊髄反射的な操作で長く生き残ることが出来る*
-  + *Atariゲームに複雑な論理思考能力は必要ない* から RL で成功した
+  + 殆どのゲームは *脊髄反射的な操作で長く生き残ることが出来る*
+  + RLのActing: 学習したpolicyに従ってgreedyに行動
+  + *Atariゲームに複雑な論理思考能力は必要ない* から RL で成功
   + 実際、 *Sokoban など論理思考が求められるAtariゲームでは性能が良くない*
-
-#+BEGIN_NOTE
-DLNN: Deep Learning Neural Network
-
-UCT-MCTS: Monte Carlo Tree Search + Universal Confidence Bound applied on Trees
-#+END_NOTE
-
-* CV
-
-#+BEGIN_XLARGE
-#+BEGIN_CENTER
-配布
-#+END_CENTER
-#+END_XLARGE
 
 * IJCAI投稿内容
 
@@ -513,7 +555,7 @@ Classical Planning
 #+END_CENTER
 #+END_XLARGE
 
-** スライディング タイル パズル (8-Puzzle)
+** 3x3 スライディング タイル パズル (8-Puzzle)
 
 空きパネルとそれ以外を移動させることで絵を完成させるパズル
 
@@ -581,6 +623,10 @@ Lights-Out
 ** 論文のゴール: 棋譜なし・事前知識なし 訓練画像のみ 完全自動で */任意の問題/* を解くAIシステムを作る
 
 #+HTML: <embed src="img/overview/3.svg" type="image/svg+xml"  />
+
+** 論文のゴール: 棋譜なし・事前知識なし 訓練画像のみ 完全自動で */任意の問題/* を解くAIシステムを作る
+
+#+HTML: <embed src="img/overview/3-hanoi.svg" type="image/svg+xml"  />
 
 ** 実行例 (MNIST 8-puzzle)
 
@@ -654,11 +700,19 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 * Latent-space Planner: */LatPlan/*
 
-以上 *学習*, *Symbol Grounding*, *Symbolの解釈* を同時に解決し
-
-生の入力のみから完全自動で *任意の問題* を解くシステム
+以上 *学習*, *Symbol Grounding*, *Symbolの解釈* を同時に解決
 
  [[png:planning]]
+
+** Step 1: State Autoencoder
+
+　
+
+ [[png:planning2]]
+
+** Step 1: State Autoencoder
+
+ [[png:overview/state-ae]]
 
 ** Autoencoder
 
@@ -686,19 +740,17 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 #+BEGIN_ALIGNRIGHT
 → *データ* $x$ を *Latent vector* $z$ に変換/逆変換するNNを学習
+
+→ ✘ Latent vector は 実数値 のよくわからん値
 #+END_ALIGNRIGHT
 
-** Deep Autoencoder
+** Deep Autoencoder                                                :noexport:
 
  いろいろな追加技術を使うことでDeepにできる → *より圧縮できる*
 
  Stacked AE, pretraining, CNN, dropout, Batch-Normalization, GPU...
 
  [[png:static/deep-ae]]
-
-** State Autoencoder
-
- [[png:overview/state-ae]]
 
 ** Gumbel-Softmax Reparametrization (Jang, Gu, ICLR2017)
 
@@ -707,9 +759,9 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 #+BEGIN_CENTER
  #+BEGIN_HTML
  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="649px" height="206px" version="1.1" content="&lt;mxfile userAgent=&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36&quot; version=&quot;6.0.1.2&quot; editor=&quot;www.draw.io&quot; type=&quot;google&quot;&gt;&lt;diagram name=&quot;Page-1&quot;&gt;3ZhLc5swEMc/Dcd0kAQCX+O67SGd6TTTaXqU0fJoZcsjy69++oogDBjs0MZ2TONDpL9ey29Xi5BDxrPtR8UW6WfJQTjY5VuHvHcwxshF5l+u7AqF+rgQEpXxQkKV8Jj9Biu6Vl1lHJaNjlpKobNFU4zkfA6RbmhMKblpdoulaK66YAm0hMeIibb6PeM6LdTQdyv9E2RJWq6MXNsyY2VnKyxTxuWmJpGJQ8ZKSl2UZtsxiBxeyaUY9+FI694wBXPdZ0AQh1EYx4xP46kXRHBnZ1gzsbIPaw3Vu/LpN2mm4XHBory+MR52yH2qZ8LUkCnGmRBjKaR67k0AcR8Coy+1kr+g1jKiAWHUtCi5mnPgdrw1AJSG7dGnQntWJshAzkCrneliB5CAFENsfCHPL+qbylt7n6Q1T+HAisxGSLKfu4JoCpZjT6a4xRT71MFUmFXvebY2xSQvfoWHb6VsFqm1tHygUjmbroyR9y944ww08QFN7LktmmEHzPASLEmLpY/wcFiiW2LptVAAN3nOVqXSqUzknIlJpdb2qtuEA9tMP9XKP/Iu7/y8NjeGPtkRz5Wq7SdovbMJnq20NFK17oOUiwb63LzT4M3TyJWK4HT0aKYS0Kd2a9uBCgTT2bq5/mvc4eEIU4xG4PsesCDqCO1z+ufKpBHugZq8FeorRf6VmfdBfiQ9XR45HXbi9kf4zRJ3i2Uw7AOFd0ssw//9JXgseupponu3Ht8MwYEDL+KZ0cDehyeBBqd3BB31B2pn+SIzY0D/KYqYsKMO3LK36N88hc7+1cgZhHHU9dVIoxCm8SW+GukINQm67bSEaEde2otnDX901nAfRGaiPTYSutYJ5uiRdthRfldeot1IlPfI8i9Abcb8AeLYz3+diJ//Xgm1hIg6IHpdEL1LQCxvEwcK0Q4I3IP8+8ZQX/9SuwGoJGxud+STFtSQtpli3/trpqZa3VwX54rq/p9M/gA=&lt;/diagram&gt;&lt;/mxfile&gt;"><defs/><g transform="translate(0.5,0.5)"><rect x="288" y="0.75" width="75" height="202.5" rx="11.25" ry="11.25" fill="#e1d5e7" stroke="#9673a6" pointer-events="none"/><path d="M 243 72 L 273 102 L 243 132 L 213 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(231.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">256<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 168 72 L 198 102 L 168 132 L 138 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(156.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">512<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 198 102 L 208.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 212.16 102 L 206.91 104.63 L 208.22 102 L 206.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 120.75 102 L 135.75 102 L 123 102 L 133.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 137.16 102 L 131.91 104.63 L 133.22 102 L 131.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 273 102 L 288 102 L 273 102 L 283.22 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 287.16 102 L 281.91 104.63 L 283.22 102 L 281.91 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 482.25 72 L 512.25 102 L 482.25 132 L 452.25 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(470.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">512<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 407.25 72 L 437.25 102 L 407.25 132 L 377.25 102 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(395.5,91.5)scale(0.75)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="30" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">256<div>ReLU</div></div></div></foreignObject><text x="15" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><path d="M 437.25 102 L 447.47 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 451.41 102 L 446.16 104.63 L 447.47 102 L 446.16 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 360 102 L 375 102 L 362.25 102 L 372.47 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 376.41 102 L 371.16 104.63 L 372.47 102 L 371.16 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><rect x="526.5" y="42" width="120" height="120" rx="18" ry="18" fill="#dae8fc" stroke="#6c8ebf" pointer-events="none"/><path d="M 512.25 102 L 521.72 102" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 525.66 102 L 520.41 104.63 L 521.72 102 L 520.41 99.38 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><rect x="0.75" y="42" width="120" height="120" rx="18" ry="18" fill="#dae8fc" stroke="#6c8ebf" pointer-events="none"/>
- <image xlink:href="https://1.bp.blogspot.com/-OBY7yjnWj9k/WCK6i_l0R9I/AAAAAAAAFLY/jCJwLNuPMecbvAB719g6VhAypmoDH6gswCLcB/s1600/x0.gif" x="8.25" y="49.5" width="105" height="105" fill="#f5f5f5" stroke="#666666" pointer-events="none"/>
- <image xlink:href="https://1.bp.blogspot.com/-WySijJ91Oa8/WCK6jFdXluI/AAAAAAAAFLc/CpaGjhd5lPwUdT6FdGNPQKRlyFhYvcwVQCLcB/s1600/x1.gif" x="534" y="49.5" width="105" height="105" fill="#f5f5f5" stroke="#666666" pointer-events="none"/>
- <image xlink:href="https://1.bp.blogspot.com/-tGqhaoX1a4Y/WCK6izWaixI/AAAAAAAAFLU/QRr6CzXET18_-c8hlx89QOkSQ3HoRH2DwCLcB/s1600/y.gif" x="293.25" y="6.75" width="64.5" height="190.5" fill="#f5f5f5" stroke="#666666" pointer-events="none"/></g></svg>
+ <image xlink:href="img/static/x0.gif" x="8.25" y="49.5" width="105" height="105" fill="#f5f5f5" stroke="#666666" pointer-events="none"/>
+ <image xlink:href="img/static/x1.gif" x="534" y="49.5" width="105" height="105" fill="#f5f5f5" stroke="#666666" pointer-events="none"/>
+ <image xlink:href="img/static/y.gif" x="293.25" y="6.75" width="64.5" height="190.5" fill="#f5f5f5" stroke="#666666" pointer-events="none"/></g></svg>
  #+END_HTML
 #+END_CENTER
 
@@ -900,6 +952,26 @@ Total time: 2724.89 (sec)
 
 + 主な貢献: *SAEによって生データから生成したシンボリック表現を用いてプランニング問題を解けることを実証*
 
+* Future Work (SAE)
+
+SAEは命題の検出が可能 (状態s = p∧q∧r...)
+
+→ 一階述語への一般化 (述語 p(a,b) )
+
+→ オブジェクトの検出 (引数 a,b) が必要
+
+→ 物体認識(R-CNN) などを内部で用いる より複雑なSAEの使用で対処可能
+
+* Future Work (アクション生成)
+
+個別アクションしか扱えない (状態s → 状態t)
+
+→ 一般化されたアクションの検出 (述語 swap(tile1,tile2))
+
+→ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など 
+
+* Future Work (問題ドメイン)
+
 + *SAE の実装を変えれば(原理的には)画像以外の任意の入力データに対応可能なはず*
 
   + テキスト用のAE: Li et al. "A hierarchical neural autoencoder for paragraphs and documents." (2015)
@@ -908,12 +980,3 @@ Total time: 2724.89 (sec)
   + *Here's an Apple, Here's a pen → oh, ApplePen!*
   + SAEを学習してプランナで解く → *数千ステップの高速な言語レベル推論が可能に*
 
-* 今日のメッセージ
-
-#+BEGIN_CENTER
-目標:
-
-　 *ルールベース人口無能を超える 論理を備えた 真に知的なチャットボット*
-
-NLPエキスパートと 探索エキスパートの力を合わせて このシステムを作ってみませんか？
-#+END_CENTER
