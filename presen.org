@@ -39,53 +39,53 @@ Made by guicho2.71828 (Masataro Asai)
 + 記号的汎用AIプランニング
 + 深層学習 + AIプランニング
 
-* 
+** 
 
-#+BEGIN_CENTER
-#+BEGIN_XLARGE
-199X年
-#+END_XLARGE
-#+END_CENTER
+ #+BEGIN_CENTER
+ #+BEGIN_XLARGE
+ 199X年
+ #+END_XLARGE
+ #+END_CENTER
 
-* 
+** 
 
-#+BEGIN_CENTER
-#+BEGIN_XLARGE
-AIは予算削減の冬に覆われた
-#+END_XLARGE
-#+END_CENTER
+ #+BEGIN_CENTER
+ #+BEGIN_XLARGE
+ AIは予算削減の冬に覆われた
+ #+END_XLARGE
+ #+END_CENTER
 
-* 
+** 
 
-#+BEGIN_CENTER
-#+BEGIN_XLARGE
-あらゆる記号的AI研究者は
+ #+BEGIN_CENTER
+ #+BEGIN_XLARGE
+ あらゆる記号的AI研究者は
 
-絶滅したかに思えた
-#+END_XLARGE
-#+END_CENTER
+ 絶滅したかに思えた
+ #+END_XLARGE
+ #+END_CENTER
 
-* 
+** 
 
-#+BEGIN_XLARGE
-#+BEGIN_CENTER
-しかし 記号は
+ #+BEGIN_XLARGE
+ #+BEGIN_CENTER
+ しかし 記号は
 
-死に絶えてはいなかった!
-#+END_CENTER
-#+END_XLARGE
+ 死に絶えてはいなかった!
+ #+END_CENTER
+ #+END_XLARGE
 
-* 
+** 
 
-#+BEGIN_CENTER
-#+BEGIN_XLARGE
-Classical Planning
+ #+BEGIN_CENTER
+ #+BEGIN_XLARGE
+ Classical Planning
 
-in Deep Latent Space:
+ in Deep Latent Space:
 
-記号をとりもどせ!
-#+END_XLARGE
-#+END_CENTER
+ 記号をとりもどせ!
+ #+END_XLARGE
+ #+END_CENTER
 
 * イントロ -- 専攻分野 -- AIプランニング
 
@@ -329,7 +329,8 @@ in Deep Latent Space:
  pure applications.
  #+END_RESUME
 
- [[png:planning2]]
+ [[png:planning-related-field]]
+
 * プランニング問題 (決定的,完全情報) -- Blocksworld
 
 #+HTML: <embed src="img/plan.svg" type="image/svg+xml"  />
@@ -491,6 +492,14 @@ International Planning Competition で使われている入力形式
   + *Atariゲームに複雑な論理思考能力は必要ない* から RL で成功
   + 実際、 *Sokoban など論理思考が求められるAtariゲームでは性能が良くない*
 
+* Yann LeCun 御大
+
+[[png:lecun]]
+
+#+BEGIN_ALIGNRIGHT
+それと去年の松尾先生
+#+END_ALIGNRIGHT
+
 * IJCAI投稿内容
 
 #+BEGIN_XLARGE
@@ -630,7 +639,7 @@ Lights-Out
 
 ** 実行例 (MNIST 8-puzzle)
 
-[[png:mnist-plan]]
+[[png:results/mnist-plan]]
 
 ** 実際の問題の例 (Mandrill 8-puzzle)
 
@@ -638,19 +647,19 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 この実験 は このシステムがそのような特性に左右されないことを示す
 
-[[png:mandrill-intro]]
+[[png:results/mandrill-intro]]
 
 ** 実行例 (Mandrill 8-puzzle)
 
-[[png:mandrill-plan]]
+[[png:results/mandrill-plan]]
 
 ** 実行例 (Tower of Hanoi)
 
 全く意味の異なる入力でも解けることを示す
 
-[[png:hanoi3]]
+[[png:results/hanoi3]]
 
-[[png:hanoi4]]
+[[png:results/hanoi4]]
 
 ** 実行例 (Lights Out)
 
@@ -658,7 +667,7 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 この実験 は このシステムがそのような特性に左右されないことを示す
 
-[[png:lights-out]]
+[[png:results/lights-out]]
 
 ** 実行例 (Skewed Lights Out)
 
@@ -666,13 +675,13 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 この実験 は このシステムがそのような特性に左右されないことを示す
 
-[[png:lights-out-skewed]]
+[[png:results/lights-out-skewed]]
 
 ** ノイズのある入力にも対応
 
 # Denoising AE を使っているため入力ノイズに左右されずにプランを求められる
 
-[[png:noise]]
+[[png:results/noise]]
 
 # (ノイズのある入力 $r$ と、それにSAEを適用した $Decode(Encode(r))$ の比較)
 
@@ -700,21 +709,25 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 * Latent-space Planner: */LatPlan/*
 
-以上 *学習*, *Symbol Grounding*, *Symbolの解釈* を同時に解決
+*学習*, *Symbol Grounding*, *Symbolの解釈* を同時に解決する *アーキテクチャ*
 
- [[png:planning]]
+ [[png:overview/planning]]
+
+#+BEGIN_ALIGNRIGHT
+本プレゼンテーションでは、 LatPlan と その *1実装* LatPlanα を紹介
+#+END_ALIGNRIGHT
+
+* Step 1: State Autoencoder
+
+*Symbolic/Subsymbolic の壁を超える* ために・・・
+
+ [[png:overview/planning2]]
 
 ** Step 1: State Autoencoder
 
-　
+ [[png:sae/state-ae]]
 
- [[png:planning2]]
-
-** Step 1: State Autoencoder
-
- [[png:overview/state-ae]]
-
-** Autoencoder
+** AutoEncoder (おさらい)
 
 #+BEGIN_CENTER
 *教師なし学習*
@@ -739,9 +752,9 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 #+END_CONTAINER-FLUID
 
 #+BEGIN_ALIGNRIGHT
-→ *データ* $x$ を *Latent vector* $z$ に変換/逆変換するNNを学習
+→ *データ* $x$ をコンパクトな *Latent vector* $z$ に変換/逆変換するNNを学習
 
-→ ✘ Latent vector は 実数値 のよくわからん値
+→ しかし、 */✘ Latent vector は 実数値 のよくわからん値/*
 #+END_ALIGNRIGHT
 
 ** Deep Autoencoder                                                :noexport:
@@ -754,7 +767,9 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 ** Gumbel-Softmax Reparametrization (Jang, Gu, ICLR2017)
 
- *入力をカテゴリカル分布にマップする* Activation Function 
+ *中間層がカテゴリカル分布(離散値)なVAEを作る手法*
+
+VAE: 中間層が特定の分布を持つAEのこと
 
 #+BEGIN_CENTER
  #+BEGIN_HTML
@@ -765,68 +780,137 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
  #+END_HTML
 #+END_CENTER
 
- #+BEGIN_NOTE
- 2/3に採択
- #+END_NOTE
+#+BEGIN_ALIGNRIGHT
+#+BEGIN_LARGER
+鍵となるアイディア: *この離散表現は記号的ソルバで使用可能*
+#+END_LARGER
+#+END_ALIGNRIGHT
 
+** Gumbel-Softmax: Gumbel-Max の微分可能な近似
+
+Gumbel-Max: カテゴリごとの確率 ($x$) から one-hot vector ($z$) をサンプルする手法
+
++ 例: $x=[0.1, 0.1, 0.8] \rightarrow z = [0, 0, 1] \text{or} [1,0,0] \text{or} [0,1,0]$ (確率にそって)
+
++ $z = \text{ GumbelMax}(x) = [ i == \arg \max_j (\text{ Gumbel}(0,1)+\log x_j) \; ? \; 1 : 0 ]$
+
++ 微分可能でない → BP法が使えない → max を 微分可能なsoftmax で近似
+
++ $z = \text{ GumbelSoftmax}_\tau (x) = \text{ Softmax}( [\text{ Gumbel}(0,1)+\log x_j]/\tau )$
+
++ 温度 $\tau$ を0に近づけるとGumbelMaxに収束: $z$ もone-hotに収束
+
+  \[
+  \text{ GumbelSoftmax}_\tau (x) \rightarrow \text{ GumbelMax}(x) \quad (\tau\rightarrow 0)
+  \]
+
+#+BEGIN_NOTE
+Maddison et. al., 2014
+#+END_NOTE
 ** Gumbel-Softmax
 
-学習中に温度を下げていくことで *始めは自由に学習*
-
-そののち、精度を保ったまま *中間層の分布を離散カテゴリカルに近似*
-
-[[spng:gumbel]]
+[[png:sae/gumbel]]
 
 $N\times M$ 行列を出力, $N$: 変数の数 $M$: カテゴリの数
 
 #+BEGIN_ALIGNRIGHT
-+ $M=2$ *→ N個の命題(true/false)にマップ可能*
+#+BEGIN_LARGER
+鍵となるアイディア: *この離散表現は記号的ソルバで使用可能*
+
+特に *カテゴリ数2 → N個の命題(true/false)に直接マップ可能*
+#+END_LARGER
 #+END_ALIGNRIGHT
 
-** State Autoencoder
-
+** Step 1: State Autoencoder
 
 [[png:train-state-ae]]
 
-+ SAEを学習させることにより以下の関数を得る:
-  + $b = Encode(r)$ : *生データ $r$ を boolean vector に変換する関数*
-  + $\tilde{r} = Decode(b)$ : *boolean vector $b$ を 生データ $\tilde{r}$ に変換する関数*
+SAEを学習させることにより以下の関数を得る:
 
-** Entire System
++ $b = Encode(r)$ : *生データ $r$ を boolean vector に変換する関数*
 
- [[png:planning]]
++ $\tilde{r} = Decode(b)$ : *boolean vector $b$ を 生データ $\tilde{r}$ に変換する関数*
+
+** LatPlan の実装 LatPlan α でのSAE
+
+Keras, Adam optimizer (learning rate:0.001)
+
+  1764(42x42)
+
+  [→FC(4000,ReLu)→Batchnorm→Dropout(0.4)] × 2
+
+  →FC(49,GumbelSoftmax) (variational loss)
+
+  [→FC(4000,ReLu)→Batchnorm→Dropout(0.4)] × 2
+
+  →1764(42x42) (loss: Binary crossentropy)
+
+8-puzzle の訓練は、可能な全状態 (362880) 中 *12000 枚のみを用いて* 訓練する。 
+
+→ 少ない画像を用いて学習可能。
+
+* Step 2: Action Model Acquisition
+
+bitvector から PDDL モデルを生成
+
+ [[png:overview/planning3]]
+
+** LatPlan の実装 LatPlan α での アクション集合の生成
+
+個別アクション遷移をPDDLアクション表現にマップ
+
+#+BEGIN_SRC lisp
+0011 → 0101
+
+↓
+
+(:action ...
+ :precondition (and (b0-false) (b1-false) (b2-true) (b3-true)) ; 遷移前の状態
+ :effect       (and (not (b1-false)) (b1-true)    ; false命題を取り除き、true命題を追加
+                    (not (b2-true))  (b2-false)))
+#+END_SRC
+
+ポイント: $i$ ビット目が 0/1 であるとき ($b_i$-true)/($b_i$-false) という命題になる
+
+** LatPlan の実装 LatPlan α での アクション集合の生成
+
+_全遷移の画像ペアを生成_
+
+→ 訓練済みのSAEを用いてbitvectorに
+
+→ bitvectorを用いてPDDL表現に
+
+#+BEGIN_ALIGNRIGHT
+… _全遷移の画像ペアを生成??__
+#+END_ALIGNRIGHT
+
+** LatPlan の実装 LatPlan α での アクション集合の生成
+
+現時点の制限: *一般化を行えない*
+
+遷移前の全ビットを指定 → 将来的には *より汎化されたルールが必要*
+
+: 未汎化の遷移   0011 → 0101
+: 汎化された遷移 *01* → *10*
+
+→ Domain Acquisition というAI分野でよく研究されている 
+
+* Step 3: PDDL モデルを解く
+
+ [[png:overview/planning4]]
+
+* Step 4: 記号的プラン(人には理解不能)を 人の理解できる画像に戻す
+
+ [[png:overview/planning5]]
 
 * 評価
 
-GTX1070, PhenomII X6 1060T (3.4GHz overclock), 16GB Mem
+GTX1070, PhenomII X6 (3.4GHz OC), 16GB Mem
 
-+ Classical Planner :: Fast Downward (State-of-the-Art solver, C++)
++ 学習: 30分程度
++ 求解: 3秒程度
 
-+ State AutoEncoder :: Tensorflow, Keras, Adam optimizer (learning rate:0.001)
-
-  784(84x84)
-
-  →FC(1000,ReLu)→Batchnorm→Dropout(0.4)
-
-  →FC(1000,ReLu)→Batchnorm→Dropout(0.4)
-
-  →FC(25,GumbelSoftmax)
-
-  →FC(1000,ReLu)→Batchnorm→Dropout(0.4)
-
-  →FC(1000,ReLu)→Batchnorm→Dropout(0.4)
-
-  →784(84x84) (loss: Binary crossentropy)
-
-** 所要時間(目安)                                                  :noexport:
-
- + State Autoencoder(TensorFlow,Keras): 学習時間: 1時間程度
- + PDDL変換 (Lisp SBCL): 一瞬
- + Fast Downward (C++): 2時間, メモリ1G程度で終了
-
-初めてのシステムなので実行時間は問題ではない
-
-** State AutoEncoder
+** State AutoEncoder                                               :noexport:
 
 1: Train入力 2: 生Latent 3: 生Autoencoding 4: 切り捨てLatent 5: 切り捨てLatentのAutoencoding
 
@@ -844,7 +928,7 @@ Test 入力: 訓練画像に含まれていない画像
 きちんと学習できている
 #+END_ALIGNRIGHT
 
-** State AutoEncoder
+** State AutoEncoder                                               :noexport:
 
 入力2: 初期画像とゴール画像
 
@@ -900,8 +984,15 @@ Search time: 2693.06 (sec)
 Total time: 2724.89 (sec)
 #+END_SRC
 
-** 人間が書いたドメイン用の枝刈り技術が /この未知の自動生成ドメインでも有効/
+** わざわざプランニングソルバを使う理由は?
 
+なぜ、ただの幅優先やDijkstra探索ではだめなの?
+
+→ ドメイン非依存ソルバの高度な枝刈りが、この未知のドメインでも有効
+
+→ より大規模な問題(15パズル,24パズル等)では *知識なし探索は指数爆発*
+
+#+BEGIN_SMALLER
 |------------------------+-------------------+----------------|
 | Heuristics             | Search Time (sec) | Node Expansion |
 |------------------------+-------------------+----------------|
@@ -940,6 +1031,7 @@ Total time: 2724.89 (sec)
 | blind                  | 2.759             | 335378         |
 | pdb                    | *1.113*           | *88851*        |
 |------------------------+-------------------+----------------|
+#+END_SMALLER
 
 * Conclusion
 
@@ -951,6 +1043,8 @@ Total time: 2724.89 (sec)
 + State AutoEncoder(SAE): Gumbel-Softmaxを用いたVAE
 
 + 主な貢献: *SAEによって生データから生成したシンボリック表現を用いてプランニング問題を解けることを実証*
+
++ */とても基礎的/* なプロトタイプ → 記号/非記号AI分野の様々な技術を取り入れることで */より発展/*
 
 * Future Work (SAE)
 
@@ -964,19 +1058,65 @@ SAEは命題の検出が可能 (状態s = p∧q∧r...)
 
 * Future Work (アクション生成)
 
-個別アクションしか扱えない (状態s → 状態t)
+個別の遷移をアクションとして扱うことしかできない (状態s → 状態t)
 
-→ 一般化されたアクションの検出 (述語 swap(tile1,tile2))
+例:
 
-→ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など 
+: 個別の遷移        0011 → 0101
+: 一般化された遷移  *01* → *10*
+
+一般化されたアクションの検出 (述語 swap(tile1,tile2))
+
+Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など 
 
 * Future Work (問題ドメイン)
 
-+ *SAE の実装を変えれば(原理的には)画像以外の任意の入力データに対応可能なはず*
+*SAE の実装を変えれば(原理的には)画像以外の任意の入力データに対応可能なはず*
 
-  + テキスト用のAE: Li et al. "A hierarchical neural autoencoder for paragraphs and documents." (2015)
-  + 音声用のAE: Deng, Li, et al. "Binary coding of speech spectrograms using a deep auto-encoder." Interspeech. 2010.
++ テキスト用のAE: Li et al. "A hierarchical neural autoencoder for paragraphs and documents." (2015)
++ 音声用のAE: Deng, Li, et al. "Binary coding of speech spectrograms using a deep auto-encoder." Interspeech. 2010.
 
-  + *Here's an Apple, Here's a pen → oh, ApplePen!*
-  + SAEを学習してプランナで解く → *数千ステップの高速な言語レベル推論が可能に*
++ *Here's an Apple, Here's a pen → oh, ApplePen!*
++ SAEを学習してプランナで解く → *数千ステップの高速な言語レベル推論が可能に*
+
+* 苦言
+
+日本には記号的AIの研究者が居なさすぎて完全に砂漠状態 (OR除く)
+
+意思決定と推論に重要な *抽象(abstraction)* や *緩和(relaxation)* といった概念
+
+特に、対話技術とかを古典AIの概念と推論を用いずにやっているかぎり、人工無能以上には成り得ない
+
+# JSAI は *技術* でなくて *目的* によってOSを分けるべき
+# 
+# + *ディープラーニング* OSと *論理* ではなく 
+
+* AIMA 3rd Ed.                                                     :noexport:
+
+1. Introduction
+2. Intelligent Agents
+3. Solving Problems by Searching
+4. Beyond Classical Search
+5. Adversarial Search
+6. Constraint Satisfaction Problems
+7. Logical Agents
+8. First-Order Logic
+9. Inference in First-Order Logic
+10. Classical Planning
+11. Planning and Acting in the Real World
+12. Knowledge Representation
+13. Quantifying Uncertainty
+15. Probabilistic Reasoning over Time
+16. Making Simple Decisions
+17. Making Complex Decisions
+18. Learning from Examples
+19. Knowledge in Learning
+20. Learning Probabilistic Models
+21. Reinforcement Learning
+22. Natural Language Processing
+23. Natural Language for Communication
+24. Perception
+25. Robotics
+26. Philosophical Foundations
+27. AI: The Present and Future
 
