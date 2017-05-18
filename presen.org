@@ -515,13 +515,11 @@ DQN = DLNN (*Subsymbolic*) + Reinforcement Learning (*Subsymbolic*)
 
 ** Arxiv版を上げた際のTwitterでの議論
 
-*/AlphaGo チーム全員: 「古典プランニング超大事!」 /*
+*/AlphaGo チーム全員: 「古典プランニング超大事!」/*
 
  [[png:twitter]]
 
-** 日本のプランニング研究者
-
-*/深層学習研究者よりさらに少ない/*
+** 日本のプランニング研究者は */深層学習研究者よりさらに少ない/*
 
  [[png:planning-researchers]]
 
