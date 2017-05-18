@@ -524,10 +524,6 @@ DQN = DLNN (*Subsymbolic*) + Reinforcement Learning (*Subsymbolic*)
 
  [[png:twitter]]
 
-** 日本のプランニング研究者は */深層学習研究者よりさらに少ない/*
-
- [[png:planning-researchers]]
-
 * IJCAI投稿内容                                                    :noexport:
 
 #+BEGIN_XLARGE
@@ -1060,9 +1056,11 @@ _全遷移の画像ペア $R$ を生成_ → $Encode(R)$ → PDDL
 
 + State AutoEncoder(SAE): Gumbel-Softmaxを用いたVAE
 
-+ 主な貢献: *SAEによって生データから生成したシンボリック表現を用いてプランニング問題を解けることを実証*
++ 主な貢献: *SAEによって生データからシンボルを生成してプランニング問題が解ける* ことを実証
 
-+ */限りなく単純に作った/* プロトタイプ → 記号/非記号AI分野の様々な技術を取り入れることで */より発展/*
++ */限りなく単純に作った/* プロトタイプ 
+
+  → 記号/非記号AI分野の様々な技術を取り入れることで */より発展/*
 
 * Future Work (SAE)
 
@@ -1259,4 +1257,8 @@ Dead ends: 24 state(s).
 Search time: 2693.06 (sec)
 Total time: 2724.89 (sec)
 #+END_SRC
+
+* 日本のプランニング研究者は */深層学習研究者よりさらに少ない/*
+
+[[png:planning-researchers]]
 
