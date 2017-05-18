@@ -21,11 +21,15 @@ in Deep Latent Space
 
 総合文化研究科　(渋谷駒場キャンパス)
 
-学振DC2 AAAI,IJCAIなど国際学会の常連!
+学振DC2 *AAAI, IJCAIなど国際学会の常連!*
 
 #+BEGIN_LARGER
 浅井 政太郎
+
+あさい まさたろう
 #+END_LARGER
+
+15分では到底終わらないので質疑の時間に食い込む(20分)
 #+END_CENTER
 
 #+BEGIN_NOTE
@@ -35,7 +39,7 @@ Made by guicho2.71828 (Masataro Asai)
 #+END_NOTE
 #+END_outline-text-1
 
-* もくじ
+* もくじ                                                           :noexport:
 
 + 深層学習 -- は解説の必要はありませんね?
 + 記号的汎用AIプランニング
@@ -89,7 +93,7 @@ Made by guicho2.71828 (Masataro Asai)
  #+END_XLARGE
  #+END_CENTER
 
-* イントロ -- 専攻分野 -- AIプランニング
+* 背景 -- AIプランニング
 
  #+BEGIN_CONTAINER-FLUID
  #+BEGIN_ROW-FLUID
@@ -210,7 +214,7 @@ Made by guicho2.71828 (Masataro Asai)
  super-sophisticated shovel car.
  #+END_RESUME
 
-** 実際の大規模災害では非実用的 --- 操縦士が足りない!
+** 実際の大規模災害では非実用的 --- 操縦士が足りない!              :noexport:
 
  #+BEGIN_CONTAINER-FLUID
  #+BEGIN_ROW-FLUID
@@ -278,7 +282,7 @@ Made by guicho2.71828 (Masataro Asai)
  It forces the society to waste a great amount of extra money.
  #+END_RESUME
 
-** だからこそ: 自動プランナ Automated Planner
+** 自律行動のための自動プランナ (≠ モータ制御)
 
  [[png:planning/1]]
 
@@ -293,7 +297,7 @@ Made by guicho2.71828 (Masataro Asai)
  プランニング機能のあるロボットは、コレに対して「男性を助けよ」という大まかな指示を受けます。
  #+END_RESUME
 
-** だからこそ: 自動プランナ Automated Planner
+** 自律行動のための自動プランナ (≠ モータ制御)
 
  [[png:planning/2]]
 
@@ -302,7 +306,7 @@ Made by guicho2.71828 (Masataro Asai)
  ロボットは、自動プランニングにより、人間の代わりに適切な行動を組み立てて、ゴールを自動で達成します。
  #+END_RESUME
 
-** だからこそ: 自動プランナ Automated Planner
+** 自律行動のための自動プランナ (≠ モータ制御)
 
  [[png:planning/final]]
 
@@ -315,9 +319,8 @@ Made by guicho2.71828 (Masataro Asai)
 
 ** AIプランニングの */Killer App/*
 
-+ 人では不可能な作業の代替 :: 危険な環境, 宇宙空間・深海, 24時間対応
-+ コストのかかる人間の代替・自動化 :: 機械工作, 人工衛星運営(専門家の時給が高い!)
-+ 最適性/理論保証の求められるミッションクリティカルシステム :: 人工衛星運営(最も少ない燃料で運用)
++ 人が不可能な作業の代替 :: 危険な環境, 宇宙空間・深海, 24時間対応
++ 最適性/理論保証の求められるミッションクリティカルシステム :: 製造システム、運送、人工衛星運営(最も少ない燃料で運用)
 
 ** AIと自動プランニング の位置づけ -- /理論/ と /実応用/ の中間    :noexport:
 
@@ -333,9 +336,15 @@ Made by guicho2.71828 (Masataro Asai)
 
  [[png:planning-related-field]]
 
-* プランニング問題 (決定的,完全情報) -- Blocksworld
+* 古典プランニング問題 (決定的,完全情報) -- Blocksworld
 
 #+HTML: <embed src="img/plan.svg" type="image/svg+xml"  />
+
+#+BEGIN_LARGER
+#+BEGIN_ALIGNRIGHT
+非古典的なさまざまな拡張がある (時間,POMDP,HTN... どのAIの教科書にものっている)
+#+END_ALIGNRIGHT
+#+END_LARGER
 
 ** アクション = 条件付き状態遷移
 
@@ -473,7 +482,7 @@ International Planning Competition で使われている入力形式
    *囲碁,将棋* : ゴール = 勝利
    #+END_SMALLER
    #+BEGIN_LARGER
-   ☺ 時間的依存関係を含む論理の組み合わせ
+   ☺ 順序制約を含む複雑な作業
    #+END_LARGER
  #+END_SPAN6
  #+END_ROW-FLUID
@@ -483,18 +492,20 @@ International Planning Competition で使われている入力形式
 
 ** 既存の有名システム
 
-+ AlphaGo = Subsymbolic (NNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
-  + ただし *ドメイン依存* -- 囲碁に特化, "マス目"や"石"といった概念をハードコード
-  + *膨大な棋譜が必要* --- 運用データしかない環境(e.g.火星)には適用不能
-  + */人って棋譜がないと行動できませんか??/*
-+ DQN = DLNN (*Subsymbolic*) + Reinforcement Learning (*Subsymbolic*)
-  + 様々な Atari Game につかえる汎用的なフレームワーク (Invader, Packman…) だが
-  + 殆どのゲームは *脊髄反射的な操作で長く生き残ることが出来る*
-  + RLのActing: 学習したpolicyに従ってgreedyに行動
-  + *Atariゲームに複雑な論理思考能力は必要ない* から RL で成功
-  + 実際、 *Sokoban など論理思考が求められるAtariゲームでは性能が良くない*
+AlphaGo = Subsymbolic (NNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
++ ただし *ドメイン依存* -- 囲碁に特化, "マス目"や"石"といった概念をハードコード
++ *膨大な棋譜が必要* --- 運用データしかない環境(e.g.火星)には適用不能
++ */人って棋譜がないと行動できませんか??/*
 
-* Yann LeCun 御大
+DQN = DLNN (*Subsymbolic*) + Reinforcement Learning (*Subsymbolic*)
+
+様々な Atari Game につかえる汎用フレームワーク (Invader, Packman…) だが
++ RLのActing: 学習したpolicyに従ってgreedyに行動
++ 殆どのAtariゲームは *脊髄反射的な操作で生き残ことが出来る* → *複雑な論理思考能力はいらない!*
+  
+  実際、 *Sokoban など論理思考が求められるAtariゲームでは性能が良くない*
+
+* 記号的AIによる論理推論の重要性
 
 [[png:lecun]]
 
@@ -502,7 +513,19 @@ International Planning Competition で使われている入力形式
 それと去年の松尾先生
 #+END_ALIGNRIGHT
 
-* IJCAI投稿内容
+** Arxiv版を上げた際のTwitterでの議論
+
+*/AlphaGo チーム全員: 「古典プランニング超大事!」 /*
+
+ [[png:twitter]]
+
+** 日本のプランニング研究者
+
+*/深層学習研究者よりさらに少ない/*
+
+ [[png:planning-researchers]]
+
+* IJCAI投稿内容                                                    :noexport:
 
 #+BEGIN_XLARGE
 #+BEGIN_CENTER
@@ -514,7 +537,7 @@ From Unlabelled Images to PDDL (and back)
 #+END_CENTER
 #+END_XLARGE
 
-** 高度に知的な機械を作るには → DeepLearning + 論理と推論
+** 高度に知的な機械を作るには → DeepLearning + 論理と推論         :noexport:
 
 #+BEGIN_CENTER
 #+BEGIN_CONTAINER-FLUID
@@ -550,21 +573,44 @@ vs
 #+END_CENTER
 
 [[png:planning-deeplearning]]
-** ゴール
+* ゴール
 
 #+BEGIN_XLARGE
 #+BEGIN_CENTER
-State of the Art
-
-Deep Learning 
+Deep Learning
 
 ＋
 
-State of the Art
-
-Classical Planning
+古典プランニング
 #+END_CENTER
 #+END_XLARGE
+
+** 利点
+
+#+BEGIN_XLARGE
+*/認知/* はDLNNベース
+#+END_XLARGE
+
+--- 柔軟、ロバスト、DL技術の発展を利用できる
+
+#+BEGIN_XLARGE
+*/意思決定/* を古典プランニングで
+#+END_XLARGE
+
+--- *強化学習にない理論的性質* 
+
+#+BEGIN_CENTER
+*完全性* (解があれば必ず見つける), */解の最適性/* (必ず最適解を返す)
+#+END_CENTER
+
+--- *意思決定が学習に依存しない*
+
+#+BEGIN_CENTER
+*/教師なし/* (データがいらない), *説明可能* (記号処理による探索)
+#+END_CENTER
+
+
+# 今まではNNとの相性から強化学習が優勢だったが *もうその必要はない*
 
 ** 3x3 スライディング タイル パズル (8-Puzzle)
 
@@ -582,15 +628,21 @@ Classical Planning
 
 ** 論文のゴール: 棋譜なし・事前知識なし 訓練画像のみ 完全自動で 8-puzzle を解くAIシステムを作る
 
-*棋譜なし* : 棋譜から学習した勘(評価関数)で解くAlphaGoと異なる
+*棋譜なし* : 棋譜から学習した勘(評価関数)で解くAlphaGoと異なる → *下界関数* を用いる
 
-*事前知識なし* : 「パネル」「9マスある」「パネルが動く」などの事前知識(ラベル、シンボル)は与えられない
+*事前知識なし* : 「パネル」「9マスある」「パネルが動く」などのラベル、シンボルなし
 
 [[sjpg:puzzle]]
 
 ** 論文のゴール: 棋譜なし・事前知識なし 訓練画像のみ 完全自動で */任意の問題/* を解くAIシステムを作る
 
-*8-puzzle だけでなく 任意の問題を解く*
+#+BEGIN_XLARGE
+*/事前知識なしで解ける/*
+
+#+BEGIN_ALIGNRIGHT
+*＝ /任意の問題を解ける/*
+#+END_ALIGNRIGHT
+#+END_XLARGE
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
@@ -599,15 +651,15 @@ Classical Planning
 
 [[sjpg:hanoi]]
 #+END_SPAN6
-#+BEGIN_SPAN6
+#+BEGIN_SPAN4
 Lights-Out
 
 [[sjpg:lightsout]]
-#+END_SPAN6
+#+END_SPAN4
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
-* 
+* -
 
 #+BEGIN_XLARGE
 #+BEGIN_CENTER
@@ -643,6 +695,15 @@ Lights-Out
 
 [[png:results/mnist-plan]]
 
+#+BEGIN_LARGER
+最適解が知られている問題の画像版
+#+BEGIN_XLARGE
+#+BEGIN_ALIGNRIGHT
+ → *31手の最適解を返却*
+#+END_ALIGNRIGHT
+#+END_XLARGE
+#+END_LARGER
+
 ** 実際の問題の例 (Mandrill 8-puzzle)
 
 MNIST 8-puzzle は 「物体」のようなものが明確に分離されている
@@ -655,6 +716,12 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 [[png:results/mandrill-plan]]
 
+#+BEGIN_XLARGE
+#+BEGIN_ALIGNRIGHT
+ → *同様に最適解を返却*
+#+END_ALIGNRIGHT
+#+END_XLARGE
+
 ** 実行例 (Tower of Hanoi)
 
 全く意味の異なる入力でも解けることを示す
@@ -662,6 +729,12 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 [[png:results/hanoi3]]
 
 [[png:results/hanoi4]]
+
+#+BEGIN_XLARGE
+#+BEGIN_ALIGNRIGHT
+ → *同様に最適解を返却* (7手,15手)
+#+END_ALIGNRIGHT
+#+END_XLARGE
 
 ** 実行例 (Lights Out)
 
@@ -671,6 +744,12 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 [[png:results/lights-out]]
 
+#+BEGIN_XLARGE
+#+BEGIN_ALIGNRIGHT
+ → *同様に最適解を返却*
+#+END_ALIGNRIGHT
+#+END_XLARGE
+
 ** 実行例 (Skewed Lights Out)
 
 8-puzzle, hanoi, LightsOut は 「物体」のようなものが格子状に並んでいる
@@ -679,15 +758,27 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 [[png:results/lights-out-skewed]]
 
+#+BEGIN_XLARGE
+#+BEGIN_ALIGNRIGHT
+ → *同様に最適解を返却*
+#+END_ALIGNRIGHT
+#+END_XLARGE
+
 ** ノイズのある入力にも対応
 
 # Denoising AE を使っているため入力ノイズに左右されずにプランを求められる
 
 [[png:results/noise]]
 
+#+BEGIN_XLARGE
+#+BEGIN_ALIGNRIGHT
+ → *同様に最適解を返却*
+#+END_ALIGNRIGHT
+#+END_XLARGE
+
 # (ノイズのある入力 $r$ と、それにSAEを適用した $Decode(Encode(r))$ の比較)
 
-* どうやって作ったのか？ 予想された困難
+* 動くのはわかった。どうやって作ったの？
 
 基本アイディア: DLNN + Classical Planner
 
@@ -788,7 +879,7 @@ VAE: 中間層が特定の分布を持つAEのこと
 #+END_LARGER
 #+END_ALIGNRIGHT
 
-** Gumbel-Softmax: Gumbel-Max の微分可能な近似
+** Gumbel-Softmax: Gumbel-Max の微分可能な近似                     :noexport:
 
 Gumbel-Max: カテゴリごとの確率 ($x$) から one-hot vector ($z$) をサンプルする手法
 
@@ -847,13 +938,23 @@ Keras, Adam optimizer (learning rate:0.001)
 
   →1764(42x42) (loss: Binary crossentropy)
 
-8-puzzle の訓練は、可能な全状態 (362880) 中 *12000 枚のみを用いて* 訓練する。 
+　
 
-→ 少ない画像を用いて学習可能。
++ なぜ全結合?? ::
+             論文の目的は *SAEで命題を作る方針がそもそもうまく行くかどうか*
+             
+             *→余計な要素を省いて限りなくシンプルに*
+             
+             (＋ 記号AIの研究者でも理解できるように)
 
-* Step 2: Action Model Acquisition
++ 8-パズルでの訓練 ::
+               可能な全状態 (362880) 中 *12000 枚* で訓練
+               
+               → 汎化能力あり
 
-bitvector から PDDL モデルを生成
+* Step 2: Domain Acquisition (ドメイン獲得)
+
+bitvector から PDDL モデルを生成する
 
  [[png:overview/planning3]]
 
@@ -872,7 +973,13 @@ bitvector から PDDL モデルを生成
                     (not (b2-true))  (b2-false)))
 #+END_SRC
 
-ポイント: $i$ ビット目が 0/1 であるとき ($b_i$-true)/($b_i$-false) という命題になる
+ポイント:
+
+#+BEGIN_CENTER
+ $i$ ビット目が 1 → 命題 ($b_i$-true)
+
+ $i$ ビット目が 0 → 命題 ($b_i$-false)
+#+END_CENTER
 
 ** LatPlan の実装 LatPlan α での アクション集合の生成
 
@@ -888,14 +995,18 @@ _全遷移の画像ペアを生成_
 
 ** LatPlan の実装 LatPlan α での アクション集合の生成
 
-現時点の制限: *一般化を行えない*
-
-遷移前の全ビットを指定 → 将来的には *より汎化されたルールが必要*
+遷移前の全ビットを指定 → *汎化されたルールを得られると良い*
 
 : 未汎化の遷移   0011 → 0101
 : 汎化された遷移 *01* → *10*
 
-→ Domain Acquisition というAI分野でよく研究されている 
++ LatPlanα: 一般化を行わない ::
+
+     論文の目的は *SAEで命題を作る方針がそもそもうまく行くかどうか*
+             
+     *→余計な要素を省いて限りなくシンプルに*
+     
+     → 既存の Domain Acquisition 学習機をそのまま使えば良い (Future work)
 
 * Step 3: PDDL モデルを解く
 
@@ -957,6 +1068,30 @@ $N=25$ の例
   ...
 #+END_SRC
 
+** 先ほどの結果
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN6
+
+[[png:results/mnist-plan]]
+
+[[png:results/mandrill-plan]]
+
+#+END_SPAN6
+#+BEGIN_SPAN6
+
+[[png:results/hanoi3]]
+
+[[png:results/hanoi4]]
+
+[[png:results/lights-out]]
+
+[[png:results/lights-out-skewed]]
+#+END_SPAN6
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
 ** Fast Downward Log Trace (Search Statistics)                     :noexport:
 
 #+BEGIN_SRC
@@ -990,50 +1125,39 @@ Total time: 2724.89 (sec)
 
 なぜ、ただの幅優先やDijkstra探索ではだめなの?
 
-→ ドメイン非依存ソルバの高度な枝刈りが、この未知のドメインでも有効
+→ ドメイン非依存下界関数による枝刈りが、この未知のドメインでも有効
 
 → より大規模な問題(15パズル,24パズル等)では *知識なし探索は指数爆発*
 
 #+BEGIN_SMALLER
-|------------------------+-------------------+----------------|
-| Heuristics             | Search Time (sec) | Node Expansion |
-|------------------------+-------------------+----------------|
-| MNIST 8-puzzle         |                   |                |
-| blind                  | 1.904             | 193924         |
-| pdb                    | *1.780*           | *109096*       |
-|------------------------+-------------------+----------------|
-| blind                  | 1.751             | 201156         |
-| pdb                    | *1.508*           | *111642*       |
-|------------------------+-------------------+----------------|
-| blind                  | 1.657             | 186767         |
-| pdb                    | *1.215*           | *84561*        |
-|------------------------+-------------------+----------------|
-| blind                  | 1.514             | 183336         |
-| pdb                    | *1.474*           | *82518*        |
-|------------------------+-------------------+----------------|
-| blind                  | 1.460             | 169907         |
-| pdb                    | *0.685*           | *52084*        |
-|------------------------+-------------------+----------------|
-| blind                  | 1.489             | 130863         |
-| pdb                    | *0.382*           | *26967*        |
-|------------------------+-------------------+----------------|
-| Hanoi (4 peg)          |                   |                |
-| blind                  | 0.0008            | 55             |
-| pdb                    | *0.0006*          | *17*           |
-|------------------------+-------------------+----------------|
-| LightsOut (4x4)        |                   |                |
-| blind                  | 0.0159            | 952            |
-| pdb                    | *0.0013*          | *27*           |
-|------------------------+-------------------+----------------|
-| Spiral LightsOut (3x3) |                   |                |
-| blind                  | 0.0040            | 522            |
-| pdb                    | *0.0026*          | *214*          |
-|------------------------+-------------------+----------------|
-| Mandrill 8-puzzle      |                   |                |
-| blind                  | 2.759             | 335378         |
-| pdb                    | *1.113*           | *88851*        |
-|------------------------+-------------------+----------------|
+|------------------------+----------+--------------------------|
+| 探索ノード数           | Dijkstra | A*+PDBヒューリスティクス |
+|------------------------+----------+--------------------------|
+| MNIST 8-puzzle         |   193924 | *109096*                 |
+|------------------------+----------+--------------------------|
+| blind                  |   201156 | *111642*                 |
+|------------------------+----------+--------------------------|
+| blind                  |   186767 | *84561*                  |
+|------------------------+----------+--------------------------|
+| blind                  |   183336 | *82518*                  |
+|------------------------+----------+--------------------------|
+| blind                  |   169907 | *52084*                  |
+|------------------------+----------+--------------------------|
+| blind                  |   130863 | *26967*                  |
+|------------------------+----------+--------------------------|
+| Hanoi (4 peg)          |       55 | *17*                     |
+|------------------------+----------+--------------------------|
+| LightsOut (4x4)        |      952 | *27*                     |
+|------------------------+----------+--------------------------|
+| Spiral LightsOut (3x3) |      522 | *214*                    |
+|------------------------+----------+--------------------------|
+| Mandrill 8-puzzle      |   335378 | *88851*                  |
+|------------------------+----------+--------------------------|
 #+END_SMALLER
+
+#+BEGIN_LARGER
+注: *プランニングでは下界関数のことをヒューリスティクスと呼ぶ*
+#+END_LARGER
 
 * Conclusion
 
@@ -1046,7 +1170,7 @@ Total time: 2724.89 (sec)
 
 + 主な貢献: *SAEによって生データから生成したシンボリック表現を用いてプランニング問題を解けることを実証*
 
-+ */とても基礎的/* なプロトタイプ → 記号/非記号AI分野の様々な技術を取り入れることで */より発展/*
++ */限りなく単純に作った/* プロトタイプ → 記号/非記号AI分野の様々な技術を取り入れることで */より発展/*
 
 * Future Work (SAE)
 
@@ -1087,7 +1211,7 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
  "Binary coding of speech spectrograms using a deep auto-encoder." (2010)
 #+END_NOTE
 
-* 苦言
+* 苦言                                                             :noexport:
 
 日本には記号的AIの研究者が居なさすぎて完全に砂漠状態 (OR除く)
 

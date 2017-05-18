@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="-25.523097"
-     inkscape:cy="85.303654"
+     inkscape:cx="285.35135"
+     inkscape:cy="102.47625"
      inkscape:document-units="px"
      inkscape:current-layer="layer10"
      showgrid="false"
@@ -1080,7 +1080,9 @@
          y="299.3331"
          x="9.3354206"
          id="tspan8954-4"
-         sodipodi:role="line">8-パズル 問題画像</tspan></text>
+         sodipodi:role="line"><tspan
+   style="fill:#ff2d2d;fill-opacity:1"
+   id="tspan6595">8-パズル</tspan> 問題画像</tspan></text>
     <image
        transform="translate(-228.22821,69.85289)"
        clip-path="url(#clipPath13012)"
@@ -1102,7 +1104,9 @@
          y="283.04733"
          x="294.62109"
          id="tspan9266"
-         sodipodi:role="line">この8-パズルを解くプランを 画像で提示</tspan></text>
+         sodipodi:role="line">この<tspan
+   style="fill:#ff0000;fill-opacity:1"
+   id="tspan6603">8-パズル</tspan>を解くプランを 画像で提示</tspan></text>
     <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
