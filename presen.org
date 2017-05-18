@@ -321,8 +321,26 @@ Made by guicho2.71828 (Masataro Asai)
 
 ** AIプランニングの */Killer App/*
 
-+ 人が不可能な作業の代替 :: 危険な環境, 宇宙空間・深海, 24時間対応
-+ 最適性/理論保証の求められるミッションクリティカルシステム :: 製造システム、運送、人工衛星運営(最も少ない燃料で運用)
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN6
++ 人が高価or不可能な作業 :: 原発, 宇宙空間, 火星, 深海
++ 最適性/理論保証の求められるミッションクリティカルシステム :: 製造システム、運送、人工衛星(燃料使いきれば運用終了)
+
+# [[sjpg:martian]]
+
+#+END_SPAN6
+#+BEGIN_SPAN6
+
+[[sjpg:gravity-m]]
+
+#+END_SPAN6
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
+
+
 
 ** AIと自動プランニング の位置づけ -- /理論/ と /実応用/ の中間    :noexport:
 
