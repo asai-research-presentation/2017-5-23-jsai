@@ -343,8 +343,9 @@ Made by guicho2.71828 (Masataro Asai)
 #+HTML: <embed src="img/plan.svg" type="image/svg+xml"  />
 
 #+BEGIN_LARGER
+非古典的なさまざまな拡張
 #+BEGIN_ALIGNRIGHT
-非古典的なさまざまな拡張がある (時間,POMDP,HTN... どのAIの教科書にものっている)
+(並列アクション,POMDP,HTN... どのAIの教科書にものっている)
 #+END_ALIGNRIGHT
 #+END_LARGER
 
@@ -362,13 +363,13 @@ Made by guicho2.71828 (Masataro Asai)
 *前提条件* と *効果* で構成される
 #+END_CENTER
 #+BEGIN_QUOTE
-*前提条件* が満たされた時…
+*前提条件* : アクションを実行できる条件
 
 命題 (clear *?X*) : 積み木 *?X* の上に何も置かれていない
 
 命題 (clear *?Y*) : 積み木 *?Y* の上に何も置かれていない
 
-*効果* を適用
+*効果* : 実行前と後の状態の差分
 
 ⇒ 命題 (on *?X* *?Y*) を追加 : *?X* が *?Y* の上に移動
 
@@ -458,9 +459,11 @@ International Planning Competition で使われている入力形式
 
    *囲碁局面の評価関数* : 局面 → 勝率
    #+END_SMALLER
+   #+BEGIN_LARGER
    ☺ 効率よく 1-to-1 mapping
    
    ☹ 単純作業
+   #+END_LARGER
  #+END_SPAN6
  #+BEGIN_SPAN6
  *推論・探索*
@@ -484,7 +487,7 @@ International Planning Competition で使われている入力形式
    *囲碁,将棋* : ゴール = 勝利
    #+END_SMALLER
    #+BEGIN_LARGER
-   ☺ 順序制約を含む複雑な作業
+   ☺ 順序制約+複雑な作業
    #+END_LARGER
  #+END_SPAN6
  #+END_ROW-FLUID
@@ -496,14 +499,14 @@ International Planning Competition で使われている入力形式
 
 AlphaGo = Subsymbolic (NNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
 + ただし *ドメイン依存* -- 囲碁に特化, "マス目"や"石"といった概念をハードコード
-+ *膨大な棋譜が必要* --- 運用データしかない環境(e.g.火星)には適用不能
++ *膨大な棋譜が必要* --- 運用データがない環境(e.g.火星)には適用不能
 + */人って棋譜がないと行動できませんか??/*
 
 DQN = DLNN (*Subsymbolic*) + Reinforcement Learning (*Subsymbolic*)
 
 様々な Atari Game につかえる汎用フレームワーク (Invader, Packman…) だが
 + RLのActing: 学習したpolicyに従ってgreedyに行動
-+ 殆どのAtariゲームは *脊髄反射的な操作で生き残ことが出来る* → *複雑な論理思考能力はいらない!*
++ Atariゲームは *脊髄反射で生き残ることが可能* → *複雑な論理思考はいらない!*
   
   実際、 *Sokoban など論理思考が求められるAtariゲームでは性能が良くない*
 
@@ -876,6 +879,8 @@ VAE: 中間層が特定の分布を持つAEのこと
 #+BEGIN_ALIGNRIGHT
 #+BEGIN_LARGER
 鍵となるアイディア: *この離散表現は記号的ソルバで使用可能*
+
+特に *カテゴリ数2 → N個の命題(true/false)に直接マップ可能*
 #+END_LARGER
 #+END_ALIGNRIGHT
 
@@ -900,7 +905,7 @@ Gumbel-Max: カテゴリごとの確率 ($x$) から one-hot vector ($z$) をサ
 #+BEGIN_NOTE
 Maddison et. al., 2014
 #+END_NOTE
-** Gumbel-Softmax
+** Gumbel-Softmax                                                  :noexport:
 
 [[png:sae/gumbel]]
 
@@ -920,9 +925,9 @@ $N\times M$ 行列を出力, $N$: 変数の数 $M$: カテゴリの数
 
 SAEを学習させることにより以下の関数を得る:
 
-+ $b = Encode(r)$ : *生データ $r$ を boolean vector に変換する関数*
++ $b = Encode(r)$ : *生データ $r$ を 命題列 $b$ に変換する関数*
 
-+ $\tilde{r} = Decode(b)$ : *boolean vector $b$ を 生データ $\tilde{r}$ に変換する関数*
++ $\tilde{r} = Decode(b)$ : *命題列 $b$ を 生データ $\tilde{r}$ に変換する関数*
 
 ** LatPlan の実装 LatPlan α でのSAE
 
@@ -941,16 +946,14 @@ Keras, Adam optimizer (learning rate:0.001)
 　
 
 + なぜ全結合?? ::
-             論文の目的は *SAEで命題を作る方針がそもそもうまく行くかどうか*
+             論文の主題は *SAEで命題を作る方針がそもそもうまく行くかどうか*
              
              *→余計な要素を省いて限りなくシンプルに*
              
              (＋ 記号AIの研究者でも理解できるように)
 
 + 8-パズルでの訓練 ::
-               可能な全状態 (362880) 中 *12000 枚* で訓練
-               
-               → 汎化能力あり
+               可能な全状態 (362880) 中 *12000 枚* で訓練 → 汎化能力あり
 
 * Step 2: Domain Acquisition (ドメイン獲得)
 
@@ -983,30 +986,24 @@ bitvector から PDDL モデルを生成する
 
 ** LatPlan の実装 LatPlan α での アクション集合の生成
 
-_全遷移の画像ペアを生成_
+_全遷移の画像ペア $R$ を生成_ → $Encode(R)$ → PDDL
 
-→ 訓練済みのSAEを用いてbitvectorに
+なぜ? → *本来は汎化されたルールを得られると良い*
 
-→ bitvectorを用いてPDDL表現に
-
-#+BEGIN_ALIGNRIGHT
-… _全遷移の画像ペアを生成??__
-#+END_ALIGNRIGHT
-
-** LatPlan の実装 LatPlan α での アクション集合の生成
-
-遷移前の全ビットを指定 → *汎化されたルールを得られると良い*
-
-: 未汎化の遷移   0011 → 0101
-: 汎化された遷移 *01* → *10*
+: 未汎化の遷移   0011 → 0101  (遷移前の全ビットを指定)
+: 汎化された遷移 *01* → *10*  (一部のビットのみを指定)
 
 + LatPlanα: 一般化を行わない ::
 
-     論文の目的は *SAEで命題を作る方針がそもそもうまく行くかどうか*
-             
+     論文の主題は *SAEで命題を作る方針がそもそもうまく行くかどうか*
+     
      *→余計な要素を省いて限りなくシンプルに*
      
-     → 既存の Domain Acquisition 学習機をそのまま使えば良い (Future work)
+     *汎化ルール → 他の Domain Acquisition 学習機^1 をそのまま使えば良い (Future work)*
+
+#+BEGIN_NOTE
+[Konidaris et.al. 14; Cresswell et al 13]
+#+END_NOTE
 
 * Step 3: PDDL モデルを解く
 
@@ -1016,112 +1013,7 @@ _全遷移の画像ペアを生成_
 
  [[png:overview/planning5]]
 
-* 評価
-
-GTX1070, PhenomII X6 (3.4GHz OC), 16GB Mem
-
-+ 学習: 30分程度
-+ 求解: 3秒程度
-
-** State AutoEncoder                                               :noexport:
-
-1: Train入力 2: 生Latent 3: 生Autoencoding 4: 切り捨てLatent 5: 切り捨てLatentのAutoencoding
-
-[[spng:experiment/autoencoding_train]]
-
-** State AutoEncoder
-
-1: Test入力 2: 生Latent 3: 生Autoencoding 4: 切り捨てLatent 5: 切り捨てLatentのAutoencoding
-
-Test 入力: 訓練画像に含まれていない画像
-
-[[spng:experiment/autoencoding_test]]
-
-#+BEGIN_ALIGNRIGHT
-きちんと学習できている
-#+END_ALIGNRIGHT
-
-** State AutoEncoder                                               :noexport:
-
-入力2: 初期画像とゴール画像
-
-[[spng:experiment/init_goal]]
-
-** PDDL Domain Definition
-
-$N=25$ の例
-
-#+BEGIN_SRC lisp
-(define (domain latent)
- (:requirements :strips :negative-preconditions)
- (:predicates (z0) (z1) (z2) (z3) (z4) (z5) (z6) (z7) (z8) (z9) (z10)
-  (z11) (z12) (z13) (z14) (z15) (z16) (z17) (z18) (z19) (z20) (z21)
-  (z22) (z23) (z24))
- (:action a10000010010110111100011111000010001011111110011111
-  :parameters () :precondition
-  (and (z0) (not (z1)) (not (z2)) (not (z3)) (not (z4)) (not (z5))
-       (z6) (not (z7)) (not (z8)) (z9) (not (z10)) (z11) (z12)
-       (not (z13)) (z14) (z15) (z16) (z17) (not (z18)) (not (z19))
-       (not (z20)) (z21) (z22) (z23) (z24))
-  :effect (and (z5) (not (z6)) (z13) (z20)))
- (:action a10000010010110111100011110000001001011011110001110
-  ...
-#+END_SRC
-
-** 先ほどの結果
-
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN6
-
-[[png:results/mnist-plan]]
-
-[[png:results/mandrill-plan]]
-
-#+END_SPAN6
-#+BEGIN_SPAN6
-
-[[png:results/hanoi3]]
-
-[[png:results/hanoi4]]
-
-[[png:results/lights-out]]
-
-[[png:results/lights-out-skewed]]
-#+END_SPAN6
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
-
-** Fast Downward Log Trace (Search Statistics)                     :noexport:
-
-#+BEGIN_SRC
-reading input... [t=5.479e-05 (sec)]
-...
-Building successor generator...done! [t=31.7737 (sec)]
-done initalizing global data [t=31.7738 (sec)]
-Conducting best first search with reopening closed nodes, (real) bound = 2147483647
-Initializing landmark cut heuristic...
-f = 4 [1 evaluated, 0 expanded, t=36.1569 (sec), 1054016 KB]
-...
-f = 12 [339 evaluated, 183 expanded, t=843.001 (sec), 1054016 KB]
-f = 13 [553 evaluated, 314 expanded, t=1357.62 (sec), 1054016 KB]
-f = 14 [942 evaluated, 529 expanded, t=2288.7 (sec), 1054016 KB]
-Solution found!
-Actual search time: 2688.73 (sec) [t=2724.89 (sec)]
-a11010000010010000101001111101100010001000010100111 (1)
-...
-a10011100111110010010011011001111010111011001001111 (1)
-a10011110101110110010011111001011001111011001001111 (1)
-Plan length: 14 step(s).
-Expanded 631 state(s).
-Evaluated 1140 state(s).
-Generated 1924 state(s).
-Dead ends: 24 state(s).
-Search time: 2693.06 (sec)
-Total time: 2724.89 (sec)
-#+END_SRC
-
-** わざわざプランニングソルバを使う理由は?
+* わざわざプランニングソルバを使う理由は?
 
 なぜ、ただの幅優先やDijkstra探索ではだめなの?
 
@@ -1262,4 +1154,109 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
   + 命題の学習 → 述語の学習
   + アクションの汎化
   + 音声やテキストに対しても今後発展させる
+
+* 評価
+
+GTX1070, PhenomII X6 (3.4GHz OC), 16GB Mem
+
++ 学習: 30分程度
++ 求解: 3秒程度
+
+** State AutoEncoder
+
+1: Train入力 2: 生Latent 3: 生Autoencoding 4: 切り捨てLatent 5: 切り捨てLatentのAutoencoding
+
+[[spng:experiment/autoencoding_train]]
+
+** State AutoEncoder
+
+1: Test入力 2: 生Latent 3: 生Autoencoding 4: 切り捨てLatent 5: 切り捨てLatentのAutoencoding
+
+Test 入力: 訓練画像に含まれていない画像
+
+[[spng:experiment/autoencoding_test]]
+
+#+BEGIN_ALIGNRIGHT
+きちんと学習できている
+#+END_ALIGNRIGHT
+
+** State AutoEncoder
+
+入力2: 初期画像とゴール画像
+
+[[spng:experiment/init_goal]]
+
+** PDDL Domain Definition
+
+$N=25$ の例
+
+#+BEGIN_SRC lisp
+(define (domain latent)
+ (:requirements :strips :negative-preconditions)
+ (:predicates (z0) (z1) (z2) (z3) (z4) (z5) (z6) (z7) (z8) (z9) (z10)
+  (z11) (z12) (z13) (z14) (z15) (z16) (z17) (z18) (z19) (z20) (z21)
+  (z22) (z23) (z24))
+ (:action a10000010010110111100011111000010001011111110011111
+  :parameters () :precondition
+  (and (z0) (not (z1)) (not (z2)) (not (z3)) (not (z4)) (not (z5))
+       (z6) (not (z7)) (not (z8)) (z9) (not (z10)) (z11) (z12)
+       (not (z13)) (z14) (z15) (z16) (z17) (not (z18)) (not (z19))
+       (not (z20)) (z21) (z22) (z23) (z24))
+  :effect (and (z5) (not (z6)) (z13) (z20)))
+ (:action a10000010010110111100011110000001001011011110001110
+  ...
+#+END_SRC
+
+** 先ほどの結果
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN6
+
+[[png:results/mnist-plan]]
+
+[[png:results/mandrill-plan]]
+
+#+END_SPAN6
+#+BEGIN_SPAN6
+
+[[png:results/hanoi3]]
+
+[[png:results/hanoi4]]
+
+[[png:results/lights-out]]
+
+[[png:results/lights-out-skewed]]
+#+END_SPAN6
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
+** Fast Downward Log Trace (Search Statistics)
+
+#+BEGIN_SRC
+reading input... [t=5.479e-05 (sec)]
+...
+Building successor generator...done! [t=31.7737 (sec)]
+done initalizing global data [t=31.7738 (sec)]
+Conducting best first search with reopening closed nodes, (real) bound = 2147483647
+Initializing landmark cut heuristic...
+f = 4 [1 evaluated, 0 expanded, t=36.1569 (sec), 1054016 KB]
+...
+f = 12 [339 evaluated, 183 expanded, t=843.001 (sec), 1054016 KB]
+f = 13 [553 evaluated, 314 expanded, t=1357.62 (sec), 1054016 KB]
+f = 14 [942 evaluated, 529 expanded, t=2288.7 (sec), 1054016 KB]
+Solution found!
+Actual search time: 2688.73 (sec) [t=2724.89 (sec)]
+a11010000010010000101001111101100010001000010100111 (1)
+...
+a10011100111110010010011011001111010111011001001111 (1)
+a10011110101110110010011111001011001111011001001111 (1)
+Plan length: 14 step(s).
+Expanded 631 state(s).
+Evaluated 1140 state(s).
+Generated 1924 state(s).
+Dead ends: 24 state(s).
+Search time: 2693.06 (sec)
+Total time: 2724.89 (sec)
+#+END_SRC
 
