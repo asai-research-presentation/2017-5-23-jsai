@@ -14,7 +14,9 @@
 #+BEGIN_XLARGE
 Classical Planning
 
-in Deep Latent Space
+in Deep Latent Space:
+
+記号を取り戻せ!
 #+END_XLARGE
 
 東京大学大学院 博士3年 -- *就活中!*
@@ -1249,4 +1251,15 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
 25. Robotics
 26. Philosophical Foundations
 27. AI: The Present and Future
+
+* Conclusion
+
+
++ 棋譜なし・事前知識なし、訓練画像のみで任意の問題を解くAIシステムを作った
++ State AutoEncoder(SAE): Gumbel-Softmaxを用いたVAE で 記号に変換できる!
++ 主な貢献: *SAEによって生データから生成したシンボリック表現を用いてプランニング問題を解けることを実証*
++ */限りなく単純に作った/* プロトタイプ → 記号/非記号AI分野の様々な技術を取り入れることで */より発展/*
+  + 命題の学習 → 述語の学習
+  + アクションの汎化
+  + 音声やテキストに対しても今後発展させる
 
