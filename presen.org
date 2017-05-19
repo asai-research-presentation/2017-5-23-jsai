@@ -1049,7 +1049,7 @@ PDB: Pattern DataBase ヒューリスティクス
 
 + State AutoEncoder(SAE): Gumbel-Softmaxを用いたVAE
 
-+ 主な貢献: *SAEによって生データからシンボルを生成してプランニング問題が解ける* ことを実証
++ 主な貢献: *SAEによって生データから命題を生成してプランニング問題が解ける* ことを実証
 
 + */限りなく単純に作った/* プロトタイプ 
 
@@ -1104,17 +1104,21 @@ _全遷移の画像ペア $R$ を生成_ → $Encode(R)$ → PDDL
 
 * 正しくない解が出力される可能性はないの？
 
-ニューラルネットが収束していない場合 (収束が保証されているのは $t\rightarrow \infty$ のみ, not 実時間)
+ニューラルネットが収束していない場合 (収束保証は $t\rightarrow \infty$ のみ, not 実時間)
 
  → でたらめなシンボル/グラフが生成
 
- → でたらめなグラフ上の正しいプランが生成 (アルゴリズムの完全性、健全性、最適性により保証)
+ → *でたらめな離散グラフ上の正しいプラン* が生成 / *グラフが非連結*
 
- → でたらめな画像プラン
+#+BEGIN_ALIGNRIGHT
+ (アルゴリズムの完全性、健全性、最適性により保証)
+#+END_ALIGNRIGHT
+
+ → でたらめな画像プラン / 解が存在しない
 
 #+BEGIN_CENTER
 #+BEGIN_LARGER
-*認識の間違いはある* が *判断の間違いはない!*
+LatPlan に *認識の間違いはある* が *判断の間違いはない!*
 #+END_LARGER
 #+END_CENTER
 
@@ -1126,15 +1130,24 @@ _全遷移の画像ペア $R$ を生成_ → $Encode(R)$ → PDDL
 
 *意思決定も学習に依存する*
 
-→ */学習されていなかった局面では失敗する。/*
+→ */個別の学習結果に理論保証はない。/*
+
+→ */Policy関数が正しく学習されなかった局面では失敗する。/*
 
 #+BEGIN_QUOTE
 セドルはそれから、左手で首の後ろに触れたまま次の手を打った。... 
 コンピューターは驚きを隠せなかった。もちろん目をパチクリさせたわけではないが、次の1手はひどいものだった。
+[白78手について]
 #+END_QUOTE
 #+BEGIN_ALIGNRIGHT
 Cade Metz. "Two Moves, that Redifined the Future." /Wired/, 2016
 #+END_ALIGNRIGHT
+
+#+BEGIN_CENTER
+#+BEGIN_LARGER
+RLは *認識にも判断にも間違いがあり得る。*
+#+END_LARGER
+#+END_CENTER
 
 * Future Work (SAE)
 
@@ -1216,17 +1229,6 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
 26. Philosophical Foundations
 27. AI: The Present and Future
 
-* Conclusion
-
-
-+ 棋譜なし・事前知識なし、訓練画像のみで任意の問題を解くAIシステムを作った
-+ State AutoEncoder(SAE): Gumbel-Softmaxを用いたVAE で 記号に変換できる!
-+ 主な貢献: *SAEによって生データから生成したシンボリック表現を用いてプランニング問題を解けることを実証*
-+ */限りなく単純に作った/* プロトタイプ → 記号/非記号AI分野の様々な技術を取り入れることで */より発展/*
-  + 命題の学習 → 述語の学習
-  + アクションの汎化
-  + 音声やテキストに対しても今後発展させる
-
 * 記号・記号処理とは
 
 *記号の特徴と強み* : なぜ記号は強力な抽象化の道具なのか？
@@ -1236,7 +1238,9 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
      
      シンボル $X$ の意味がリンゴだろうと車だろうと ルールが正しければ推論できる
      
-     ドメイン非依存ソルバの顕著な例: *mystery* と *nomystery* ドメイン --- シンボル名だけ意味不明にした運送ドメイン
+     ドメイン非依存ソルバの顕著な例: *mystery* と *nomystery* ドメイン
+
+      --- シンボル名だけ意味不明にした運送ドメイン
 
      (名前を見て特殊アルゴリズムを使う不正を禁じるため)
   
