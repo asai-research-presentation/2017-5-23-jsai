@@ -1,0 +1,20 @@
+make[1]: 警告: 副次 make で -jN を強制指定しました: jobserver モードを無効にします.
+make[1]: ディレクトリ '/home/guicho/repos/presentations/2017-5-23-jsai' に入ります
+make -C img
+make -C css
+make[2]: ディレクトリ '/home/guicho/repos/presentations/2017-5-23-jsai/css' に入ります
+sass --update .
+make[2]: ディレクトリ '/home/guicho/repos/presentations/2017-5-23-jsai/img' に入ります
+make[2]: 'all' に対して行うべき事はありません.
+make[2]: ディレクトリ '/home/guicho/repos/presentations/2017-5-23-jsai/img' から出ます
+make -C scripts
+make[2]: ディレクトリ '/home/guicho/repos/presentations/2017-5-23-jsai/scripts' に入ります
+make[2]: 'all' に対して行うべき事はありません.
+make[2]: ディレクトリ '/home/guicho/repos/presentations/2017-5-23-jsai/scripts' から出ます
+scripts/org-html.sh presen.org presen.org.html
+Loading /home/guicho/repos/presentations/2017-5-23-jsai/scripts/compile-org-html.el (source)...
+make[2]: ディレクトリ '/home/guicho/repos/presentations/2017-5-23-jsai/css' から出ます
+Saving file /home/guicho/repos/presentations/2017-5-23-jsai/presen.org.html...
+Wrote /home/guicho/repos/presentations/2017-5-23-jsai/presen.org.html
+cp -f presen.org.html index.html
+make[1]: ディレクトリ '/home/guicho/repos/presentations/2017-5-23-jsai' から出ます
