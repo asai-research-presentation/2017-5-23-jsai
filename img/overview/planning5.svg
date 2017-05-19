@@ -781,6 +781,21 @@
          d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
          id="path25656-2-5-9" />
     </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker25654-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path25656-7" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -790,15 +805,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.5106728"
-     inkscape:cx="376.61777"
-     inkscape:cy="130.22801"
+     inkscape:cx="383.27655"
+     inkscape:cy="139.79283"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="817"
-     inkscape:window-x="768"
-     inkscape:window-y="25"
+     inkscape:window-width="1366"
+     inkscape:window-height="703"
+     inkscape:window-x="0"
+     inkscape:window-y="20"
      inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -1221,52 +1236,6 @@
        width="900"
        clip-path="url(#clipPath7954)"
        transform="matrix(0.45402292,0,0,0.45402292,-20.801011,296.57532)" />
-    <text
-       xml:space="preserve"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.12749672px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.32916966;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       x="150.57521"
-       y="401.7229"
-       id="text7958"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="150.57521"
-         y="401.7229"
-         id="tspan3807"
-         style="stroke:none;stroke-width:0.32916966">初期状態</tspan></text>
-    <text
-       xml:space="preserve"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.12749672px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.32916966;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       x="149.25511"
-       y="509.00732"
-       id="text7958-3"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="149.25511"
-         y="509.00732"
-         id="tspan3809"
-         style="stroke:none;stroke-width:0.32916966">ゴール状態</tspan></text>
-    <text
-       xml:space="preserve"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.14570999px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.32916966;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       x="230.56335"
-       y="443.14093"
-       id="text7985"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="230.56335"
-         y="443.14093"
-         id="tspan7995"
-         style="stroke:none;stroke-width:0.32916966">ドメイン非依存</tspan><tspan
-         sodipodi:role="line"
-         x="230.56335"
-         y="458.96371"
-         style="stroke:none;stroke-width:0.32916966"
-         id="tspan3862">古典的プランニング</tspan><tspan
-         sodipodi:role="line"
-         x="230.56335"
-         y="474.78653"
-         style="stroke:none;stroke-width:0.32916966"
-         id="tspan3864">ソルバ</tspan></text>
     <image
        y="235.10059"
        x="-111.09382"
@@ -1309,23 +1278,6 @@
          y="442.14822"
          id="tspan8549"
          style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:19.61992836px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.32916966;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;">プラン</tspan></text>
-    <text
-       xml:space="preserve"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:19.61992836px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.32916966;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       x="290.70013"
-       y="389.81812"
-       id="text7958-4"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="290.70013"
-         y="389.81812"
-         id="tspan3815"
-         style="font-size:19.61992836px;stroke:none;stroke-width:0.32916966">PDDL(記号的)</tspan><tspan
-         sodipodi:role="line"
-         x="290.70013"
-         y="409.04565"
-         style="font-size:19.61992836px;stroke:none;stroke-width:0.32916966"
-         id="tspan3868">アクションモデル</tspan></text>
     <g
        transform="matrix(0.64496176,0,0,0.64496176,58.232182,170.49783)"
        id="g13070-8-7"
@@ -2629,71 +2581,12 @@
          x="-22.829838"
          y="378.60965"
          id="tspan3804">ゴール画像</tspan></text>
-    <text
-       xml:space="preserve"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.12749672px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.32916966;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;"
-       x="435.94922"
-       y="416.28595"
-       id="text7958-7"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="435.94922"
-         y="416.28595"
-         id="tspan3807-5"
-         style="stroke:none;stroke-width:0.32916966;fill:#ff0000;">初期状態</tspan></text>
-    <text
-       xml:space="preserve"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.12749672px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Bold';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.32916966;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;"
-       x="462.4313"
-       y="505.69754"
-       id="text7958-3-3"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="462.4313"
-         y="505.69754"
-         id="tspan3809-5"
-         style="stroke:none;stroke-width:0.32916966;fill:#ff0000;">ゴール状態</tspan></text>
-    <path
-       style="fill:#999999;fill-rule:evenodd;stroke:#999999;stroke-width:1.29165685;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25654-36)"
-       d="m 291.78971,437.45941 28.19736,0"
-       id="path8016-2"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:#999999;fill-rule:evenodd;stroke:#999999;stroke-width:1.29165685;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25654-7-9)"
-       d="m 134.0369,426.30823 27.32593,0"
-       id="path8016-2-9"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:#999999;fill-rule:evenodd;stroke:#999999;stroke-width:1.29165685;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25654-3-8)"
-       d="m 134.6615,480.18255 27.32593,0"
-       id="path8016-2-0"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:#999999;fill-rule:evenodd;stroke:#999999;stroke-width:1.29165685;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25654-6-2)"
-       d="m 197.23777,373.21893 0,39.09788"
-       id="path8016-2-6"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
     <path
        style="fill:#ff0000;fill-rule:evenodd;stroke:#ff0000;stroke-width:1.29165685;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25654-9-0)"
        d="m 402.41933,462.33741 27.70188,0"
        id="path8016-2-2"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
-    <text
-       xml:space="preserve"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#999999;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       x="108.78651"
-       y="382.23465"
-       id="text3845"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         id="tspan3847"
-         x="108.78651"
-         y="382.23465">Encode</tspan></text>
     <text
        xml:space="preserve"
        style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ff2d2d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;"
@@ -2705,33 +2598,22 @@
          id="tspan3847-2"
          x="524.96466"
          y="320.12155">Decode</tspan></text>
-    <text
-       xml:space="preserve"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;line-height:98.00000191%;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP';text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:middle;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#999999;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       x="95.433578"
-       y="321.04422"
-       id="text3845-7"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         id="tspan3847-9"
-         x="95.433578"
-         y="321.04422">Encode</tspan></text>
-    <path
-       style="opacity:1;fill:#999999;fill-rule:evenodd;stroke:#999999;stroke-width:1.29165685;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25654-6-7-5)"
-       d="m 139.17083,300.99088 0,39.09788"
-       id="path8016-2-6-3"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="opacity:1;fill:#999999;fill-rule:evenodd;stroke:#999999;stroke-width:1.29165685;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25654-6-5-3)"
-       d="m 61.40854,396.13081 39.09788,0"
-       id="path8016-2-6-2"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
     <path
        style="opacity:1;fill:#ff2d2d;fill-rule:evenodd;stroke:#ff2d2d;stroke-width:1.29165685;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25654-9-6-0);fill-opacity:1"
        d="m 499.43568,350.58458 27.70191,0"
        id="path8016-2-2-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker25654)"
+       d="m 136.15281,495.69558 c 51.81395,39.08993 281.20867,7.32249 321.04901,-5.95762"
+       id="path12284"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker25654-2)"
+       d="m 136.15281,400.54578 c 51.81395,-39.08993 281.20867,-7.32249 321.04901,5.95762"
+       id="path12284-0"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
   </g>

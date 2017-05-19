@@ -813,11 +813,11 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
   + *機械のSymbolをどうやって人の理解できる形式にするか？* ← *自明でない*
 
-* Latent-space Planner: */LatPlan/*
+* Latent-Space Planner: */LatPlan/*
 
-*学習*, *Symbol Grounding*, *Symbolの解釈* を同時に解決する *アーキテクチャ*
+3つの課題を同時に解決する *アーキテクチャ*
 
- [[png:overview/planning]]
+ [[png:overview/planning1]]
 
 #+BEGIN_ALIGNRIGHT
 本プレゼンテーションでは、 LatPlan と その *1実装* LatPlanα を紹介
