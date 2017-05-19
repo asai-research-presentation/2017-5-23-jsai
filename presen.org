@@ -23,7 +23,9 @@ in Deep Latent Space:
 
 総合文化研究科　(渋谷駒場キャンパス)
 
-学振DC2 *AAAI, IJCAIなど国際学会の常連!*
+学振DC2 
+
+# *AAAI, IJCAIなど国際学会の常連!*
 
 #+BEGIN_LARGER
 浅井 政太郎
@@ -31,7 +33,7 @@ in Deep Latent Space:
 あさい まさたろう
 #+END_LARGER
 
-15分では到底終わらないので質疑の時間に食い込む(20分)
+# 15分では到底終わらないので質疑の時間に食い込む(20分)
 #+END_CENTER
 
 #+BEGIN_NOTE
@@ -536,12 +538,6 @@ DQN = DLNN (*Subsymbolic*) + Reinforcement Learning (*Subsymbolic*)
 それと去年の松尾先生
 #+END_ALIGNRIGHT
 
-** Arxiv版を上げた際のTwitterでの議論
-
-*/AlphaGo チーム全員: 「古典プランニング超大事!」/*
-
- [[png:twitter]]
-
 * IJCAI投稿内容                                                    :noexport:
 
 #+BEGIN_XLARGE
@@ -943,32 +939,6 @@ SAEを学習させることにより以下の関数を得る:
 
 + $\tilde{r} = Decode(b)$ : *命題列 $b$ を 生データ $\tilde{r}$ に変換する関数*
 
-** LatPlan の実装 LatPlan α でのSAE
-
-Keras, Adam optimizer (learning rate:0.001)
-
-  1764(42x42)
-
-  [→FC(4000,ReLu)→Batchnorm→Dropout(0.4)] × 2
-
-  →FC(49,GumbelSoftmax) (variational loss)
-
-  [→FC(4000,ReLu)→Batchnorm→Dropout(0.4)] × 2
-
-  →1764(42x42) (loss: Binary crossentropy)
-
-　
-
-+ なぜ全結合?? ::
-             論文の主題は *SAEで命題を作る方針がそもそもうまく行くかどうか*
-             
-             *→余計な要素を省いて限りなくシンプルに*
-             
-             (＋ 記号AIの研究者でも理解できるように)
-
-+ 8-パズルでの訓練 ::
-               可能な全状態 (362880) 中 *12000 枚* で訓練 → 汎化能力あり
-
 * Step 2: Domain Acquisition (ドメイン獲得)
 
 bitvector から PDDL モデルを生成する
@@ -997,27 +967,6 @@ bitvector から PDDL モデルを生成する
 
  $i$ ビット目が 0 → 命題 ($b_i$-false)
 #+END_CENTER
-
-** LatPlan の実装 LatPlan α での アクション集合の生成
-
-_全遷移の画像ペア $R$ を生成_ → $Encode(R)$ → PDDL
-
-なぜ? → *本来は汎化されたルールを得られると良い*
-
-: 未汎化の遷移   0011 → 0101  (遷移前の全ビットを指定)
-: 汎化された遷移 *01* → *10*  (一部のビットのみを指定)
-
-+ LatPlanα: 一般化を行わない ::
-
-     論文の主題は *SAEで命題を作る方針がそもそもうまく行くかどうか*
-     
-     *→余計な要素を省いて限りなくシンプルに*
-     
-     *汎化ルール → 他の Domain Acquisition 学習機^1 をそのまま使えば良い (Future work)*
-
-#+BEGIN_NOTE
-[Konidaris et.al. 14; Cresswell et al 13]
-#+END_NOTE
 
 * Step 3: PDDL モデルを解く
 
@@ -1079,6 +1028,87 @@ _全遷移の画像ペア $R$ を生成_ → $Encode(R)$ → PDDL
 + */限りなく単純に作った/* プロトタイプ 
 
   → 記号/非記号AI分野の様々な技術を取り入れることで */より発展/*
+
+* LatPlan の実装 LatPlan α でのSAE
+
+Keras, Adam optimizer (learning rate:0.001)
+
+  1764(42x42)
+
+  [→FC(4000,ReLu)→Batchnorm→Dropout(0.4)] × 2
+
+  →FC(49,GumbelSoftmax) (variational loss)
+
+  [→FC(4000,ReLu)→Batchnorm→Dropout(0.4)] × 2
+
+  →1764(42x42) (loss: Binary crossentropy)
+
+　
+
++ なぜ全結合?? ::
+             論文の主題は *SAEで命題を作る方針がそもそもうまく行くかどうか*
+             
+             *→余計な要素を省いて限りなくシンプルに*
+             
+             (＋ 記号AIの研究者でも理解できるように)
+
++ 8-パズルでの訓練 ::
+               可能な全状態 (362880) 中 *12000 枚* で訓練 → 汎化能力あり
+
+* LatPlan の実装 LatPlan α での アクション集合の生成
+
+_全遷移の画像ペア $R$ を生成_ → $Encode(R)$ → PDDL
+
+なぜ? → *本来は汎化されたルールを得られると良い*
+
+: 未汎化の遷移   0011 → 0101  (遷移前の全ビットを指定)
+: 汎化された遷移 *01* → *10*  (一部のビットのみを指定)
+
++ LatPlanα: 一般化を行わない ::
+
+     論文の主題は *SAEで命題を作る方針がそもそもうまく行くかどうか*
+     
+     *→余計な要素を省いて限りなくシンプルに*
+     
+     *汎化ルール → 他の Domain Acquisition 学習機^1 をそのまま使えば良い (Future work)*
+
+#+BEGIN_NOTE
+[Konidaris et.al. 14; Cresswell et al 13]
+#+END_NOTE
+
+* 正しくない解が出力される可能性はないの？
+
+ニューラルネットが収束していない場合 (収束が保証されているのは $t\rightarrow \infty$ のみ, not 実時間)
+
+ → でたらめなシンボル/グラフが生成
+
+ → でたらめなグラフ上の正しいプランが生成 (アルゴリズムの完全性、健全性、最適性により保証)
+
+ → でたらめな画像プラン
+
+#+BEGIN_CENTER
+#+BEGIN_LARGER
+*認識の間違いはある* が *判断の間違いはない!*
+#+END_LARGER
+#+END_CENTER
+
+#+BEGIN_ALIGNRIGHT
+→強化学習に対する強み
+#+END_ALIGNRIGHT
+
+** 強化学習
+
+*意思決定も学習に依存する*
+
+→ */学習されていなかった局面では失敗する。/*
+
+#+BEGIN_QUOTE
+セドルはそれから、左手で首の後ろに触れたまま次の手を打った。... 
+コンピューターは驚きを隠せなかった。もちろん目をパチクリさせたわけではないが、次の1手はひどいものだった。
+#+END_QUOTE
+#+BEGIN_ALIGNRIGHT
+Cade Metz. "Two Moves, that Redifined the Future." /Wired/, 2016
+#+END_ALIGNRIGHT
 
 * Future Work (SAE)
 
@@ -1170,6 +1200,38 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
   + 命題の学習 → 述語の学習
   + アクションの汎化
   + 音声やテキストに対しても今後発展させる
+
+* 記号・記号処理とは
+
+*記号の特徴と強み* : なぜ記号は強力な抽象化の道具なのか？
+
++ 理解する必要がない ::
+     ルールを機械的に適用することだけによって論理推論を行える
+     
+     シンボル $X$ の意味がリンゴだろうと車だろうと ルールが正しければ推論できる
+     
+     ドメイン非依存ソルバの顕著な例: *mystery* と *nomystery* ドメイン --- シンボル名だけ意味不明にした運送ドメイン
+
+     (名前を見て特殊アルゴリズムを使う不正を禁じるため)
+  
++ 組み合わせが可能 :: 
+     Latent vector は 複数の命題の連言 (and)
+
++ ノイズを含む画像はそのままではシンボルになれない ::
+
+     なんらかの特徴を抽出したものでなくてはいけない
+     
+     全く異なる画像になる
+
+* Arxiv版を上げた際のTwitterでの議論
+
+*/AlphaGo チーム全員: 「古典プランニング超大事!」/*
+
+ [[png:twitter]]
+
+* 日本のプランニング研究者は */深層学習研究者よりさらに少ない/*
+
+[[png:planning-researchers]]
 
 * 評価
 
@@ -1275,8 +1337,4 @@ Dead ends: 24 state(s).
 Search time: 2693.06 (sec)
 Total time: 2724.89 (sec)
 #+END_SRC
-
-* 日本のプランニング研究者は */深層学習研究者よりさらに少ない/*
-
-[[png:planning-researchers]]
 
