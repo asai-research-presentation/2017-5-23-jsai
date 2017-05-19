@@ -380,23 +380,50 @@ Made by guicho2.71828 (Masataro Asai)
 #+BEGIN_CENTER
 *?X*, *?Y* : 変数。 値 *BLOCK-A*, *BLOCK-B* などを適用して使う
 
-*前提条件* と *効果* で構成される
+*条件* と *効果* で構成される
 #+END_CENTER
+
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN7
 #+BEGIN_QUOTE
-*前提条件* : アクションを実行できる条件
+*条件* : 実行に必要な条件を表す命題
 
-命題 (clear *?X*) : 積み木 *?X* の上に何も置かれていない
+　(clear *?X*) : 積み木 *?X* の上が空
 
-命題 (clear *?Y*) : 積み木 *?Y* の上に何も置かれていない
+　(clear *?Y*) : 積み木 *?Y* の上に空
 
-*効果* : 実行前と後の状態の差分
+*効果* : 前後の状態の *差分* を表す命題
 
-⇒ 命題 (on *?X* *?Y*) を追加 : *?X* が *?Y* の上に移動
+　(on *?X* *?Y*) を *追加* : *?Y* の上は *?X*
 
-⇒ 命題 (clear *?Y*) を削除 : *?Y* は clear ではなくなる
+　(clear *?Y*) を *削除*
 #+END_QUOTE
+#+END_SPAN7
+#+BEGIN_SPAN5
+#+BEGIN_SRC lisp
+(:action move
+ :parameters (?X ?Y)
+ :preconditions
+   (and (clear ?X)   ; (1)
+        (clear ?Y))  ; (2)
 
-** *PDDL* : Planning Domain Description Language
+ :effect
+   (and (on ?X ?Y)   ; (3)
+        (not         ; (4)
+         (clear ?Y))))
+#+END_SRC
+#+BEGIN_ALIGNRIGHT
+#+BEGIN_LARGER
+モデリング言語 *PDDL* で記述
+#+END_LARGER
+#+END_ALIGNRIGHT
+#+END_SPAN5
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
+** *PDDL* : Planning Domain Description Language                   :noexport:
 
 International Planning Competition で使われている入力形式
 
@@ -424,11 +451,6 @@ International Planning Competition で使われている入力形式
 #+END_SPAN2
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
-
-#+BEGIN_NOTE
-宇宙探査機 NASA DS1 上の Remote Agent 自動航行システム でも
- "DDL" という名で 似たような記述言語があったようだ
-#+END_NOTE
 
 ** プランニング = グラフ探索
 
@@ -950,9 +972,9 @@ bitvector から PDDL モデルを生成する
 個別アクション遷移をPDDLアクション表現にマップ
 
 #+BEGIN_SRC lisp
-0011 → 0101
+ 0011 → 0101
 
-↓
+　　　↓
 
 (:action ...
  :precondition (and (b0-false) (b1-false) (b2-true) (b3-true)) ; 遷移前の状態
