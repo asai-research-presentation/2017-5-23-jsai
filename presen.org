@@ -561,7 +561,7 @@ DQN = Subsymbolic (DLNN) + Reinforcement Learning
 + RLのActing: 学習したpolicyに従ってgreedyに行動
 + Atariゲームは *脊髄反射で生き残ることが可能* → *複雑な論理思考はいらない!*
   
-  実際、 *Sokoban など論理思考が求められるAtariゲームでは性能が良くない*
+  実際、 *Sokoban など論理思考が求められるゲームでDQNは性能が悪い* ↔ 倉庫番ソルバ
 
 * 記号的AIによる論理推論の重要性
 
