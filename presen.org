@@ -750,7 +750,7 @@ Lights-Out
 #+END_XLARGE
 #+END_LARGER
 
-** 実際の問題の例 (Mandrill 8-puzzle)
+** 実際の問題の例 (マンドリル 8-puzzle)                            :noexport:
 
 MNIST 8-puzzle は 「物体」のようなものが明確に分離されている
 
@@ -758,7 +758,7 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 [[png:results/mandrill-intro]]
 
-** 実行例 (Mandrill 8-puzzle)
+** 写実的な画像 + 明確に分かれていないタイルでの実行例 (マンドリル 8-puzzle)
 
 [[png:results/mandrill-plan]]
 
@@ -806,13 +806,11 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
   + *どんな知識をどうやって?* ← *自明でない*
 
-+ 2. 取り出せたとする。NNの出力は Subsymbolic: *実数値*
-
-  + プランナが必要とするのは Symbolic な入力: *離散値・命題・真偽値*
++ 2. NNの出力は Subsymbolic: *実数値* ↔ Symbolic な *離散値・命題* がほしい
 
   + Subsymbolic を Symbol をどう変換する? (*Symbol Grounding*) ← *自明でない*
 
-+ 3. 出来たとしても、機械が作った Symbol は *人間には意味不明* 
++ 3. 機械が作った Symbol は *人間には理解不能* 
 
   + *意味不明のSymbolをどうやって人の理解できる形式にするか？* ← *自明でない*
 
