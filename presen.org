@@ -11,6 +11,19 @@
 
 #+BEGIN_outline-text-1
 #+BEGIN_CENTER
+東京大学 (駒場) 博士3年 -- *就活中!*
+
+# 総合文化研究科　(渋谷駒場キャンパス)
+
+学振DC2 
+
+# *AAAI, IJCAIなど国際学会の常連!*
+
+#+BEGIN_LARGER
+#+BEGIN_HTML
+<ruby>浅井 政太郎<rt>あさい まさたろう</rt></ruby>
+#+END_HTML
+#+END_LARGER
 #+BEGIN_XLARGE
 Classical Planning
 
@@ -18,20 +31,6 @@ in Deep Latent Space:
 
 記号を取り戻せ!
 #+END_XLARGE
-
-東京大学大学院 博士3年 -- *就活中!*
-
-総合文化研究科　(渋谷駒場キャンパス)
-
-学振DC2 
-
-# *AAAI, IJCAIなど国際学会の常連!*
-
-#+BEGIN_LARGER
-浅井 政太郎
-
-あさい まさたろう
-#+END_LARGER
 
 # 15分では到底終わらないので質疑の時間に食い込む(20分)
 #+END_CENTER
@@ -42,6 +41,18 @@ Made by guicho2.71828 (Masataro Asai)
 #+END_ALIGNRIGHT
 #+END_NOTE
 #+END_outline-text-1
+
+* もくじ
+
+#+BEGIN_XLARGE
+深層学習 (AutoEncoder, VAE) -- は */解説の必要が無いはず/* なので
+#+BEGIN_CENTER
+記号的AIプランニング
+#+END_CENTER
+#+BEGIN_ALIGNRIGHT
+の話からはじめます
+#+END_ALIGNRIGHT
+#+END_XLARGE
 
 * もくじ                                                           :noexport:
 
@@ -542,15 +553,15 @@ International Planning Competition で使われている入力形式
 AlphaGo = Subsymbolic (NNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
 + ただし *ドメイン依存* -- 囲碁に特化, "マス目"や"石"といった概念をハードコード
 + *膨大な棋譜が必要* --- 運用データがない環境(e.g.火星)には適用不能
-+ */人って棋譜がないと行動できませんか??/*
++ */人って前例がないと行動できませんか??/* *真の自律機械は前例無しで行動可能*
 
-DQN = DLNN (*Subsymbolic*) + Reinforcement Learning (*Subsymbolic*)
+DQN = Subsymbolic (DLNN) + Reinforcement Learning
 
 様々な Atari Game につかえる汎用フレームワーク (Invader, Packman…) だが
 + RLのActing: 学習したpolicyに従ってgreedyに行動
 + Atariゲームは *脊髄反射で生き残ることが可能* → *複雑な論理思考はいらない!*
   
-  実際、 *Sokoban など論理思考が求められるAtariゲームでは性能が良くない*
+  実際、 *Sokoban など論理思考が求められるゲームでDQNは性能が悪い* ↔ 倉庫番ソルバ
 
 * 記号的AIによる論理推論の重要性
 
@@ -726,7 +737,7 @@ Lights-Out
 
 #+HTML: <embed src="img/overview/3-hanoi.svg" type="image/svg+xml"  />
 
-** 実行例 (MNIST 8-puzzle)
+* 実行例 (MNIST 8-puzzle)
 
 [[png:results/mnist-plan]]
 
@@ -739,7 +750,7 @@ Lights-Out
 #+END_XLARGE
 #+END_LARGER
 
-** 実際の問題の例 (Mandrill 8-puzzle)
+** 実際の問題の例 (マンドリル 8-puzzle)                            :noexport:
 
 MNIST 8-puzzle は 「物体」のようなものが明確に分離されている
 
@@ -747,7 +758,7 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 [[png:results/mandrill-intro]]
 
-** 実行例 (Mandrill 8-puzzle)
+** 写実的な画像 + 明確に分かれていないタイルでの実行例 (マンドリル 8-puzzle)
 
 [[png:results/mandrill-plan]]
 
@@ -765,39 +776,13 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 [[png:results/hanoi4]]
 
-#+BEGIN_XLARGE
 #+BEGIN_ALIGNRIGHT
+#+BEGIN_XLARGE
  → *同様に最適解を返却* (7手,15手)
-#+END_ALIGNRIGHT
 #+END_XLARGE
 
-** 実行例 (Lights Out)
-
-8-puzzle も hanoi も 「物体」のようなものが「消えない」という性質がある。
-
-この実験 は このシステムがそのような特性に左右されないことを示す
-
-[[png:results/lights-out]]
-
-#+BEGIN_XLARGE
-#+BEGIN_ALIGNRIGHT
- → *同様に最適解を返却*
+他にも2種類の問題で実験
 #+END_ALIGNRIGHT
-#+END_XLARGE
-
-** 実行例 (Skewed Lights Out)
-
-8-puzzle, hanoi, LightsOut は 「物体」のようなものが格子状に並んでいる
-
-この実験 は このシステムがそのような特性に左右されないことを示す
-
-[[png:results/lights-out-skewed]]
-
-#+BEGIN_XLARGE
-#+BEGIN_ALIGNRIGHT
- → *同様に最適解を返却*
-#+END_ALIGNRIGHT
-#+END_XLARGE
 
 ** ノイズのある入力にも対応
 
@@ -821,19 +806,13 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
   + *どんな知識をどうやって?* ← *自明でない*
 
-+ 2. 取り出せたとする。NNで発見される知識は Subsymbolic: 実数値
-
-  + プランナが必要とするのは Symbolic な入力: 離散値・命題・真偽値
-
-  + システム全体が Unsupervised, 画像入力だけでラベル無し 
++ 2. NNの出力は Subsymbolic: *実数値* ↔ Symbolic な *離散値・命題* がほしい
 
   + Subsymbolic を Symbol をどう変換する? (*Symbol Grounding*) ← *自明でない*
 
-+ 3. 仮に自動的に Symbol を 生成したとして
++ 3. 機械が作った Symbol は *人間には理解不能* 
 
-  + 自動的に作られた Symbol は人に理解できる形式ではおそらくない
-
-  + *機械のSymbolをどうやって人の理解できる形式にするか？* ← *自明でない*
+  + *意味不明のSymbolをどうやって人の理解できる形式にするか？* ← *自明でない*
 
 * Latent-Space Planner: */LatPlan/*
 
@@ -1002,9 +981,9 @@ bitvector から PDDL モデルを生成する
 
 なぜ、ただの幅優先やDijkstra探索ではだめなの?
 
-→ ドメイン非依存下界関数による枝刈り (*PDB*) が、この未知のドメインでも有効
+→ 大規模な問題(5x5パズル等)で *指数爆発* し、非実用的
 
-→ より大規模な問題(15パズル,24パズル等)では *知識なし探索は指数爆発*
+→ *ドメイン非依存下界関数* (*PDB*) による枝刈り が、この未知のドメインでも有効
 
 #+BEGIN_SMALLER
 |------------------------+----------+----------+--------|
@@ -1035,10 +1014,16 @@ bitvector から PDDL モデルを生成する
 #+END_SMALLER
 
 #+BEGIN_LARGER
-PDB: Pattern DataBase ヒューリスティクス
-
-注: *プランニングでは理論保証付き下界関数のことをヒューリスティック関数と呼ぶ*
+#+BEGIN_ALIGNRIGHT
+→ */プランナを使えば既存の様々な下界関数を利用できる!/*
+#+END_ALIGNRIGHT
 #+END_LARGER
+
+# #+BEGIN_LARGER
+# PDB: Pattern DataBase ヒューリスティクス
+# 
+# 注: *プランニングでは理論保証付き下界関数のことをヒューリスティック関数と呼ぶ*
+# #+END_LARGER
 
 * Conclusion
 
@@ -1095,13 +1080,42 @@ _全遷移の画像ペア $R$ を生成_ → $Encode(R)$ → PDDL
 [Konidaris et.al. 14; Cresswell et al 13]
 #+END_NOTE
 
+* 他の実行例 (Lights Out)
+
+8-puzzle も hanoi も 「物体」のようなものが「消えない」という性質がある。
+
+この実験 は このシステムがそのような特性に左右されないことを示す
+
+[[png:results/lights-out]]
+
+#+BEGIN_XLARGE
+#+BEGIN_ALIGNRIGHT
+ → *同様に最適解を返却*
+#+END_ALIGNRIGHT
+#+END_XLARGE
+
+* 他の実行例 (Skewed Lights Out)
+
+8-puzzle, hanoi, LightsOut は 「物体」のようなものが格子状に並んでいる
+
+この実験 は このシステムがそのような特性に左右されないことを示す
+
+[[png:results/lights-out-skewed]]
+
+#+BEGIN_XLARGE
+#+BEGIN_ALIGNRIGHT
+ → *同様に最適解を返却*
+#+END_ALIGNRIGHT
+#+END_XLARGE
+
+
 * 正しくない解が出力される可能性はないの？
 
-ニューラルネットが収束していない場合 (収束保証は $t\rightarrow \infty$ のみ, not 実時間)
+*ニューラルネットの誤差が大きい場合のみ発生* (収束保証は $t\rightarrow \infty$ のみ, not 実時間)
 
  → でたらめなシンボル/グラフが生成
 
- → *でたらめな離散グラフ上の正しいプラン* が生成 / *グラフが非連結*
+ → *でたらめな離散グラフ上の正しいプラン* が生成 / *グラフが非連結* で解なし
 
 #+BEGIN_ALIGNRIGHT
  (アルゴリズムの完全性、健全性、最適性により保証)
@@ -1138,7 +1152,7 @@ Cade Metz. "Two Moves, that Redifined the Future." /Wired/, 2016
 
 #+BEGIN_CENTER
 #+BEGIN_LARGER
-RLは *認識にも判断にも間違いがあり得る。*
+RLは *判断に間違いがあり得る。*
 #+END_LARGER
 #+END_CENTER
 
@@ -1231,20 +1245,20 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
      
      シンボル $X$ の意味がリンゴだろうと車だろうと ルールが正しければ推論できる
      
-     ドメイン非依存ソルバの顕著な例: *mystery* と *nomystery* ドメイン
+     ドメイン非依存ソルバの顕著な例: *mystery* ドメインと *nomystery* ドメイン
 
-      --- シンボル名だけ意味不明にした運送ドメイン
+      --- シンボル名だけデタラメにした荷物配送ドメイン
 
-     (名前を見て特殊アルゴリズムを使う不正を禁じるため)
+     */(名前を見て特殊アルゴリズムを使う不正を禁じるため)/*
   
 + 組み合わせが可能 :: 
      Latent vector は 複数の命題の連言 (and)
 
 + ノイズを含む画像はそのままではシンボルになれない ::
 
-     なんらかの特徴を抽出したものでなくてはいけない
+     ノイズの有無で画像は全く異なるデータになる → 何か *共通の特徴* の抽出が必要
      
-     全く異なる画像になる
+     
 
 * Arxiv版を上げた際のTwitterでの議論
 
@@ -1273,7 +1287,7 @@ GTX1070, PhenomII X6 (3.4GHz OC), 16GB Mem
 
 1: Test入力 2: 生Latent 3: 生Autoencoding 4: 切り捨てLatent 5: 切り捨てLatentのAutoencoding
 
-Test 入力: 訓練画像に含まれていない画像
+Test 入力: 訓練画像に含まれていない画像 (注!)
 
 [[spng:experiment/autoencoding_test]]
 
@@ -1332,7 +1346,7 @@ $N=25$ の例
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
-** Fast Downward Log Trace (Search Statistics)
+** Fast Downward Log Trace (Search Statistics)                     :noexport:
 
 #+BEGIN_SRC
 reading input... [t=5.479e-05 (sec)]
