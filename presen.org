@@ -553,7 +553,7 @@ International Planning Competition で使われている入力形式
 AlphaGo = Subsymbolic (NNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
 + ただし *ドメイン依存* -- 囲碁に特化, "マス目"や"石"といった概念をハードコード
 + *膨大な棋譜が必要* --- 運用データがない環境(e.g.火星)には適用不能
-+ */人って棋譜がないと行動できませんか??/*
++ */人って前例がないと行動できませんか??/* *真の自律機械は前例無しで行動可能*
 
 DQN = Subsymbolic (DLNN) + Reinforcement Learning
 
@@ -981,11 +981,9 @@ bitvector から PDDL モデルを生成する
 
 なぜ、ただの幅優先やDijkstra探索ではだめなの?
 
-→ ドメイン非依存下界関数による枝刈り (*PDB*) が、この未知のドメインでも有効
+→ 大規模な問題(5x5パズル等)で *指数爆発* し、非実用的
 
-→ より大規模な問題(15パズル,24パズル等)では *知識なし探索は指数爆発*
-
-→ */プランナを使えば既存の様々な下界関数を利用できる/*
+→ *ドメイン非依存下界関数* (*PDB*) による枝刈り が、この未知のドメインでも有効
 
 #+BEGIN_SMALLER
 |------------------------+----------+----------+--------|
@@ -1016,10 +1014,16 @@ bitvector から PDDL モデルを生成する
 #+END_SMALLER
 
 #+BEGIN_LARGER
-PDB: Pattern DataBase ヒューリスティクス
-
-注: *プランニングでは理論保証付き下界関数のことをヒューリスティック関数と呼ぶ*
+#+BEGIN_ALIGNRIGHT
+→ */プランナを使えば既存の様々な下界関数を利用できる!/*
+#+END_ALIGNRIGHT
 #+END_LARGER
+
+# #+BEGIN_LARGER
+# PDB: Pattern DataBase ヒューリスティクス
+# 
+# 注: *プランニングでは理論保証付き下界関数のことをヒューリスティック関数と呼ぶ*
+# #+END_LARGER
 
 * Conclusion
 
@@ -1105,14 +1109,13 @@ _全遷移の画像ペア $R$ を生成_ → $Encode(R)$ → PDDL
 #+END_XLARGE
 
 
-
 * 正しくない解が出力される可能性はないの？
 
 *ニューラルネットの誤差が大きい場合のみ発生* (収束保証は $t\rightarrow \infty$ のみ, not 実時間)
 
  → でたらめなシンボル/グラフが生成
 
- → *でたらめな離散グラフ上の正しいプラン* が生成 / *グラフが非連結*
+ → *でたらめな離散グラフ上の正しいプラン* が生成 / *グラフが非連結* で解なし
 
 #+BEGIN_ALIGNRIGHT
  (アルゴリズムの完全性、健全性、最適性により保証)
@@ -1242,20 +1245,20 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
      
      シンボル $X$ の意味がリンゴだろうと車だろうと ルールが正しければ推論できる
      
-     ドメイン非依存ソルバの顕著な例: *mystery* と *nomystery* ドメイン
+     ドメイン非依存ソルバの顕著な例: *mystery* ドメインと *nomystery* ドメイン
 
-      --- シンボル名だけ意味不明にした運送ドメイン
+      --- シンボル名だけデタラメにした荷物配送ドメイン
 
-     (名前を見て特殊アルゴリズムを使う不正を禁じるため)
+     */(名前を見て特殊アルゴリズムを使う不正を禁じるため)/*
   
 + 組み合わせが可能 :: 
      Latent vector は 複数の命題の連言 (and)
 
 + ノイズを含む画像はそのままではシンボルになれない ::
 
-     なんらかの特徴を抽出したものでなくてはいけない
+     ノイズの有無で画像は全く異なるデータになる → 何か *共通の特徴* の抽出が必要
      
-     全く異なる画像になる
+     
 
 * Arxiv版を上げた際のTwitterでの議論
 
@@ -1284,7 +1287,7 @@ GTX1070, PhenomII X6 (3.4GHz OC), 16GB Mem
 
 1: Test入力 2: 生Latent 3: 生Autoencoding 4: 切り捨てLatent 5: 切り捨てLatentのAutoencoding
 
-Test 入力: 訓練画像に含まれていない画像
+Test 入力: 訓練画像に含まれていない画像 (注!)
 
 [[spng:experiment/autoencoding_test]]
 
@@ -1343,7 +1346,7 @@ $N=25$ の例
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
-** Fast Downward Log Trace (Search Statistics)
+** Fast Downward Log Trace (Search Statistics)                     :noexport:
 
 #+BEGIN_SRC
 reading input... [t=5.479e-05 (sec)]
