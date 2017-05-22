@@ -553,7 +553,7 @@ International Planning Competition で使われている入力形式
 AlphaGo = Subsymbolic (NNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
 + ただし *ドメイン依存* -- 囲碁に特化, "マス目"や"石"といった概念をハードコード
 + *膨大な棋譜が必要* --- 運用データがない環境(e.g.火星)には適用不能
-+ */人って前例がないと行動できませんか??/* *真の自律機械は前例無しで行動可能*
++ */人って棋譜・前例がないと行動できませんか??/* *真の自律機械は前例無しで行動可能*
 
 DQN = Subsymbolic (DLNN) + Reinforcement Learning
 
@@ -561,7 +561,7 @@ DQN = Subsymbolic (DLNN) + Reinforcement Learning
 + RLのActing: 学習したpolicyに従ってgreedyに行動
 + Atariゲームは *脊髄反射で生き残ることが可能* → *複雑な論理思考はいらない!*
   
-  実際、 *Sokoban など論理思考が求められるゲームでDQNは性能が悪い* ↔ 倉庫番ソルバ
+  実際 *Sokoban など論理思考ゲームでは性能が悪い* ↔ 倉庫番ソルバ
 
 * 記号的AIによる論理推論の重要性
 
@@ -808,11 +808,11 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
 + 2. NNの出力は Subsymbolic: *実数値* ↔ Symbolic な *離散値・命題* がほしい
 
-  + Subsymbolic を Symbol をどう変換する? (*Symbol Grounding*) ← *自明でない*
+  + *Symbol Grounding* ← *自明でない*
 
 + 3. 機械が作った Symbol は *人間には理解不能* 
 
-  + *意味不明のSymbolをどうやって人の理解できる形式にするか？* ← *自明でない*
+  + *意味不明の記号列をどうやって人の理解できる形式にするか？* ← *自明でない*
 
 * Latent-Space Planner: */LatPlan/*
 
@@ -1181,12 +1181,13 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
 
 * Future Work (問題ドメイン)
 
+LatPlan は あくまで *アーキテクチャ*
+
 *SAE の実装を変えれば(原理的には)画像以外の任意の入力データに対応可能なはず*
 
-+ テキスト用のAE [Li et.al. 2015]
-+ 音声用のAE [Deng, Li, et al. 2010]
-
-+ *Here's an Apple, Here's a pen → oh, ApplePen!*
++ テキスト用のAE [Li et.al. 2015]、 音声用のAE [Deng, Li, et al. 2010]
++ 改造してSAEにすれば・・・
+  + *Here's an Apple, Here's a pen → oh, ApplePen!*
 + SAEを学習してプランナで解く → *数千ステップの高速な言語レベル推論が可能に*
 
 #+BEGIN_NOTE
@@ -1262,11 +1263,17 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
 
 * Arxiv版を上げた際のTwitterでの議論
 
-*/AlphaGo チーム全員: 「古典プランニング超大事!」/*
-
  [[png:twitter]]
 
-* 日本のプランニング研究者は */深層学習研究者よりさらに少ない/*
+#+BEGIN_CENTER
+#+BEGIN_XLARGE
+*/AlphaGo チーム全員:/*
+
+*/「古典プランニング超大事!」/*
+#+END_XLARGE
+#+END_CENTER
+
+* 日本のプランニング研究者: */DL研究者よりさらに少ない/*
 
 [[png:planning-researchers]]
 
