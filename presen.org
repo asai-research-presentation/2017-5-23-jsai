@@ -11,11 +11,14 @@
 
 #+BEGIN_outline-text-1
 #+BEGIN_CENTER
-東京大学 (駒場) 博士3年 -- *就活中!*
 
-# 総合文化研究科　(渋谷駒場キャンパス)
+# 田添
 
-学振DC2 
+#+BEGIN_LARGER
+*東京大学 総合文化研究科 広域科学専攻*
+
+博士3年 学振DC2 -- *就活中!*
+#+END_LARGER
 
 # *AAAI, IJCAIなど国際学会の常連!*
 
@@ -29,7 +32,7 @@ Classical Planning
 
 in Deep Latent Space:
 
-記号を取り戻せ!
+*/記号を取り戻せ!/*
 #+END_XLARGE
 
 # 15分では到底終わらないので質疑の時間に食い込む(20分)
@@ -337,18 +340,27 @@ Made by guicho2.71828 (Masataro Asai)
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
-#+BEGIN_SPAN6
+#+BEGIN_SPAN7
+#+BEGIN_LARGER
 + 人が高価or不可能な作業 :: 原発, 宇宙空間, 火星, 深海
-+ 最適性/理論保証の求められるミッションクリティカルシステム :: 製造システム、運送、人工衛星(燃料使いきれば運用終了)
++ 正しさと最適性の理論保証が必要なミッションクリティカルシステム :: 
+     製造システム、運送 (時間=お金)
+
+     人工衛星 (燃料使いきれば運用終了)
+
+     間違った解は許されない
++ 思考過程を説明可能なシステム :: 
+     レスキュー・宇宙船 (人間の安全がかかっている)
+#+END_LARGER
 
 # [[sjpg:martian]]
 
-#+END_SPAN6
-#+BEGIN_SPAN6
+#+END_SPAN7
+#+BEGIN_SPAN5
 
 [[sjpg:gravity-m]]
 
-#+END_SPAN6
+#+END_SPAN5
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
@@ -502,7 +514,7 @@ International Planning Competition で使われている入力形式
    画像、音声、非構造化テキスト: 
  + *感覚的知能*:
    
-   　 *_直後_ の行動の決定*
+   　 */反応/, /直後/ の行動の決定*
    #+BEGIN_SMALLER
    *パブロフの犬* : 餌を認知→よだれ
 
@@ -527,7 +539,7 @@ International Planning Competition で使われている入力形式
    論理 オブジェクト ルール
  + *論理・推論による知能:*
 
-   　 *_未来に渡る_ 戦略の決定*
+   　 */未来に渡る/ 戦略の決定*
    
    　 (戦略 = 行動の *列や木*)
    #+BEGIN_SMALLER
@@ -550,18 +562,18 @@ International Planning Competition で使われている入力形式
 
 ** 既存の有名システム
 
-AlphaGo = Subsymbolic (NNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
+AlphaGo = Subsymbolic (NNによる評価関数) + Symbolic (MCTSによる探索)
 + ただし *ドメイン依存* -- 囲碁に特化, "マス目"や"石"といった概念をハードコード
 + *膨大な棋譜が必要* --- 運用データがない環境(e.g.火星)には適用不能
-+ */人って棋譜・前例がないと行動できませんか??/* *真の自律機械は前例無しで行動可能*
++ */人って模範解答がないと行動できませんか?/* *真の自律機械は前例無しでも行動可能*
 
-DQN = Subsymbolic (DLNN) + Reinforcement Learning
+DQN = Subsymbolic (DLNN) + 強化学習 (DLNN)
 
 様々な Atari Game につかえる汎用フレームワーク (Invader, Packman…) だが
 + RLのActing: 学習したpolicyに従ってgreedyに行動
 + Atariゲームは *脊髄反射で生き残ることが可能* → *複雑な論理思考はいらない!*
   
-  実際 *Sokoban など論理思考ゲームでは性能が悪い* ↔ 倉庫番ソルバ
+# 実際 *Sokoban など論理思考ゲームでは性能が悪い* ↔ 倉庫番ソルバ
 
 * 記号的AIによる論理推論の重要性
 
@@ -662,25 +674,27 @@ Deep Learning
 
 空きパネルとそれ以外を移動させることで絵を完成させるパズル
 
-[[sjpg:puzzle]]
+#+BEGIN_CENTER
+*古くからあるAI問題*, 可能な曲面の数は 362880 個
 
-#+BEGIN_ALIGNRIGHT
-*古典的なAI問題として知られている*
+4x4、5x5のパズルは */全探索では/ 探索空間が指数爆発→メモリ不足で解けない*
 
-可能な曲面の数は 362880 個
-
-4x4の15-パズル、5x5の24-パズルはさらに難しい
-#+END_ALIGNRIGHT
-
-** 論文のゴール: 棋譜なし・事前知識なし 訓練画像のみ 完全自動で 8-puzzle を解くAIシステムを作る
-
-*棋譜なし* : 棋譜から学習した勘(評価関数)で解くAlphaGoと異なる → *下界関数* を用いる
-
-*事前知識なし* : 「パネル」「9マスある」「パネルが動く」などのラベル、シンボルなし
+*/古典プランニングの理論保証付き下界関数を使えば/ 最適解を求められる*
+#+END_CENTER
 
 [[sjpg:puzzle]]
 
-** 論文のゴール: 棋譜なし・事前知識なし 訓練画像のみ 完全自動で */任意の問題/* を解くAIシステムを作る
+** ゴール: 棋譜・事前知識なし 画像のみで8パズルを解くAI
+
+*DLNN + 古典プランニング*
+
+*事前知識なし* : 「9マスある」「動くパネル」など人の与えた *ラベル・シンボルなし*
+
+*棋譜なし* : AlphaGoは 棋譜から学習した評価関数で解く → *理論保証付き下界関数* で解く
+
+[[sjpg:puzzle]]
+
+** ゴール: 棋譜・事前知識なし、画像のみで */任意の問題/* を解くAI
 
 #+BEGIN_XLARGE
 */事前知識なしで解ける/*
@@ -768,7 +782,7 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 #+END_ALIGNRIGHT
 #+END_XLARGE
 
-** 実行例 (Tower of Hanoi)
+** 実行例 (ハノイの塔)
 
 全く意味の異なる入力でも解けることを示す
 
@@ -830,10 +844,6 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
  [[png:overview/planning2]]
 
-** Step 1: State Autoencoder
-
- [[png:sae/state-ae]]
-
 ** AutoEncoder (おさらい)
 
 #+BEGIN_CENTER
@@ -876,7 +886,7 @@ MNIST 8-puzzle は 「物体」のようなものが明確に分離されてい�
 
  *中間層がカテゴリカル分布(離散値)なVAEを作る手法*
 
-VAE: 中間層が特定の分布を持つAEのこと
+VAE: 中間層が特定の分布を持つAEのこと。 下図: カテゴリ数8, 30変数 の GumbelSoftmax
 
 #+BEGIN_CENTER
  #+BEGIN_HTML
@@ -894,6 +904,10 @@ VAE: 中間層が特定の分布を持つAEのこと
 特に *カテゴリ数2 → N個の命題(true/false)に直接マップ可能*
 #+END_LARGER
 #+END_ALIGNRIGHT
+
+** Step 1: State Autoencoder                                       :noexport:
+
+ [[png:sae/state-ae]]
 
 ** Gumbel-Softmax: Gumbel-Max の微分可能な近似                     :noexport:
 
@@ -916,19 +930,6 @@ Gumbel-Max: カテゴリごとの確率 ($x$) から one-hot vector ($z$) をサ
 #+BEGIN_NOTE
 Maddison et. al., 2014
 #+END_NOTE
-** Gumbel-Softmax                                                  :noexport:
-
-[[png:sae/gumbel]]
-
-$N\times M$ 行列を出力, $N$: 変数の数 $M$: カテゴリの数
-
-#+BEGIN_ALIGNRIGHT
-#+BEGIN_LARGER
-鍵となるアイディア: *この離散表現は記号的ソルバで使用可能*
-
-特に *カテゴリ数2 → N個の命題(true/false)に直接マップ可能*
-#+END_LARGER
-#+END_ALIGNRIGHT
 
 ** Step 1: State Autoencoder
 
@@ -1035,6 +1036,15 @@ bitvector から PDDL モデルを生成する
 
   → 記号/非記号AI分野の様々な技術を取り入れることで */より発展/*
 
+JSAI予稿論文は 短縮版です。
+
+#+BEGIN_LARGER
+Arxiv 1705.00154 : *Classical Planning in Deep Latent Space: Bridging the Subsymbolic-Symbolic Boundary.*
+
+KEPS17採択版: *Classical Planning in Deep Latent Space: From Unlabeled Images to PDDL (and back).*  /Knowledge Engineering for Planning and Scheduling (KEPS) Workshop in ICAPS2017/
+#+END_LARGER
+
+
 * LatPlan の実装 LatPlan α でのSAE
 
 Keras, Adam optimizer (learning rate:0.001)
@@ -1058,6 +1068,12 @@ Keras, Adam optimizer (learning rate:0.001)
              
 + 8-パズルでの訓練 ::
                可能な全状態 (362880) 中 *12000 枚* で訓練 → 汎化能力あり
+
+* Gumbel-Softmax
+
+[[png:sae/gumbel]]
+
+$N\times M$ 行列を出力, $N$: 変数の数 $M$: カテゴリの数
 
 * LatPlan の実装 LatPlan α での アクション集合の生成
 
@@ -1108,7 +1124,6 @@ _全遷移の画像ペア $R$ を生成_ → $Encode(R)$ → PDDL
 #+END_ALIGNRIGHT
 #+END_XLARGE
 
-
 * 正しくない解が出力される可能性はないの？
 
 *ニューラルネットの誤差が大きい場合のみ発生* (収束保証は $t\rightarrow \infty$ のみ, not 実時間)
@@ -1125,12 +1140,12 @@ _全遷移の画像ペア $R$ を生成_ → $Encode(R)$ → PDDL
 
 #+BEGIN_CENTER
 #+BEGIN_LARGER
-LatPlan に *認識の間違いはある* が *判断の間違いはない!*
+LatPlan に */認識の間違いはある/* が */判断の間違いはない!/*
 #+END_LARGER
 #+END_CENTER
 
 #+BEGIN_ALIGNRIGHT
-→強化学習に対する強み
+ (完全性,最適性) →強化学習に対する強み
 #+END_ALIGNRIGHT
 
 ** 強化学習
@@ -1165,19 +1180,6 @@ SAEは命題の検出が可能 (状態s = p∧q∧r...)
 → オブジェクトの検出 (引数 a,b) が必要
 
 → 物体認識(R-CNN) などを内部で用いる より複雑なSAEの使用で対処可能
-
-* Future Work (アクション生成)
-
-個別の遷移をアクションとして扱うことしかできない (状態s → 状態t)
-
-例:
-
-: 個別の遷移        0011 → 0101
-: 一般化された遷移  *01* → *10*
-
-一般化されたアクションの検出 (述語 swap(tile1,tile2))
-
-Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など 
 
 * Future Work (問題ドメイン)
 
@@ -1246,21 +1248,22 @@ LatPlan は あくまで *アーキテクチャ*
      
      シンボル $X$ の意味がリンゴだろうと車だろうと ルールが正しければ推論できる
      
-     ドメイン非依存ソルバの顕著な例: *mystery* ドメインと *nomystery* ドメイン
+     + ドメイン非依存ソルバの顕著な例: *mystery* ドメインと *nomystery* ドメイン
 
-      --- シンボル名だけデタラメにした荷物配送ドメイン
+       *シンボル名だけデタラメ* にした荷物配送ベンチマーク (truck → shark)
 
-     */(名前を見て特殊アルゴリズムを使う不正を禁じるため)/*
+       */(名前を見て特殊アルゴリズムを使う不正を禁じるため)/*
   
 + 組み合わせが可能 :: 
-     Latent vector は 複数の命題の連言 (and)
+     Latent vector は 複数の命題の連言 (and) → modus ponens が適用可能になる
+     
+     探索の下界関数はこれらを適用してゴールへの近さを見積もる
 
-+ ノイズを含む画像はそのままではシンボルになれない ::
++ ノイズを含む画像ピクセルはそのままではシンボルになれない ::
 
      ノイズの有無で画像は全く異なるデータになる → 何か *共通の特徴* の抽出が必要
      
      
-
 * Arxiv版を上げた際のTwitterでの議論
 
  [[png:twitter]]
