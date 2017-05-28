@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title></title>
-<!-- 2017-05-20 土 20:05 -->
+<!-- 2017-05-29 月 00:11 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Masataro Asai" />
@@ -191,12 +191,19 @@ for the JavaScript code in this tag.
 <div class="outline-text-1">
 <div class="center">
 <p>
-東京大学 (駒場) 博士3年 &#x2013; <b>就活中!</b>
+
+</p>
+
+<div class="larger">
+<p>
+<b>東京大学 総合文化研究科 広域科学専攻</b>
 </p>
 
 <p>
-学振DC2 
+博士3年 学振DC2 &#x2013; <b>就活中!</b>
 </p>
+
+</div>
 
 <div class="larger">
 <ruby>浅井 政太郎<rt>あさい まさたろう</rt></ruby>
@@ -212,7 +219,7 @@ in Deep Latent Space:
 </p>
 
 <p>
-記号を取り戻せ!
+<b><i>記号を取り戻せ!</i></b>
 </p>
 
 </div>
@@ -572,16 +579,29 @@ super-sophisticated shovel car.
 <div class="outline-text-3" id="text-2-5">
 <div class="container-fluid">
 <div class="row-fluid">
-<div class="span6">
+<div class="span7">
+<div class="larger">
 <dl class="org-dl">
 <dt> 人が高価or不可能な作業 </dt><dd>原発, 宇宙空間, 火星, 深海
 </dd>
-<dt> 最適性/理論保証の求められるミッションクリティカルシステム </dt><dd>製造システム、運送、人工衛星(燃料使いきれば運用終了)
+<dt> 正しさと最適性の理論保証が必要なミッションクリティカルシステム </dt><dd>     製造システム、運送 (時間=お金)
+
+<p>
+人工衛星 (燃料使いきれば運用終了)
+</p>
+
+<p>
+間違った解は許されない
+</p>
+</dd>
+<dt> 思考過程を説明可能なシステム </dt><dd>     レスキュー・宇宙船 (人間の安全がかかっている)
 </dd>
 </dl>
 
 </div>
-<div class="span6">
+
+</div>
+<div class="span5">
 <p>
 
 </p>
@@ -756,14 +776,14 @@ for <b>認識・反射</b>
 画像、音声、非構造化テキスト: 
 </p>
 </li>
-<li><b>直感/脊髄反射的知能</b>:
+<li><b>感覚的知能</b>:
 
 <p>
-　 <b><span class="underline">直後</span> の行動の決定</b>
+　 <b><i>反応</i>, <i>直後</i> の行動の決定</b>
 </p>
 <div class="smaller">
 <p>
-<b>パブロフの犬</b> : 餌→よだれ
+<b>パブロフの犬</b> : 餌を認知→よだれ
 </p>
 
 <p>
@@ -811,7 +831,7 @@ for <b>プランニング・ゲーム・定理証明</b>
 <li><b>論理・推論による知能:</b>
 
 <p>
-　 <b><span class="underline">未来に渡る</span> 戦略の決定</b>
+　 <b><i>未来に渡る</i> 戦略の決定</b>
 </p>
 
 <p>
@@ -861,19 +881,19 @@ for <b>プランニング・ゲーム・定理証明</b>
 <h3 id="sec-3-4"><span class="section-number-3">3.4</span> 既存の有名システム</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
-AlphaGo = Subsymbolic (NNによる評価関数の学習) + Symbolic (UCT-MCTSによる探索)
+AlphaGo = Subsymbolic (NNによる評価関数) + Symbolic (MCTSによる探索)
 </p>
 <ul class="org-ul">
 <li>ただし <b>ドメイン依存</b> &#x2013; 囲碁に特化, "マス目"や"石"といった概念をハードコード
 </li>
 <li><b>膨大な棋譜が必要</b> &#x2014; 運用データがない環境(e.g.火星)には適用不能
 </li>
-<li><b><i>人って前例がないと行動できませんか??</i></b> <b>真の自律機械は前例無しで行動可能</b>
+<li><b><i>人って模範解答がないと行動できませんか?</i></b> <b>真の自律機械は前例無しでも行動可能</b>
 </li>
 </ul>
 
 <p>
-DQN = Subsymbolic (DLNN) + Reinforcement Learning
+DQN = Subsymbolic (DLNN) + 強化学習 (DLNN)
 </p>
 
 <p>
@@ -883,10 +903,6 @@ DQN = Subsymbolic (DLNN) + Reinforcement Learning
 <li>RLのActing: 学習したpolicyに従ってgreedyに行動
 </li>
 <li>Atariゲームは <b>脊髄反射で生き残ることが可能</b> → <b>複雑な論理思考はいらない!</b>
-
-<p>
-実際、 <b>Sokoban など論理思考が求められるゲームでDQNは性能が悪い</b> ↔ 倉庫番ソルバ
-</p>
 </li>
 </ul>
 </div>
@@ -982,38 +998,41 @@ Deep Learning
 空きパネルとそれ以外を移動させることで絵を完成させるパズル
 </p>
 
+<div class="center">
+<p>
+<b>古くからあるAI問題</b>, 可能な曲面の数は 362880 個
+</p>
+
+<p>
+4x4、5x5のパズルは <b><i>全探索では</i> 探索空間が指数爆発→メモリ不足で解けない</b>
+</p>
+
+<p>
+<b><i>古典プランニングの理論保証付き下界関数を使えば</i> 最適解を求められる</b>
+</p>
+</div>
+
 
 <div class="figure">
 <p><img src="img/static/puzzle.jpg" alt="puzzle.jpg" />
 </p>
 </div>
-
-<div class="alignright">
-<p>
-<b>古典的なAI問題として知られている</b>
-</p>
-
-<p>
-可能な曲面の数は 362880 個
-</p>
-
-<p>
-4x4の15-パズル、5x5の24-パズルはさらに難しい
-</p>
-
-</div>
 </div>
 </div>
 
 <div id="outline-container-sec-5-3" class="outline-3">
-<h3 id="sec-5-3"><span class="section-number-3">5.3</span> 論文のゴール: 棋譜なし・事前知識なし 訓練画像のみ 完全自動で 8-puzzle を解くAIシステムを作る</h3>
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> ゴール: 棋譜・事前知識なし 画像のみで8パズルを解くAI</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
-<b>棋譜なし</b> : 棋譜から学習した勘(評価関数)で解くAlphaGoと異なる → <b>下界関数</b> を用いる
+<b>DLNN + 古典プランニング</b>
 </p>
 
 <p>
-<b>事前知識なし</b> : 「パネル」「9マスある」「パネルが動く」などのラベル、シンボルなし
+<b>事前知識なし</b> : 「9マスある」「動くパネル」など人の与えた <b>ラベル・シンボルなし</b>
+</p>
+
+<p>
+<b>棋譜なし</b> : AlphaGoは 棋譜から学習した評価関数で解く → <b>理論保証付き下界関数</b> で解く
 </p>
 
 
@@ -1025,7 +1044,7 @@ Deep Learning
 </div>
 
 <div id="outline-container-sec-5-4" class="outline-3">
-<h3 id="sec-5-4"><span class="section-number-3">5.4</span> 論文のゴール: 棋譜なし・事前知識なし 訓練画像のみ 完全自動で <b><i>任意の問題</i></b> を解くAIシステムを作る</h3>
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> ゴール: 棋譜・事前知識なし、画像のみで <b><i>任意の問題</i></b> を解くAI</h3>
 <div class="outline-text-3" id="text-5-4">
 <div class="xlarge">
 <p>
@@ -1192,7 +1211,7 @@ Lights-Out
 </div>
 
 <div id="outline-container-sec-7-2" class="outline-3">
-<h3 id="sec-7-2"><span class="section-number-3">7.2</span> 実行例 (Tower of Hanoi)</h3>
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> 実行例 (ハノイの塔)</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 全く意味の異なる入力でも解けることを示す
@@ -1267,7 +1286,7 @@ Lights-Out
 <li>2. NNの出力は Subsymbolic: <b>実数値</b> ↔ Symbolic な <b>離散値・命題</b> がほしい
 
 <ul class="org-ul">
-<li>Subsymbolic を Symbol をどう変換する? (<b>Symbol Grounding</b>) ← <b>自明でない</b>
+<li><b>Symbol Grounding</b> ← <b>自明でない</b>
 </li>
 </ul>
 </li>
@@ -1275,7 +1294,7 @@ Lights-Out
 <li>3. 機械が作った Symbol は <b>人間には理解不能</b> 
 
 <ul class="org-ul">
-<li><b>意味不明のSymbolをどうやって人の理解できる形式にするか？</b> ← <b>自明でない</b>
+<li><b>意味不明の記号列をどうやって人の理解できる形式にするか？</b> ← <b>自明でない</b>
 </li>
 </ul>
 </li>
@@ -1320,19 +1339,8 @@ Lights-Out
 </div>
 
 <div id="outline-container-sec-10-1" class="outline-3">
-<h3 id="sec-10-1"><span class="section-number-3">10.1</span> Step 1: State Autoencoder</h3>
+<h3 id="sec-10-1"><span class="section-number-3">10.1</span> AutoEncoder (おさらい)</h3>
 <div class="outline-text-3" id="text-10-1">
-
-<div class="figure">
-<p><img src="img/sae/state-ae.png" alt="state-ae.png" />
-</p>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-10-2" class="outline-3">
-<h3 id="sec-10-2"><span class="section-number-3">10.2</span> AutoEncoder (おさらい)</h3>
-<div class="outline-text-3" id="text-10-2">
 <div class="center">
 <p>
 <b>教師なし学習</b>
@@ -1387,15 +1395,15 @@ Lights-Out
 </div>
 </div>
 
-<div id="outline-container-sec-10-3" class="outline-3">
-<h3 id="sec-10-3"><span class="section-number-3">10.3</span> Gumbel-Softmax Reparametrization (Jang, Gu, ICLR2017)</h3>
-<div class="outline-text-3" id="text-10-3">
+<div id="outline-container-sec-10-2" class="outline-3">
+<h3 id="sec-10-2"><span class="section-number-3">10.2</span> Gumbel-Softmax Reparametrization (Jang, Gu, ICLR2017)</h3>
+<div class="outline-text-3" id="text-10-2">
 <p>
 <b>中間層がカテゴリカル分布(離散値)なVAEを作る手法</b>
 </p>
 
 <p>
-VAE: 中間層が特定の分布を持つAEのこと
+VAE: 中間層が特定の分布を持つAEのこと。 下図: カテゴリ数8, 30変数 の GumbelSoftmax
 </p>
 
 <div class="center">
@@ -1421,9 +1429,9 @@ VAE: 中間層が特定の分布を持つAEのこと
 </div>
 </div>
 
-<div id="outline-container-sec-10-4" class="outline-3">
-<h3 id="sec-10-4"><span class="section-number-3">10.4</span> Step 1: State Autoencoder</h3>
-<div class="outline-text-3" id="text-10-4">
+<div id="outline-container-sec-10-3" class="outline-3">
+<h3 id="sec-10-3"><span class="section-number-3">10.3</span> Step 1: State Autoencoder</h3>
+<div class="outline-text-3" id="text-10-3">
 
 <div class="figure">
 <p><img src="img/train-state-ae.png" alt="train-state-ae.png" />
@@ -1673,8 +1681,24 @@ bitvector から PDDL モデルを生成する
 </p>
 </li>
 </ul>
+
+<p>
+JSAI予稿論文は 短縮版です。
+</p>
+
+<div class="larger">
+<p>
+Arxiv 1705.00154 : <b>Classical Planning in Deep Latent Space: Bridging the Subsymbolic-Symbolic Boundary.</b>
+</p>
+
+<p>
+KEPS17採択版: <b>Classical Planning in Deep Latent Space: From Unlabeled Images to PDDL (and back).</b>  <i>Knowledge Engineering for Planning and Scheduling (KEPS) Workshop in ICAPS2017</i>
+</p>
+
 </div>
 </div>
+</div>
+
 
 <div id="outline-container-sec-16" class="outline-2">
 <h2 id="sec-16"><span class="section-number-2">16</span> LatPlan の実装 LatPlan α でのSAE</h2>
@@ -1722,8 +1746,23 @@ Keras, Adam optimizer (learning rate:0.001)
 </div>
 
 <div id="outline-container-sec-17" class="outline-2">
-<h2 id="sec-17"><span class="section-number-2">17</span> LatPlan の実装 LatPlan α での アクション集合の生成</h2>
+<h2 id="sec-17"><span class="section-number-2">17</span> Gumbel-Softmax</h2>
 <div class="outline-text-2" id="text-17">
+
+<div class="figure">
+<p><img src="img/sae/gumbel.png" alt="gumbel.png" />
+</p>
+</div>
+
+<p>
+\(N\times M\) 行列を出力, \(N\): 変数の数 \(M\): カテゴリの数
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-18" class="outline-2">
+<h2 id="sec-18"><span class="section-number-2">18</span> LatPlan の実装 LatPlan α での アクション集合の生成</h2>
+<div class="outline-text-2" id="text-18">
 <p>
 <span class="underline">全遷移の画像ペア \(R\) を生成</span> → \(Encode(R)\) → PDDL
 </p>
@@ -1759,9 +1798,9 @@ Keras, Adam optimizer (learning rate:0.001)
 </div>
 </div>
 
-<div id="outline-container-sec-18" class="outline-2">
-<h2 id="sec-18"><span class="section-number-2">18</span> 他の実行例 (Lights Out)</h2>
-<div class="outline-text-2" id="text-18">
+<div id="outline-container-sec-19" class="outline-2">
+<h2 id="sec-19"><span class="section-number-2">19</span> 他の実行例 (Lights Out)</h2>
+<div class="outline-text-2" id="text-19">
 <p>
 8-puzzle も hanoi も 「物体」のようなものが「消えない」という性質がある。
 </p>
@@ -1788,9 +1827,9 @@ Keras, Adam optimizer (learning rate:0.001)
 </div>
 </div>
 
-<div id="outline-container-sec-19" class="outline-2">
-<h2 id="sec-19"><span class="section-number-2">19</span> 他の実行例 (Skewed Lights Out)</h2>
-<div class="outline-text-2" id="text-19">
+<div id="outline-container-sec-20" class="outline-2">
+<h2 id="sec-20"><span class="section-number-2">20</span> 他の実行例 (Skewed Lights Out)</h2>
+<div class="outline-text-2" id="text-20">
 <p>
 8-puzzle, hanoi, LightsOut は 「物体」のようなものが格子状に並んでいる
 </p>
@@ -1817,10 +1856,9 @@ Keras, Adam optimizer (learning rate:0.001)
 </div>
 </div>
 
-
-<div id="outline-container-sec-20" class="outline-2">
-<h2 id="sec-20"><span class="section-number-2">20</span> 正しくない解が出力される可能性はないの？</h2>
-<div class="outline-text-2" id="text-20">
+<div id="outline-container-sec-21" class="outline-2">
+<h2 id="sec-21"><span class="section-number-2">21</span> 正しくない解が出力される可能性はないの？</h2>
+<div class="outline-text-2" id="text-21">
 <p>
 <b>ニューラルネットの誤差が大きい場合のみ発生</b> (収束保証は \(t\rightarrow \infty\) のみ, not 実時間)
 </p>
@@ -1847,7 +1885,7 @@ Keras, Adam optimizer (learning rate:0.001)
 <div class="center">
 <div class="larger">
 <p>
-LatPlan に <b>認識の間違いはある</b> が <b>判断の間違いはない!</b>
+LatPlan に <b><i>認識の間違いはある</i></b> が <b><i>判断の間違いはない!</i></b>
 </p>
 
 </div>
@@ -1855,15 +1893,15 @@ LatPlan に <b>認識の間違いはある</b> が <b>判断の間違いはな�
 
 <div class="alignright">
 <p>
-→強化学習に対する強み
+(完全性,最適性) →強化学習に対する強み
 </p>
 
 </div>
 </div>
 
-<div id="outline-container-sec-20-1" class="outline-3">
-<h3 id="sec-20-1"><span class="section-number-3">20.1</span> 強化学習</h3>
-<div class="outline-text-3" id="text-20-1">
+<div id="outline-container-sec-21-1" class="outline-3">
+<h3 id="sec-21-1"><span class="section-number-3">21.1</span> 強化学習</h3>
+<div class="outline-text-3" id="text-21-1">
 <p>
 <b>意思決定も学習に依存する</b>
 </p>
@@ -1902,9 +1940,9 @@ RLは <b>判断に間違いがあり得る。</b>
 </div>
 </div>
 
-<div id="outline-container-sec-21" class="outline-2">
-<h2 id="sec-21"><span class="section-number-2">21</span> Future Work (SAE)</h2>
-<div class="outline-text-2" id="text-21">
+<div id="outline-container-sec-22" class="outline-2">
+<h2 id="sec-22"><span class="section-number-2">22</span> Future Work (SAE)</h2>
+<div class="outline-text-2" id="text-22">
 <p>
 SAEは命題の検出が可能 (状態s = p∧q∧r&#x2026;)
 </p>
@@ -1923,46 +1961,25 @@ SAEは命題の検出が可能 (状態s = p∧q∧r&#x2026;)
 </div>
 </div>
 
-<div id="outline-container-sec-22" class="outline-2">
-<h2 id="sec-22"><span class="section-number-2">22</span> Future Work (アクション生成)</h2>
-<div class="outline-text-2" id="text-22">
-<p>
-個別の遷移をアクションとして扱うことしかできない (状態s → 状態t)
-</p>
-
-<p>
-例:
-</p>
-
-<pre class="example">
-個別の遷移        0011 → 0101
-一般化された遷移  *01* → *10*
-</pre>
-
-<p>
-一般化されたアクションの検出 (述語 swap(tile1,tile2))
-</p>
-
-<p>
-Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など 
-</p>
-</div>
-</div>
-
 <div id="outline-container-sec-23" class="outline-2">
 <h2 id="sec-23"><span class="section-number-2">23</span> Future Work (問題ドメイン)</h2>
 <div class="outline-text-2" id="text-23">
+<p>
+LatPlan は あくまで <b>アーキテクチャ</b>
+</p>
+
 <p>
 <b>SAE の実装を変えれば(原理的には)画像以外の任意の入力データに対応可能なはず</b>
 </p>
 
 <ul class="org-ul">
-<li>テキスト用のAE [Li et.al. 2015]
+<li>テキスト用のAE [Li et.al. 2015]、 音声用のAE [Deng, Li, et al. 2010]
 </li>
-<li>音声用のAE [Deng, Li, et al. 2010]
-</li>
-
+<li>改造してSAEにすれば・・・
+<ul class="org-ul">
 <li><b>Here's an Apple, Here's a pen → oh, ApplePen!</b>
+</li>
+</ul>
 </li>
 <li>SAEを学習してプランナで解く → <b>数千ステップの高速な言語レベル推論が可能に</b>
 </li>
@@ -1995,47 +2012,60 @@ Model Acquisition [Konidaris et.al. 14;Cresswell et al 13] など
 シンボル \(X\) の意味がリンゴだろうと車だろうと ルールが正しければ推論できる
 </p>
 
-<p>
-ドメイン非依存ソルバの顕著な例: <b>mystery</b> ドメインと <b>nomystery</b> ドメイン
-</p>
+<ul class="org-ul">
+<li>ドメイン非依存ソルバの顕著な例: <b>mystery</b> ドメインと <b>nomystery</b> ドメイン
 
 <p>
-&#x2014; シンボル名だけデタラメにした荷物配送ドメイン
+<b>シンボル名だけデタラメ</b> にした荷物配送ベンチマーク (truck → shark)
 </p>
 
 <p>
 <b><i>(名前を見て特殊アルゴリズムを使う不正を禁じるため)</i></b>
 </p>
+</li>
+</ul>
 </dd>
 
-<dt> 組み合わせが可能 </dt><dd>     Latent vector は 複数の命題の連言 (and)
+<dt> 組み合わせが可能 </dt><dd>     Latent vector は 複数の命題の連言 (and) → modus ponens が適用可能になる
+
+<p>
+探索の下界関数はこれらを適用してゴールへの近さを見積もる
+</p>
 </dd>
 
-<dt> ノイズを含む画像はそのままではシンボルになれない </dt><dd>     ノイズの有無で画像は全く異なるデータになる → 何か <b>共通の特徴</b> の抽出が必要
+<dt> ノイズを含む画像ピクセルはそのままではシンボルになれない </dt><dd>     ノイズの有無で画像は全く異なるデータになる → 何か <b>共通の特徴</b> の抽出が必要
 </dd>
 </dl>
 </div>
 </div>
 
 
-
 <div id="outline-container-sec-25" class="outline-2">
 <h2 id="sec-25"><span class="section-number-2">25</span> Arxiv版を上げた際のTwitterでの議論</h2>
 <div class="outline-text-2" id="text-25">
-<p>
-<b><i>AlphaGo チーム全員: 「古典プランニング超大事!」</i></b>
-</p>
-
 
 <div class="figure">
 <p><img src="img/twitter.png" alt="twitter.png" />
 </p>
 </div>
+
+<div class="center">
+<div class="xlarge">
+<p>
+<b><i>AlphaGo チーム全員:</i></b>
+</p>
+
+<p>
+<b><i>「古典プランニング超大事!」</i></b>
+</p>
+
+</div>
+</div>
 </div>
 </div>
 
 <div id="outline-container-sec-26" class="outline-2">
-<h2 id="sec-26"><span class="section-number-2">26</span> 日本のプランニング研究者は <b><i>深層学習研究者よりさらに少ない</i></b></h2>
+<h2 id="sec-26"><span class="section-number-2">26</span> 日本のプランニング研究者: <b><i>DL研究者よりさらに少ない</i></b></h2>
 <div class="outline-text-2" id="text-26">
 
 <div class="figure">
@@ -2207,7 +2237,7 @@ Test 入力: 訓練画像に含まれていない画像 (注!)
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Masataro Asai</p>
-<p class="date">Created: 2017-05-20 土 20:05</p>
+<p class="date">Created: 2017-05-29 月 00:11</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
